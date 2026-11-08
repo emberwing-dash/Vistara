@@ -107,3 +107,22 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Vistara: never commit analysed/test videos, job results, venv, weights, datasets
+Backend/data/jobs/
+Backend/data/samples/*
+!Backend/data/samples/README.txt
+Backend/data/epic/
+Backend/.venv/
+Backend/weights/
+*.mp4
+*.mkv
+*.webm
+*.mov
+
+# Unity generated
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
