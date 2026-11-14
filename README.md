@@ -1,50 +1,46 @@
 # Vistara
 
-**Action-aware egocentric video summarization in XR** - Samsung R&D Institute India PRISM Hackathon 2026, Track 04.
+**Action-aware egocentric video summarization in mixed reality** - Samsung R&D Institute India PRISM Hackathon 2026, Track 04.
 
-Vistara watches first-person video, finds the moments that matter, and compiles a ~15 % highlight reel from the original footage.
-A Unity 6 XR front end (works with the XR Interaction Simulator) talks to a local Python AI engine over HTTP.
+Vistara watches a first-person video, recognises verb-noun actions, scores how important each moment is and compiles a ~15 % highlight reel from the original footage.
+A hand-controlled Unity MR app (Quest 3 / XR Simulator) talks to a local Python engine that runs the trained model.
 
-## Prototype
-
-Screens: main menu (branding, engine status, recent analyses), in-VR library (+ paste a YouTube link), video workspace,
-live AI analysis, results (activities, objects, action timestamps), highlight timeline (importance bars, selected segments,
-click to jump) and summary preview (highlight reel, % retained, JSON export).
-
-_Screenshots / demo video: to be added (captured with videos we have the rights to use)._
-
-## How it works
-
-1. **Decode** - frame sampling at 2 fps, optical-flow motion (camera motion removed, hand-zone weighted).
-2. **Understand** - pretrained CLIP ViT-B/32 embeddings; zero-shot video label and verb-noun actions over the official 98 verbs / 301 nouns.
-3. **Score** - importance from activity, change, distinctiveness and action confidence; idle and repetitive footage is penalised.
-4. **Select** - greedy, redundancy-aware selection within the 15 % budget (segments >= 4 s, chronological, non-overlapping).
-5. **Export** - official JSON per video (`./run.sh <video.mp4> <out.json>`) and a highlight reel cut from the original footage.
-
+## Repository layout
+```text
+vistara/                  <- the competition submission folder (TEAM_ID = vistara)
+├── run.sh                #    ./run.sh <video.mp4> <out.json>
+├── code/                 #    inference source
+├── weights/              #    trained heads (head.pt, label_head.pt) + pretrained CLIP backbone (Git LFS)
+├── requirements.txt
+├── outputs/              #    59 of the 187 manifest outputs (validated) - see vistara/README.md "Outputs status"
+└── README.md             #    setup, architecture, training, reproduction, measured results
+unity/VisteraMR/          <- Unity 6 (6000.2.7f2) MR project: hand-controlled flow, Vistara UI, Test Lab, model integration
+docs/                     <- demo script / deck outline, screenshots
 ```
-Assets/Vistara/   Unity C# front end (UI is built in code; scenes via Vistara > Build Scenes)
-Backend/          Python engine, FastAPI server, run.sh, validate.py, submission files
-```
+Start with [`vistara/README.md`](vistara/README.md) (model, training, results, how to reproduce) and [`unity/VisteraMR/README.md`](unity/VisteraMR/README.md) (the MR app).
 
-## Run it
+## The trained model
+`vistara/weights/head.pt` (verb-noun action head, EPIC-KITCHENS-100 train videos) and `vistara/weights/label_head.pt` (video-category head, FPVSum) on top of a frozen CLIP ViT-B/32.
+The same files are used by `run.sh` and by the Unity app (`unity/VisteraMR/Assets/Model/Weights`, byte-identical).
+The CLIP backbone (~600 MB) is stored with Git LFS; for the Unity project copy it from `vistara/weights/models--timm--vit_base_patch32_clip_224.openai` to `unity/VisteraMR/Assets/Model/Backbone~/`.
 
-1. Backend setup (venv, CUDA PyTorch, requirements): see [`Backend/README.md`](Backend/README.md).
-2. Open in **Unity 6000.2.7f2**, open `Assets/Scenes/MainMenu.unity`, press **Play** (the engine starts automatically, or run `Backend/start_server.bat`).
-3. **Start Analysis** -> pick an MP4 (or copy a YouTube link and press **Paste YouTube link**) -> **Analyze**.
+## Measured results (held-out videos, local approximation of the kit metrics)
+Action mAP **0.022**, action coverage **0.280**, FPVSum label accuracy **86.7 %**, Highlight F1 **0.180**, 100 % schema-valid, 56/59 within the 15 % budget, ~0.06 x real time on a laptop GPU.
+Small samples (14 EPIC + 45 FPVSum videos); action recognition is weak and importance is heuristic. Details and caveats: `vistara/README.md`.
 
-## Status and honest limitations
+## The MR app (hand-controlled)
+START -> 15-category carousel (from `manifest.csv`) -> video selection + preview -> ANALYSE (real model) -> results -> floating MR HUD with live action captions, confidence, timeline, guidance and hand playback.
+Tested in the XR Simulator; physical Quest 3 checks (real pinch / swipe / drag) are listed in the Unity README.
 
-Zero-shot CLIP is used; it has **not** been scored on EPIC-KITCHENS or FPVSum, so expect modest Action mAP (CLIP is better at objects than verbs).
-Importance is a heuristic, not learned from human labels. Details in [`Backend/README.md`](Backend/README.md).
-A trained verb-noun head on EPIC-KITCHENS features is the planned next step.
+| | |
+|---|---|
+| ![Start](docs/screenshots/01-start-screen.png) **Start** | ![Videos](docs/screenshots/02-video-selection.png) **Video selection** |
+| ![Results](docs/screenshots/03-results.png) **Results** | ![HUD](docs/screenshots/04-mr-hud.png) **MR HUD** |
+| ![Test Lab](docs/screenshots/05-test-lab.png) **Test Lab** (held-out evaluation) | |
+
+> Screenshots come from the XR Simulator play-mode run. Kitchen frames are from EPIC-KITCHENS-100 (Damen et al., University of Bristol, non-commercial licence).
 
 ## Credits
-
-- **Challenge:** Samsung R&D Institute India, Bangalore - PRISM Hackathon 2026, Track 04 (student kit, `manifest.csv`, `supported_classes.json`).
-- **Datasets:** [EPIC-KITCHENS-100](https://epic-kitchens.github.io/2020) (University of Bristol / University of Catania / University of Toronto; class vocabulary and annotations) and FPVSum (see the kit's [azuxmioy/fpvsum](https://github.com/azuxmioy/fpvsum) and [v-iashin/FPVSum](https://github.com/v-iashin/FPVSum) links).
-- **Models and libraries:** CLIP by OpenAI via [OpenCLIP](https://github.com/mlfoundations/open_clip); [PyTorch](https://pytorch.org); [OpenCV](https://opencv.org); [FFmpeg](https://ffmpeg.org) (via imageio-ffmpeg); [FastAPI](https://fastapi.tiangolo.com) / Uvicorn; [yt-dlp](https://github.com/yt-dlp/yt-dlp) for the optional link import.
-- **Unity:** Unity 6, XR Interaction Toolkit 3.4, XR Hands, OpenXR, TextMeshPro, the Unity VR template assets, and the Meta XR Simulator.
-- **Design inspiration:** VR media-browser and video-control panels and immersive-analytics dashboards (reference images supplied by the team); all Vistara UI, sprites and the neon environment are generated in code.
-- **Built with** [Claude Code](https://claude.com/claude-code) assistance.
-
-Please respect the licences of the datasets and of any video you analyse.
+Samsung R&D Institute India PRISM Hackathon 2026 (Track 04 kit); [EPIC-KITCHENS-100](https://epic-kitchens.github.io/2020); FPVSum (Ho et al., ECCV 2018; [azuxmioy/fpvsum](https://github.com/azuxmioy/fpvsum));
+CLIP by OpenAI via [OpenCLIP](https://github.com/mlfoundations/open_clip); PyTorch, OpenCV, FFmpeg, FastAPI; Unity 6, XR Interaction Toolkit, XR Hands, OpenXR and the Unity MR template.
+Built with [Claude Code](https://claude.com/claude-code) assistance. Please respect the licences of the datasets and of any video you analyse.

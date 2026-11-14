@@ -1,0 +1,57 @@
+{
+  "name": "Vistara action-aware egocentric summariser",
+  "track": "Samsung PRISM 2026 Track 04",
+  "framework": "PyTorch 2.x + open_clip (ViT-B/32, OpenAI weights) + OpenCV Farneback optical flow",
+  "backbone": {
+    "model": "ViT-B-32",
+    "pretrained": "openai",
+    "dir": "Backbone~",
+    "frozen": true,
+    "input": "224x224 RGB, CLIP mean/std normalisation",
+    "mean": [
+      0.48145466,
+      0.4578275,
+      0.40821073
+    ],
+    "std": [
+      0.26862954,
+      0.26130258,
+      0.27577711
+    ],
+    "embedding_dim": 512
+  },
+  "preprocessing": {
+    "sample_fps": 2.0,
+    "flow_width": 160,
+    "motion_gap_s": 0.25,
+    "window_s": 4.0,
+    "hop_s": 2.0,
+    "window_feature": "[mean CLIP emb(512), last-first emb diff(512), 3 robust-normalised motion cues] = 1027 dims"
+  },
+  "heads": {
+    "action_head": {
+      "file": "Weights/head.pt",
+      "arch": "MLP 1027-1024-1024 (GELU, dropout 0.5) -> fg(1), verb(97), noun(300)",
+      "trained_on": "EPIC-KITCHENS-100 train split (videos not in the manifest)",
+      "blend_with_zero_shot": 0.5
+    },
+    "label_head": {
+      "file": "Weights/label_head.pt",
+      "arch": "linear 512->16 initialised from CLIP text prompts, L2-regularised towards them",
+      "trained_on": "FPVSum videos not in the manifest + EPIC clips as 'cooking'"
+    }
+  },
+  "labels": "Config/supported_classes.json (16 labels, 98 verbs, 301 nouns)",
+  "highlights": {
+    "budget_frac": 0.15,
+    "min_segment_s": 4.0,
+    "seg_len_choices_s": [
+      4,
+      6,
+      8
+    ],
+    "selection": "greedy MMR with redundancy + pair-novelty terms"
+  },
+  "inference": "Python engine in Engine~ (FastAPI, port 8765) started by Unity BackendLauncher; Unity talks JSON over HTTP",
+  "onnx": "not used: optical flow, video decoding and highlight rendering are not available in-engine; the original PyTorch weights are used unchanged"
+}

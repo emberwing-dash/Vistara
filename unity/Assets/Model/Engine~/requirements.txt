@@ -1,0 +1,19 @@
+# Exact versions used for development/testing (Python 3.14, Windows 11).
+# GPU: install torch/torchvision from https://download.pytorch.org/whl/cu128 first (CPU wheels also work).
+torch==2.11.0
+torchvision==0.26.0
+open_clip_torch==4.2.1
+timm==1.0.31
+safetensors==0.8.0
+ftfy==6.3.1
+regex==2026.11.7
+opencv-python-headless==5.0.0.93
+numpy==2.5.4
+pillow==13.0.0
+imageio-ffmpeg==0.8.1
+# only needed for the Unity app's HTTP server / YouTube link import (not for ./run.sh):
+fastapi==0.162.2
+uvicorn[standard]==0.54.0
+python-multipart==0.0.33
+pydantic==2.14.3
+yt-dlp==2026.10.26

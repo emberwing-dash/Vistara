@@ -1,0 +1,15 @@
+# Engine for the Unity app:  docker compose up --build   (Unity then talks to http://127.0.0.1:8765)
+# Remove the "deploy" block for CPU-only machines.
+services:
+  vistara-engine:
+    build: .
+    image: vistara
+    command: ["serve"]
+    ports: ["127.0.0.1:8765:8765"]
+    volumes: ["vistara-jobs:/app/data/jobs"]
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]
+volumes:
+  vistara-jobs:

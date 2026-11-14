@@ -1,0 +1,43 @@
+{
+  "generated": "2026-11-14 12:19:07",
+  "device": "cuda",
+  "engine_config": {
+    "sample_fps": 2.0,
+    "budget_frac": 0.15,
+    "action_window_s": 4.0
+  },
+  "videos_evaluated": 59,
+  "manifest_videos": {
+    "epic_kitchens_100": 138,
+    "fpvsum": 49
+  },
+  "coverage_of_manifest": {
+    "epic_kitchens_100": 14,
+    "fpvsum": 45
+  },
+  "note": "Local approximations of the official metrics on videos that are NOT used for training. Only the manifest videos present on this machine were evaluated; the official scorer evaluates a hidden subset.",
+  "epic": {
+    "videos": 14,
+    "gt_actions": 132,
+    "action_map": 0.022,
+    "action_coverage": 0.2803,
+    "verb_acc": 0.2045,
+    "noun_acc": 0.1742,
+    "pair_acc": 0.0606,
+    "loc_recall_iou0_1": 0.9924,
+    "label_cooking_rate": 1.0
+  },
+  "fpvsum": {
+    "videos": 45,
+    "label_accuracy": 0.8667,
+    "highlight_f1_videos": 44,
+    "highlight_f1": 0.1798
+  },
+  "all": {
+    "schema_valid_rate": 1.0,
+    "within_budget_rate": 0.9492,
+    "mean_highlight_frac": 0.1508,
+    "mean_infer_sec": 11.59,
+    "median_realtime_factor": 0.061
+  }
+}

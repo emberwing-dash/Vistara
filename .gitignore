@@ -126,3 +126,23 @@ Backend/weights/
 /Obj/
 /Build/
 /Builds/
+
+__pycache__/
+*.pyc
+
+# --- repo layout: vistara/ (submission) + unity/VisteraMR (Unity project) ---
+.venv/
+__pycache__/
+*.pyc
+vistara/data/jobs/
+vistara/data/thumbs/
+vistara/data/playable/
+unity/*/[Ll]ibrary/
+unity/*/[Tt]emp/
+unity/*/[Oo]bj/
+unity/*/[Ll]ogs/
+unity/*/[Uu]ser[Ss]ettings/
+unity/*/Assets/Model/Backbone~/
+unity/*/Assets/Model/Engine~/data/
+*.csproj
+*.sln
