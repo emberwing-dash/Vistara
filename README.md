@@ -43,4 +43,4 @@ Tested in the XR Simulator; physical Quest 3 checks (real pinch / swipe / drag) 
 ## Credits
 Samsung R&D Institute India PRISM Hackathon 2026 (Track 04 kit); [EPIC-KITCHENS-100](https://epic-kitchens.github.io/2020); FPVSum (Ho et al., ECCV 2018; [azuxmioy/fpvsum](https://github.com/azuxmioy/fpvsum));
 CLIP by OpenAI via [OpenCLIP](https://github.com/mlfoundations/open_clip); PyTorch, OpenCV, FFmpeg, FastAPI; Unity 6, XR Interaction Toolkit, XR Hands, OpenXR and the Unity MR template.
-Built with [Claude Code](https://claude.com/claude-code) assistance. Please respect the licences of the datasets and of any video you analyse.
+Built with Claude & ChatGPT assistance. Please respect the licences of the datasets and of any video you analyse.
