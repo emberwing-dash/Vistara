@@ -1,0 +1,21 @@
+﻿{
+    "note":  "SHA-256 of the final trained weights (residual action head + data priors on a frozen CLIP ViT-L/14 backbone); identical to Vistara/Backend/weights.",
+    "files":  {
+                  "Backbone~/models--timm--vit_large_patch14_clip_224.openai/refs/main":  {
+                                                                                              "sha256":  "2e82190c9d9c39cee15c3062bccf99cf72bc1e3cc4524a52433a8dbbb2fdb9d7",
+                                                                                              "bytes":  40
+                                                                                          },
+                  "Weights/head.pt":  {
+                                          "sha256":  "5991de91c23c482247aee1516f8bcba439423aea5c6fb2106211362562fa1ea6",
+                                          "bytes":  5026005
+                                      },
+                  "Weights/pair_prior.npz":  {
+                                                 "sha256":  "ea48e4e5d2b4120289b15499acb869e28f661fdf0595829f7f0b20731cea19ed",
+                                                 "bytes":  238030
+                                             },
+                  "Backbone~/models--timm--vit_large_patch14_clip_224.openai/snapshots/18d0535469bb561bf468d76c1d73aa35156c922b/open_clip_model.safetensors":  {
+                                                                                                                                                                   "sha256":  "9ce2e8a8ebfff3793d7d375ad6d3c35cb9aebf3de7ace0fc7308accab7cd207e",
+                                                                                                                                                                   "bytes":  1710517724
+                                                                                                                                                               }
+              }
+}
