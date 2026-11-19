@@ -1,3 +1,5 @@
-# The pretrained CLIP ViT-L/14 backbone (~1.6 GB, files > GitHub's 100 MB limit) is stored with Git LFS.
-# Run `git lfs install` before `git add`; the trained head (head.pt) and pair_prior.npz are small and stay in plain git.
+# Large model files go through Git LFS (run `git lfs install` before the first commit):
+# the CLIP ViT-L/14 backbone (~1.6 GB) and the AVION action recogniser (~590 MB, converted from the public EPIC-KITCHENS-100 checkpoint).
+# The trained residual head (head.pt) and pair_prior.npz are small and stay in plain git.
 weights/models--timm--vit_large_patch14_clip_224.openai/** filter=lfs diff=lfs merge=lfs -text
+weights/avion_vitl_ek100_fp16.pt filter=lfs diff=lfs merge=lfs -text

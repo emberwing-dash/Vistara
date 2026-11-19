@@ -7,5 +7,5 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if   [ -x "$HERE/.venv/Scripts/python.exe" ]; then PY="$HERE/.venv/Scripts/python.exe"
 elif [ -x "$HERE/.venv/bin/python" ];        then PY="$HERE/.venv/bin/python"
 else PY="${PYTHON:-python3}"; fi
-export PYTHONPATH="$HERE/code${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH="$HERE/code/backend${PYTHONPATH:+:$PYTHONPATH}"
 exec "$PY" -m vistara.cli "$1" "$2" "${@:3}"

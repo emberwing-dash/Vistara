@@ -3,58 +3,4549 @@
  "video_id": "P07_12",
  "duration_sec": 236.02,
  "label": {
-  "name": "other",
-  "score": 0.0
+  "name": "cooking",
+  "score": 0.9413
  },
- "actions": [],
+ "actions": [
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    0.0,
+    7.5
+   ],
+   "start": 0.0,
+   "end": 7.5,
+   "score": 0.1501
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    0.0,
+    7.5
+   ],
+   "start": 0.0,
+   "end": 7.5,
+   "score": 0.137
+  },
+  {
+   "verb": "open",
+   "noun": "spoon",
+   "segment": [
+    0.0,
+    5.0
+   ],
+   "start": 0.0,
+   "end": 5.0,
+   "score": 0.1301
+  },
+  {
+   "verb": "put",
+   "noun": "spoon",
+   "segment": [
+    0.0,
+    7.5
+   ],
+   "start": 0.0,
+   "end": 7.5,
+   "score": 0.13
+  },
+  {
+   "verb": "open",
+   "noun": "bowl",
+   "segment": [
+    0.0,
+    5.0
+   ],
+   "start": 0.0,
+   "end": 5.0,
+   "score": 0.1295
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    0.0,
+    7.5
+   ],
+   "start": 0.0,
+   "end": 7.5,
+   "score": 0.1291
+  },
+  {
+   "verb": "close",
+   "noun": "spoon",
+   "segment": [
+    0.0,
+    5.0
+   ],
+   "start": 0.0,
+   "end": 5.0,
+   "score": 0.1169
+  },
+  {
+   "verb": "take",
+   "noun": "glass",
+   "segment": [
+    0.0,
+    4.0
+   ],
+   "start": 0.0,
+   "end": 4.0,
+   "score": 0.0957
+  },
+  {
+   "verb": "move",
+   "noun": "spoon",
+   "segment": [
+    0.0,
+    4.0
+   ],
+   "start": 0.0,
+   "end": 4.0,
+   "score": 0.0953
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    0.0,
+    4.0
+   ],
+   "start": 0.0,
+   "end": 4.0,
+   "score": 0.0951
+  },
+  {
+   "verb": "insert",
+   "noun": "spoon",
+   "segment": [
+    2.0,
+    5.0
+   ],
+   "start": 2.0,
+   "end": 5.0,
+   "score": 0.1041
+  },
+  {
+   "verb": "close",
+   "noun": "bowl",
+   "segment": [
+    2.0,
+    5.0
+   ],
+   "start": 2.0,
+   "end": 5.0,
+   "score": 0.1028
+  },
+  {
+   "verb": "take",
+   "noun": "fork",
+   "segment": [
+    2.0,
+    5.0
+   ],
+   "start": 2.0,
+   "end": 5.0,
+   "score": 0.0923
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    4.0,
+    18.0
+   ],
+   "start": 4.0,
+   "end": 18.0,
+   "score": 0.2009
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    4.0,
+    18.0
+   ],
+   "start": 4.0,
+   "end": 18.0,
+   "score": 0.1749
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    4.0,
+    18.0
+   ],
+   "start": 4.0,
+   "end": 18.0,
+   "score": 0.1727
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    4.0,
+    18.0
+   ],
+   "start": 4.0,
+   "end": 18.0,
+   "score": 0.1583
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    4.0,
+    7.5
+   ],
+   "start": 4.0,
+   "end": 7.5,
+   "score": 0.0958
+  },
+  {
+   "verb": "pour",
+   "noun": "bowl",
+   "segment": [
+    4.0,
+    7.5
+   ],
+   "start": 4.0,
+   "end": 7.5,
+   "score": 0.0879
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    6.5,
+    13.5
+   ],
+   "start": 6.5,
+   "end": 13.5,
+   "score": 0.1999
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    6.5,
+    20.0
+   ],
+   "start": 6.5,
+   "end": 20.0,
+   "score": 0.1841
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    6.5,
+    20.0
+   ],
+   "start": 6.5,
+   "end": 20.0,
+   "score": 0.1838
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    6.5,
+    20.0
+   ],
+   "start": 6.5,
+   "end": 20.0,
+   "score": 0.1775
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    6.5,
+    14.5
+   ],
+   "start": 6.5,
+   "end": 14.5,
+   "score": 0.173
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    6.5,
+    10.0
+   ],
+   "start": 6.5,
+   "end": 10.0,
+   "score": 0.1648
+  },
+  {
+   "verb": "wash",
+   "noun": "sponge",
+   "segment": [
+    8.0,
+    12.0
+   ],
+   "start": 8.0,
+   "end": 12.0,
+   "score": 0.1674
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    10.0,
+    14.5
+   ],
+   "start": 10.0,
+   "end": 14.5,
+   "score": 0.1535
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    12.0,
+    14.5
+   ],
+   "start": 12.0,
+   "end": 14.5,
+   "score": 0.1175
+  },
+  {
+   "verb": "mix",
+   "noun": "tap",
+   "segment": [
+    16.0,
+    20.0
+   ],
+   "start": 16.0,
+   "end": 20.0,
+   "score": 0.1035
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    16.0,
+    20.0
+   ],
+   "start": 16.0,
+   "end": 20.0,
+   "score": 0.0972
+  },
+  {
+   "verb": "take",
+   "noun": "tap",
+   "segment": [
+    17.5,
+    22.0
+   ],
+   "start": 17.5,
+   "end": 22.0,
+   "score": 0.1109
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    18.5,
+    21.5
+   ],
+   "start": 18.5,
+   "end": 21.5,
+   "score": 0.1303
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    18.5,
+    21.5
+   ],
+   "start": 18.5,
+   "end": 21.5,
+   "score": 0.1175
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    18.5,
+    21.5
+   ],
+   "start": 18.5,
+   "end": 21.5,
+   "score": 0.1119
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    18.5,
+    21.5
+   ],
+   "start": 18.5,
+   "end": 21.5,
+   "score": 0.1092
+  },
+  {
+   "verb": "take",
+   "noun": "pan",
+   "segment": [
+    18.5,
+    21.5
+   ],
+   "start": 18.5,
+   "end": 21.5,
+   "score": 0.1009
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    18.5,
+    21.5
+   ],
+   "start": 18.5,
+   "end": 21.5,
+   "score": 0.099
+  },
+  {
+   "verb": "put",
+   "noun": "spoon",
+   "segment": [
+    18.5,
+    21.5
+   ],
+   "start": 18.5,
+   "end": 21.5,
+   "score": 0.0947
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.1639
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.1221
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.1182
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.1096
+  },
+  {
+   "verb": "pour",
+   "noun": "plate",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.1067
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.1024
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.0958
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.0956
+  },
+  {
+   "verb": "pour",
+   "noun": "bowl",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.0944
+  },
+  {
+   "verb": "put",
+   "noun": "plate",
+   "segment": [
+    20.0,
+    22.5
+   ],
+   "start": 20.0,
+   "end": 22.5,
+   "score": 0.094
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.1583
+  },
+  {
+   "verb": "pour",
+   "noun": "water",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.1318
+  },
+  {
+   "verb": "wash",
+   "noun": "food",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.1264
+  },
+  {
+   "verb": "scrape",
+   "noun": "water",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.1146
+  },
+  {
+   "verb": "mix",
+   "noun": "water",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.1117
+  },
+  {
+   "verb": "cut",
+   "noun": "water",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.1097
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.1069
+  },
+  {
+   "verb": "put",
+   "noun": "water",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0959
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0948
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    27.5,
+    32.0
+   ],
+   "start": 27.5,
+   "end": 32.0,
+   "score": 0.122
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    29.0,
+    42.0
+   ],
+   "start": 29.0,
+   "end": 42.0,
+   "score": 0.2001
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    29.0,
+    36.0
+   ],
+   "start": 29.0,
+   "end": 36.0,
+   "score": 0.1982
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    29.5,
+    32.0
+   ],
+   "start": 29.5,
+   "end": 32.0,
+   "score": 0.1315
+  },
+  {
+   "verb": "put",
+   "noun": "plate",
+   "segment": [
+    29.5,
+    32.0
+   ],
+   "start": 29.5,
+   "end": 32.0,
+   "score": 0.1076
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    29.5,
+    32.0
+   ],
+   "start": 29.5,
+   "end": 32.0,
+   "score": 0.1024
+  },
+  {
+   "verb": "pour",
+   "noun": "bowl",
+   "segment": [
+    29.5,
+    32.0
+   ],
+   "start": 29.5,
+   "end": 32.0,
+   "score": 0.0994
+  },
+  {
+   "verb": "put",
+   "noun": "spoon",
+   "segment": [
+    29.5,
+    32.0
+   ],
+   "start": 29.5,
+   "end": 32.0,
+   "score": 0.0974
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    29.5,
+    33.0
+   ],
+   "start": 29.5,
+   "end": 33.0,
+   "score": 0.0942
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    29.5,
+    32.0
+   ],
+   "start": 29.5,
+   "end": 32.0,
+   "score": 0.0877
+  },
+  {
+   "verb": "open",
+   "noun": "bowl",
+   "segment": [
+    30.0,
+    35.5
+   ],
+   "start": 30.0,
+   "end": 35.5,
+   "score": 0.2065
+  },
+  {
+   "verb": "move",
+   "noun": "bowl",
+   "segment": [
+    30.0,
+    33.0
+   ],
+   "start": 30.0,
+   "end": 33.0,
+   "score": 0.1903
+  },
+  {
+   "verb": "throw",
+   "noun": "bowl",
+   "segment": [
+    30.0,
+    33.0
+   ],
+   "start": 30.0,
+   "end": 33.0,
+   "score": 0.188
+  },
+  {
+   "verb": "insert",
+   "noun": "bowl",
+   "segment": [
+    30.0,
+    33.0
+   ],
+   "start": 30.0,
+   "end": 33.0,
+   "score": 0.1677
+  },
+  {
+   "verb": "close",
+   "noun": "bowl",
+   "segment": [
+    30.0,
+    33.0
+   ],
+   "start": 30.0,
+   "end": 33.0,
+   "score": 0.1629
+  },
+  {
+   "verb": "turn-on",
+   "noun": "bowl",
+   "segment": [
+    30.0,
+    33.0
+   ],
+   "start": 30.0,
+   "end": 33.0,
+   "score": 0.1507
+  },
+  {
+   "verb": "open",
+   "noun": "plate",
+   "segment": [
+    30.0,
+    33.0
+   ],
+   "start": 30.0,
+   "end": 33.0,
+   "score": 0.1002
+  },
+  {
+   "verb": "hang",
+   "noun": "pan",
+   "segment": [
+    32.0,
+    38.0
+   ],
+   "start": 32.0,
+   "end": 38.0,
+   "score": 0.1745
+  },
+  {
+   "verb": "take",
+   "noun": "pan",
+   "segment": [
+    32.0,
+    42.0
+   ],
+   "start": 32.0,
+   "end": 42.0,
+   "score": 0.1743
+  },
+  {
+   "verb": "take",
+   "noun": "box",
+   "segment": [
+    32.0,
+    40.0
+   ],
+   "start": 32.0,
+   "end": 40.0,
+   "score": 0.1315
+  },
+  {
+   "verb": "take",
+   "noun": "bag",
+   "segment": [
+    32.0,
+    38.0
+   ],
+   "start": 32.0,
+   "end": 38.0,
+   "score": 0.1292
+  },
+  {
+   "verb": "hang",
+   "noun": "bowl",
+   "segment": [
+    32.0,
+    38.0
+   ],
+   "start": 32.0,
+   "end": 38.0,
+   "score": 0.1108
+  },
+  {
+   "verb": "put",
+   "noun": "box",
+   "segment": [
+    32.0,
+    36.0
+   ],
+   "start": 32.0,
+   "end": 36.0,
+   "score": 0.1017
+  },
+  {
+   "verb": "open",
+   "noun": "box",
+   "segment": [
+    32.0,
+    36.0
+   ],
+   "start": 32.0,
+   "end": 36.0,
+   "score": 0.0903
+  },
+  {
+   "verb": "take",
+   "noun": "pot",
+   "segment": [
+    34.0,
+    40.0
+   ],
+   "start": 34.0,
+   "end": 40.0,
+   "score": 0.1291
+  },
+  {
+   "verb": "take",
+   "noun": "ladder",
+   "segment": [
+    34.0,
+    38.0
+   ],
+   "start": 34.0,
+   "end": 38.0,
+   "score": 0.1183
+  },
+  {
+   "verb": "take",
+   "noun": "container",
+   "segment": [
+    34.0,
+    40.0
+   ],
+   "start": 34.0,
+   "end": 40.0,
+   "score": 0.1178
+  },
+  {
+   "verb": "take",
+   "noun": "package",
+   "segment": [
+    34.0,
+    38.0
+   ],
+   "start": 34.0,
+   "end": 38.0,
+   "score": 0.1064
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    36.0,
+    42.0
+   ],
+   "start": 36.0,
+   "end": 42.0,
+   "score": 0.1236
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    36.0,
+    42.0
+   ],
+   "start": 36.0,
+   "end": 42.0,
+   "score": 0.1232
+  },
+  {
+   "verb": "put",
+   "noun": "pan",
+   "segment": [
+    36.0,
+    42.0
+   ],
+   "start": 36.0,
+   "end": 42.0,
+   "score": 0.1137
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    37.0,
+    39.5
+   ],
+   "start": 37.0,
+   "end": 39.5,
+   "score": 0.1152
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    37.0,
+    39.5
+   ],
+   "start": 37.0,
+   "end": 39.5,
+   "score": 0.1094
+  },
+  {
+   "verb": "pour",
+   "noun": "bowl",
+   "segment": [
+    38.0,
+    42.0
+   ],
+   "start": 38.0,
+   "end": 42.0,
+   "score": 0.1191
+  },
+  {
+   "verb": "pour",
+   "noun": "pan",
+   "segment": [
+    38.0,
+    43.5
+   ],
+   "start": 38.0,
+   "end": 43.5,
+   "score": 0.1028
+  },
+  {
+   "verb": "pour",
+   "noun": "spoon",
+   "segment": [
+    38.0,
+    43.5
+   ],
+   "start": 38.0,
+   "end": 43.5,
+   "score": 0.0965
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    38.0,
+    42.0
+   ],
+   "start": 38.0,
+   "end": 42.0,
+   "score": 0.0943
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    38.0,
+    43.5
+   ],
+   "start": 38.0,
+   "end": 43.5,
+   "score": 0.0904
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    41.0,
+    52.0
+   ],
+   "start": 41.0,
+   "end": 52.0,
+   "score": 0.136
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    41.0,
+    46.0
+   ],
+   "start": 41.0,
+   "end": 46.0,
+   "score": 0.1068
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    41.0,
+    43.5
+   ],
+   "start": 41.0,
+   "end": 43.5,
+   "score": 0.1017
+  },
+  {
+   "verb": "put",
+   "noun": "spoon",
+   "segment": [
+    41.0,
+    46.0
+   ],
+   "start": 41.0,
+   "end": 46.0,
+   "score": 0.0964
+  },
+  {
+   "verb": "pour",
+   "noun": "lid",
+   "segment": [
+    41.0,
+    46.0
+   ],
+   "start": 41.0,
+   "end": 46.0,
+   "score": 0.096
+  },
+  {
+   "verb": "mix",
+   "noun": "spoon",
+   "segment": [
+    41.0,
+    43.5
+   ],
+   "start": 41.0,
+   "end": 43.5,
+   "score": 0.089
+  },
+  {
+   "verb": "mix",
+   "noun": "lid",
+   "segment": [
+    41.0,
+    43.5
+   ],
+   "start": 41.0,
+   "end": 43.5,
+   "score": 0.0813
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    42.0,
+    46.0
+   ],
+   "start": 42.0,
+   "end": 46.0,
+   "score": 0.1159
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    42.0,
+    46.0
+   ],
+   "start": 42.0,
+   "end": 46.0,
+   "score": 0.1057
+  },
+  {
+   "verb": "take",
+   "noun": "glass",
+   "segment": [
+    42.0,
+    46.0
+   ],
+   "start": 42.0,
+   "end": 46.0,
+   "score": 0.0996
+  },
+  {
+   "verb": "put",
+   "noun": "glass",
+   "segment": [
+    42.0,
+    46.0
+   ],
+   "start": 42.0,
+   "end": 46.0,
+   "score": 0.0958
+  },
+  {
+   "verb": "take",
+   "noun": "knife",
+   "segment": [
+    42.0,
+    46.0
+   ],
+   "start": 42.0,
+   "end": 46.0,
+   "score": 0.0926
+  },
+  {
+   "verb": "take",
+   "noun": "pan",
+   "segment": [
+    42.0,
+    46.0
+   ],
+   "start": 42.0,
+   "end": 46.0,
+   "score": 0.0886
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    44.0,
+    56.5
+   ],
+   "start": 44.0,
+   "end": 56.5,
+   "score": 0.199
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    44.0,
+    56.0
+   ],
+   "start": 44.0,
+   "end": 56.0,
+   "score": 0.1943
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    44.0,
+    56.5
+   ],
+   "start": 44.0,
+   "end": 56.5,
+   "score": 0.1893
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    44.0,
+    56.5
+   ],
+   "start": 44.0,
+   "end": 56.5,
+   "score": 0.1804
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    44.0,
+    54.0
+   ],
+   "start": 44.0,
+   "end": 54.0,
+   "score": 0.1649
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    44.0,
+    54.0
+   ],
+   "start": 44.0,
+   "end": 54.0,
+   "score": 0.1607
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    44.0,
+    56.5
+   ],
+   "start": 44.0,
+   "end": 56.5,
+   "score": 0.1513
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    44.0,
+    48.0
+   ],
+   "start": 44.0,
+   "end": 48.0,
+   "score": 0.1079
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    44.0,
+    48.0
+   ],
+   "start": 44.0,
+   "end": 48.0,
+   "score": 0.1077
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    46.0,
+    60.0
+   ],
+   "start": 46.0,
+   "end": 60.0,
+   "score": 0.1478
+  },
+  {
+   "verb": "wash",
+   "noun": "kettle",
+   "segment": [
+    46.0,
+    50.0
+   ],
+   "start": 46.0,
+   "end": 50.0,
+   "score": 0.1366
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    48.0,
+    52.0
+   ],
+   "start": 48.0,
+   "end": 52.0,
+   "score": 0.121
+  },
+  {
+   "verb": "take",
+   "noun": "tap",
+   "segment": [
+    50.5,
+    56.0
+   ],
+   "start": 50.5,
+   "end": 56.0,
+   "score": 0.1498
+  },
+  {
+   "verb": "put",
+   "noun": "tap",
+   "segment": [
+    50.5,
+    56.0
+   ],
+   "start": 50.5,
+   "end": 56.0,
+   "score": 0.1412
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    52.0,
+    65.0
+   ],
+   "start": 52.0,
+   "end": 65.0,
+   "score": 0.1519
+  },
+  {
+   "verb": "wash",
+   "noun": "kettle",
+   "segment": [
+    52.0,
+    64.0
+   ],
+   "start": 52.0,
+   "end": 64.0,
+   "score": 0.1298
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    54.0,
+    68.0
+   ],
+   "start": 54.0,
+   "end": 68.0,
+   "score": 0.1684
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    54.0,
+    68.0
+   ],
+   "start": 54.0,
+   "end": 68.0,
+   "score": 0.1506
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    54.0,
+    57.5
+   ],
+   "start": 54.0,
+   "end": 57.5,
+   "score": 0.1102
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    56.0,
+    69.5
+   ],
+   "start": 56.0,
+   "end": 69.5,
+   "score": 0.1631
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    60.0,
+    74.0
+   ],
+   "start": 60.0,
+   "end": 74.0,
+   "score": 0.2444
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    60.0,
+    74.0
+   ],
+   "start": 60.0,
+   "end": 74.0,
+   "score": 0.2042
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    60.0,
+    74.0
+   ],
+   "start": 60.0,
+   "end": 74.0,
+   "score": 0.1985
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    60.0,
+    65.5
+   ],
+   "start": 60.0,
+   "end": 65.5,
+   "score": 0.1445
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    63.0,
+    75.5
+   ],
+   "start": 63.0,
+   "end": 75.5,
+   "score": 0.1565
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    63.0,
+    68.0
+   ],
+   "start": 63.0,
+   "end": 68.0,
+   "score": 0.1501
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    64.0,
+    72.0
+   ],
+   "start": 64.0,
+   "end": 72.0,
+   "score": 0.1633
+  },
+  {
+   "verb": "take",
+   "noun": "tap",
+   "segment": [
+    66.0,
+    69.5
+   ],
+   "start": 66.0,
+   "end": 69.5,
+   "score": 0.1484
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    68.0,
+    81.5
+   ],
+   "start": 68.0,
+   "end": 81.5,
+   "score": 0.1539
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    68.0,
+    74.0
+   ],
+   "start": 68.0,
+   "end": 74.0,
+   "score": 0.1491
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    68.0,
+    81.5
+   ],
+   "start": 68.0,
+   "end": 81.5,
+   "score": 0.1479
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    70.0,
+    75.5
+   ],
+   "start": 70.0,
+   "end": 75.5,
+   "score": 0.1625
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    70.0,
+    84.0
+   ],
+   "start": 70.0,
+   "end": 84.0,
+   "score": 0.1476
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    70.0,
+    84.0
+   ],
+   "start": 70.0,
+   "end": 84.0,
+   "score": 0.144
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    72.0,
+    86.0
+   ],
+   "start": 72.0,
+   "end": 86.0,
+   "score": 0.157
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    74.0,
+    84.0
+   ],
+   "start": 74.0,
+   "end": 84.0,
+   "score": 0.163
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    76.0,
+    90.0
+   ],
+   "start": 76.0,
+   "end": 90.0,
+   "score": 0.2167
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    76.0,
+    90.0
+   ],
+   "start": 76.0,
+   "end": 90.0,
+   "score": 0.1891
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    76.0,
+    90.0
+   ],
+   "start": 76.0,
+   "end": 90.0,
+   "score": 0.179
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    78.0,
+    84.0
+   ],
+   "start": 78.0,
+   "end": 84.0,
+   "score": 0.1465
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    82.0,
+    96.0
+   ],
+   "start": 82.0,
+   "end": 96.0,
+   "score": 0.1594
+  },
+  {
+   "verb": "put",
+   "noun": "tap",
+   "segment": [
+    82.0,
+    86.0
+   ],
+   "start": 82.0,
+   "end": 86.0,
+   "score": 0.1329
+  },
+  {
+   "verb": "take",
+   "noun": "tap",
+   "segment": [
+    82.0,
+    86.0
+   ],
+   "start": 82.0,
+   "end": 86.0,
+   "score": 0.1255
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    84.0,
+    98.0
+   ],
+   "start": 84.0,
+   "end": 98.0,
+   "score": 0.1667
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    84.0,
+    98.0
+   ],
+   "start": 84.0,
+   "end": 98.0,
+   "score": 0.1416
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    84.0,
+    92.0
+   ],
+   "start": 84.0,
+   "end": 92.0,
+   "score": 0.1202
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    84.0,
+    88.0
+   ],
+   "start": 84.0,
+   "end": 88.0,
+   "score": 0.1034
+  },
+  {
+   "verb": "pour",
+   "noun": "bowl",
+   "segment": [
+    84.0,
+    88.0
+   ],
+   "start": 84.0,
+   "end": 88.0,
+   "score": 0.1032
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    86.0,
+    99.5
+   ],
+   "start": 86.0,
+   "end": 99.5,
+   "score": 0.1629
+  },
+  {
+   "verb": "wash",
+   "noun": "kettle",
+   "segment": [
+    86.0,
+    98.0
+   ],
+   "start": 86.0,
+   "end": 98.0,
+   "score": 0.1344
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    86.0,
+    90.0
+   ],
+   "start": 86.0,
+   "end": 90.0,
+   "score": 0.1335
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    88.0,
+    94.0
+   ],
+   "start": 88.0,
+   "end": 94.0,
+   "score": 0.1352
+  },
+  {
+   "verb": "mix",
+   "noun": "tap",
+   "segment": [
+    90.0,
+    94.0
+   ],
+   "start": 90.0,
+   "end": 94.0,
+   "score": 0.1363
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    93.0,
+    106.0
+   ],
+   "start": 93.0,
+   "end": 106.0,
+   "score": 0.2339
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    93.0,
+    106.0
+   ],
+   "start": 93.0,
+   "end": 106.0,
+   "score": 0.2333
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    93.0,
+    106.0
+   ],
+   "start": 93.0,
+   "end": 106.0,
+   "score": 0.2278
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    93.0,
+    106.0
+   ],
+   "start": 93.0,
+   "end": 106.0,
+   "score": 0.1802
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    93.0,
+    102.0
+   ],
+   "start": 93.0,
+   "end": 102.0,
+   "score": 0.1559
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    96.0,
+    103.0
+   ],
+   "start": 96.0,
+   "end": 103.0,
+   "score": 0.1638
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    98.0,
+    110.5
+   ],
+   "start": 98.0,
+   "end": 110.5,
+   "score": 0.1929
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    98.0,
+    110.5
+   ],
+   "start": 98.0,
+   "end": 110.5,
+   "score": 0.1796
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    100.0,
+    114.0
+   ],
+   "start": 100.0,
+   "end": 114.0,
+   "score": 0.1736
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    100.0,
+    114.0
+   ],
+   "start": 100.0,
+   "end": 114.0,
+   "score": 0.1711
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    102.5,
+    106.0
+   ],
+   "start": 102.5,
+   "end": 106.0,
+   "score": 0.1969
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    102.5,
+    110.0
+   ],
+   "start": 102.5,
+   "end": 110.0,
+   "score": 0.1747
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    104.0,
+    108.0
+   ],
+   "start": 104.0,
+   "end": 108.0,
+   "score": 0.1588
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    106.0,
+    110.0
+   ],
+   "start": 106.0,
+   "end": 110.0,
+   "score": 0.1422
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    108.0,
+    121.0
+   ],
+   "start": 108.0,
+   "end": 121.0,
+   "score": 0.1886
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    108.0,
+    121.0
+   ],
+   "start": 108.0,
+   "end": 121.0,
+   "score": 0.1766
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    108.0,
+    121.0
+   ],
+   "start": 108.0,
+   "end": 121.0,
+   "score": 0.1699
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    108.0,
+    121.0
+   ],
+   "start": 108.0,
+   "end": 121.0,
+   "score": 0.1693
+  },
+  {
+   "verb": "wash",
+   "noun": "fork",
+   "segment": [
+    108.0,
+    118.0
+   ],
+   "start": 108.0,
+   "end": 118.0,
+   "score": 0.1209
+  },
+  {
+   "verb": "wash",
+   "noun": "kettle",
+   "segment": [
+    108.0,
+    110.5
+   ],
+   "start": 108.0,
+   "end": 110.5,
+   "score": 0.111
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    110.0,
+    120.0
+   ],
+   "start": 110.0,
+   "end": 120.0,
+   "score": 0.1369
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    112.0,
+    115.5
+   ],
+   "start": 112.0,
+   "end": 115.5,
+   "score": 0.0978
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    114.0,
+    128.0
+   ],
+   "start": 114.0,
+   "end": 128.0,
+   "score": 0.1562
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    114.0,
+    128.0
+   ],
+   "start": 114.0,
+   "end": 128.0,
+   "score": 0.1476
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    114.0,
+    128.0
+   ],
+   "start": 114.0,
+   "end": 128.0,
+   "score": 0.138
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    116.0,
+    130.0
+   ],
+   "start": 116.0,
+   "end": 130.0,
+   "score": 0.1471
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    116.0,
+    121.0
+   ],
+   "start": 116.0,
+   "end": 121.0,
+   "score": 0.1389
+  },
+  {
+   "verb": "wash",
+   "noun": "kettle",
+   "segment": [
+    118.0,
+    125.5
+   ],
+   "start": 118.0,
+   "end": 125.5,
+   "score": 0.1104
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    123.0,
+    130.0
+   ],
+   "start": 123.0,
+   "end": 130.0,
+   "score": 0.1068
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    124.0,
+    134.0
+   ],
+   "start": 124.0,
+   "end": 134.0,
+   "score": 0.1447
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    124.0,
+    132.0
+   ],
+   "start": 124.0,
+   "end": 132.0,
+   "score": 0.1336
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    124.0,
+    132.0
+   ],
+   "start": 124.0,
+   "end": 132.0,
+   "score": 0.1279
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    124.0,
+    132.0
+   ],
+   "start": 124.0,
+   "end": 132.0,
+   "score": 0.1251
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    124.0,
+    128.0
+   ],
+   "start": 124.0,
+   "end": 128.0,
+   "score": 0.0995
+  },
+  {
+   "verb": "wash",
+   "noun": "kettle",
+   "segment": [
+    126.0,
+    130.0
+   ],
+   "start": 126.0,
+   "end": 130.0,
+   "score": 0.0997
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    130.0,
+    139.0
+   ],
+   "start": 130.0,
+   "end": 139.0,
+   "score": 0.1644
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    130.0,
+    139.0
+   ],
+   "start": 130.0,
+   "end": 139.0,
+   "score": 0.1641
+  },
+  {
+   "verb": "throw",
+   "noun": "bowl",
+   "segment": [
+    130.0,
+    138.0
+   ],
+   "start": 130.0,
+   "end": 138.0,
+   "score": 0.1369
+  },
+  {
+   "verb": "put",
+   "noun": "plate",
+   "segment": [
+    130.0,
+    134.0
+   ],
+   "start": 130.0,
+   "end": 134.0,
+   "score": 0.1304
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    130.0,
+    139.0
+   ],
+   "start": 130.0,
+   "end": 139.0,
+   "score": 0.1215
+  },
+  {
+   "verb": "take",
+   "noun": "pan",
+   "segment": [
+    130.0,
+    136.0
+   ],
+   "start": 130.0,
+   "end": 136.0,
+   "score": 0.1182
+  },
+  {
+   "verb": "open",
+   "noun": "bowl",
+   "segment": [
+    130.0,
+    138.0
+   ],
+   "start": 130.0,
+   "end": 138.0,
+   "score": 0.118
+  },
+  {
+   "verb": "turn-off",
+   "noun": "bowl",
+   "segment": [
+    130.0,
+    134.0
+   ],
+   "start": 130.0,
+   "end": 134.0,
+   "score": 0.1129
+  },
+  {
+   "verb": "put",
+   "noun": "pan",
+   "segment": [
+    130.0,
+    134.0
+   ],
+   "start": 130.0,
+   "end": 134.0,
+   "score": 0.108
+  },
+  {
+   "verb": "pour",
+   "noun": "bowl",
+   "segment": [
+    130.0,
+    132.0
+   ],
+   "start": 130.0,
+   "end": 132.0,
+   "score": 0.1024
+  },
+  {
+   "verb": "put",
+   "noun": "tap",
+   "segment": [
+    130.0,
+    132.0
+   ],
+   "start": 130.0,
+   "end": 132.0,
+   "score": 0.1002
+  },
+  {
+   "verb": "shake",
+   "noun": "bowl",
+   "segment": [
+    130.0,
+    132.0
+   ],
+   "start": 130.0,
+   "end": 132.0,
+   "score": 0.097
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    132.0,
+    138.0
+   ],
+   "start": 132.0,
+   "end": 138.0,
+   "score": 0.1183
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    132.0,
+    138.0
+   ],
+   "start": 132.0,
+   "end": 138.0,
+   "score": 0.1115
+  },
+  {
+   "verb": "take",
+   "noun": "cupboard",
+   "segment": [
+    132.0,
+    136.0
+   ],
+   "start": 132.0,
+   "end": 136.0,
+   "score": 0.1067
+  },
+  {
+   "verb": "take",
+   "noun": "drawer",
+   "segment": [
+    132.0,
+    136.0
+   ],
+   "start": 132.0,
+   "end": 136.0,
+   "score": 0.1009
+  },
+  {
+   "verb": "take",
+   "noun": "glass",
+   "segment": [
+    134.0,
+    138.0
+   ],
+   "start": 134.0,
+   "end": 138.0,
+   "score": 0.1266
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    134.0,
+    138.0
+   ],
+   "start": 134.0,
+   "end": 138.0,
+   "score": 0.1126
+  },
+  {
+   "verb": "take",
+   "noun": "cup",
+   "segment": [
+    134.0,
+    138.0
+   ],
+   "start": 134.0,
+   "end": 138.0,
+   "score": 0.1123
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    136.0,
+    144.0
+   ],
+   "start": 136.0,
+   "end": 144.0,
+   "score": 0.2365
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    136.0,
+    150.0
+   ],
+   "start": 136.0,
+   "end": 150.0,
+   "score": 0.2066
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    136.0,
+    150.0
+   ],
+   "start": 136.0,
+   "end": 150.0,
+   "score": 0.1873
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    136.0,
+    150.0
+   ],
+   "start": 136.0,
+   "end": 150.0,
+   "score": 0.1687
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    136.0,
+    150.0
+   ],
+   "start": 136.0,
+   "end": 150.0,
+   "score": 0.1624
+  },
+  {
+   "verb": "take",
+   "noun": "tap",
+   "segment": [
+    136.0,
+    139.5
+   ],
+   "start": 136.0,
+   "end": 139.5,
+   "score": 0.0959
+  },
+  {
+   "verb": "put",
+   "noun": "plate",
+   "segment": [
+    136.0,
+    139.5
+   ],
+   "start": 136.0,
+   "end": 139.5,
+   "score": 0.0935
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    138.0,
+    152.0
+   ],
+   "start": 138.0,
+   "end": 152.0,
+   "score": 0.2061
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    138.0,
+    152.0
+   ],
+   "start": 138.0,
+   "end": 152.0,
+   "score": 0.1981
+  },
+  {
+   "verb": "wash",
+   "noun": "pan",
+   "segment": [
+    138.0,
+    142.0
+   ],
+   "start": 138.0,
+   "end": 142.0,
+   "score": 0.1885
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    138.0,
+    144.0
+   ],
+   "start": 138.0,
+   "end": 144.0,
+   "score": 0.1801
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    138.0,
+    144.0
+   ],
+   "start": 138.0,
+   "end": 144.0,
+   "score": 0.1666
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    140.0,
+    144.0
+   ],
+   "start": 140.0,
+   "end": 144.0,
+   "score": 0.1144
+  },
+  {
+   "verb": "take",
+   "noun": "tap",
+   "segment": [
+    142.0,
+    152.0
+   ],
+   "start": 142.0,
+   "end": 152.0,
+   "score": 0.1378
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    142.0,
+    152.0
+   ],
+   "start": 142.0,
+   "end": 152.0,
+   "score": 0.1361
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    142.0,
+    146.0
+   ],
+   "start": 142.0,
+   "end": 146.0,
+   "score": 0.1044
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    142.0,
+    146.0
+   ],
+   "start": 142.0,
+   "end": 146.0,
+   "score": 0.1019
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    144.0,
+    150.0
+   ],
+   "start": 144.0,
+   "end": 150.0,
+   "score": 0.1287
+  },
+  {
+   "verb": "pour",
+   "noun": "tap",
+   "segment": [
+    144.0,
+    148.0
+   ],
+   "start": 144.0,
+   "end": 148.0,
+   "score": 0.1253
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    146.0,
+    150.0
+   ],
+   "start": 146.0,
+   "end": 150.0,
+   "score": 0.1259
+  },
+  {
+   "verb": "wash",
+   "noun": "jug",
+   "segment": [
+    149.5,
+    152.0
+   ],
+   "start": 149.5,
+   "end": 152.0,
+   "score": 0.1037
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    149.5,
+    154.0
+   ],
+   "start": 149.5,
+   "end": 154.0,
+   "score": 0.0998
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    150.0,
+    156.0
+   ],
+   "start": 150.0,
+   "end": 156.0,
+   "score": 0.1306
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    150.0,
+    156.0
+   ],
+   "start": 150.0,
+   "end": 156.0,
+   "score": 0.1293
+  },
+  {
+   "verb": "put",
+   "noun": "plate",
+   "segment": [
+    150.0,
+    156.0
+   ],
+   "start": 150.0,
+   "end": 156.0,
+   "score": 0.1188
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    150.0,
+    156.0
+   ],
+   "start": 150.0,
+   "end": 156.0,
+   "score": 0.1117
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    150.0,
+    154.0
+   ],
+   "start": 150.0,
+   "end": 154.0,
+   "score": 0.11
+  },
+  {
+   "verb": "throw",
+   "noun": "bowl",
+   "segment": [
+    150.0,
+    154.0
+   ],
+   "start": 150.0,
+   "end": 154.0,
+   "score": 0.1046
+  },
+  {
+   "verb": "open",
+   "noun": "bowl",
+   "segment": [
+    150.0,
+    156.0
+   ],
+   "start": 150.0,
+   "end": 156.0,
+   "score": 0.1034
+  },
+  {
+   "verb": "open",
+   "noun": "plate",
+   "segment": [
+    150.0,
+    154.0
+   ],
+   "start": 150.0,
+   "end": 154.0,
+   "score": 0.086
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    152.0,
+    156.0
+   ],
+   "start": 152.0,
+   "end": 156.0,
+   "score": 0.1452
+  },
+  {
+   "verb": "take",
+   "noun": "container",
+   "segment": [
+    152.0,
+    156.0
+   ],
+   "start": 152.0,
+   "end": 156.0,
+   "score": 0.1077
+  },
+  {
+   "verb": "put",
+   "noun": "container",
+   "segment": [
+    152.0,
+    156.0
+   ],
+   "start": 152.0,
+   "end": 156.0,
+   "score": 0.1025
+  },
+  {
+   "verb": "open",
+   "noun": "lid",
+   "segment": [
+    152.0,
+    156.0
+   ],
+   "start": 152.0,
+   "end": 156.0,
+   "score": 0.0945
+  },
+  {
+   "verb": "put",
+   "noun": "glass",
+   "segment": [
+    152.0,
+    156.0
+   ],
+   "start": 152.0,
+   "end": 156.0,
+   "score": 0.0923
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    154.0,
+    168.0
+   ],
+   "start": 154.0,
+   "end": 168.0,
+   "score": 0.2082
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    154.0,
+    157.5
+   ],
+   "start": 154.0,
+   "end": 157.5,
+   "score": 0.1388
+  },
+  {
+   "verb": "take",
+   "noun": "cup",
+   "segment": [
+    154.0,
+    157.5
+   ],
+   "start": 154.0,
+   "end": 157.5,
+   "score": 0.1289
+  },
+  {
+   "verb": "take",
+   "noun": "glass",
+   "segment": [
+    154.0,
+    157.5
+   ],
+   "start": 154.0,
+   "end": 157.5,
+   "score": 0.1182
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    154.0,
+    157.5
+   ],
+   "start": 154.0,
+   "end": 157.5,
+   "score": 0.1019
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    154.0,
+    157.5
+   ],
+   "start": 154.0,
+   "end": 157.5,
+   "score": 0.1016
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    156.0,
+    170.0
+   ],
+   "start": 156.0,
+   "end": 170.0,
+   "score": 0.2164
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    156.0,
+    170.0
+   ],
+   "start": 156.0,
+   "end": 170.0,
+   "score": 0.2008
+  },
+  {
+   "verb": "wash",
+   "noun": "box",
+   "segment": [
+    156.0,
+    170.0
+   ],
+   "start": 156.0,
+   "end": 170.0,
+   "score": 0.1864
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    156.0,
+    170.0
+   ],
+   "start": 156.0,
+   "end": 170.0,
+   "score": 0.1847
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    156.0,
+    170.0
+   ],
+   "start": 156.0,
+   "end": 170.0,
+   "score": 0.1825
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    156.0,
+    166.0
+   ],
+   "start": 156.0,
+   "end": 166.0,
+   "score": 0.1774
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    156.0,
+    161.5
+   ],
+   "start": 156.0,
+   "end": 161.5,
+   "score": 0.1715
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    156.0,
+    161.5
+   ],
+   "start": 156.0,
+   "end": 161.5,
+   "score": 0.161
+  },
+  {
+   "verb": "wash",
+   "noun": "hand",
+   "segment": [
+    156.0,
+    160.0
+   ],
+   "start": 156.0,
+   "end": 160.0,
+   "score": 0.1146
+  },
+  {
+   "verb": "wash",
+   "noun": "bag",
+   "segment": [
+    158.0,
+    172.0
+   ],
+   "start": 158.0,
+   "end": 172.0,
+   "score": 0.2759
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    160.0,
+    164.0
+   ],
+   "start": 160.0,
+   "end": 164.0,
+   "score": 0.1893
+  },
+  {
+   "verb": "wash",
+   "noun": "sponge",
+   "segment": [
+    160.0,
+    174.0
+   ],
+   "start": 160.0,
+   "end": 174.0,
+   "score": 0.1882
+  },
+  {
+   "verb": "wash",
+   "noun": "package",
+   "segment": [
+    162.0,
+    174.0
+   ],
+   "start": 162.0,
+   "end": 174.0,
+   "score": 0.1844
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    164.0,
+    170.0
+   ],
+   "start": 164.0,
+   "end": 170.0,
+   "score": 0.178
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    168.0,
+    172.0
+   ],
+   "start": 168.0,
+   "end": 172.0,
+   "score": 0.1834
+  },
+  {
+   "verb": "wash",
+   "noun": "bottle",
+   "segment": [
+    168.0,
+    172.0
+   ],
+   "start": 168.0,
+   "end": 172.0,
+   "score": 0.1706
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    170.0,
+    183.0
+   ],
+   "start": 170.0,
+   "end": 183.0,
+   "score": 0.2118
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    170.0,
+    183.0
+   ],
+   "start": 170.0,
+   "end": 183.0,
+   "score": 0.1717
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    170.0,
+    183.0
+   ],
+   "start": 170.0,
+   "end": 183.0,
+   "score": 0.1652
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    172.0,
+    186.0
+   ],
+   "start": 172.0,
+   "end": 186.0,
+   "score": 0.2271
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    172.0,
+    186.0
+   ],
+   "start": 172.0,
+   "end": 186.0,
+   "score": 0.2223
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    172.0,
+    186.0
+   ],
+   "start": 172.0,
+   "end": 186.0,
+   "score": 0.1919
+  },
+  {
+   "verb": "wash",
+   "noun": "plate",
+   "segment": [
+    172.0,
+    176.0
+   ],
+   "start": 172.0,
+   "end": 176.0,
+   "score": 0.1709
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    172.0,
+    177.5
+   ],
+   "start": 172.0,
+   "end": 177.5,
+   "score": 0.1704
+  },
+  {
+   "verb": "wash",
+   "noun": "box",
+   "segment": [
+    172.0,
+    180.0
+   ],
+   "start": 172.0,
+   "end": 180.0,
+   "score": 0.158
+  },
+  {
+   "verb": "wash",
+   "noun": "bag",
+   "segment": [
+    174.0,
+    180.0
+   ],
+   "start": 174.0,
+   "end": 180.0,
+   "score": 0.1773
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    174.0,
+    177.5
+   ],
+   "start": 174.0,
+   "end": 177.5,
+   "score": 0.1482
+  },
+  {
+   "verb": "wash",
+   "noun": "bottle",
+   "segment": [
+    176.0,
+    182.0
+   ],
+   "start": 176.0,
+   "end": 182.0,
+   "score": 0.1487
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    176.0,
+    180.0
+   ],
+   "start": 176.0,
+   "end": 180.0,
+   "score": 0.1204
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    178.0,
+    192.0
+   ],
+   "start": 178.0,
+   "end": 192.0,
+   "score": 0.1671
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    178.0,
+    192.0
+   ],
+   "start": 178.0,
+   "end": 192.0,
+   "score": 0.1637
+  },
+  {
+   "verb": "wash",
+   "noun": "hand",
+   "segment": [
+    178.0,
+    188.0
+   ],
+   "start": 178.0,
+   "end": 188.0,
+   "score": 0.158
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    180.0,
+    186.0
+   ],
+   "start": 180.0,
+   "end": 186.0,
+   "score": 0.1637
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    184.5,
+    190.0
+   ],
+   "start": 184.5,
+   "end": 190.0,
+   "score": 0.1494
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    186.0,
+    200.0
+   ],
+   "start": 186.0,
+   "end": 200.0,
+   "score": 0.2557
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    186.0,
+    200.0
+   ],
+   "start": 186.0,
+   "end": 200.0,
+   "score": 0.1716
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    186.0,
+    200.0
+   ],
+   "start": 186.0,
+   "end": 200.0,
+   "score": 0.1547
+  },
+  {
+   "verb": "wash",
+   "noun": "box",
+   "segment": [
+    186.0,
+    194.0
+   ],
+   "start": 186.0,
+   "end": 194.0,
+   "score": 0.1324
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    188.0,
+    202.0
+   ],
+   "start": 188.0,
+   "end": 202.0,
+   "score": 0.2325
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    188.0,
+    202.0
+   ],
+   "start": 188.0,
+   "end": 202.0,
+   "score": 0.1794
+  },
+  {
+   "verb": "wash",
+   "noun": "bottle",
+   "segment": [
+    188.0,
+    198.0
+   ],
+   "start": 188.0,
+   "end": 198.0,
+   "score": 0.1397
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    188.0,
+    195.5
+   ],
+   "start": 188.0,
+   "end": 195.5,
+   "score": 0.1345
+  },
+  {
+   "verb": "wash",
+   "noun": "jug",
+   "segment": [
+    190.5,
+    198.0
+   ],
+   "start": 190.5,
+   "end": 198.0,
+   "score": 0.14
+  },
+  {
+   "verb": "wash",
+   "noun": "bag",
+   "segment": [
+    190.5,
+    194.0
+   ],
+   "start": 190.5,
+   "end": 194.0,
+   "score": 0.1221
+  },
+  {
+   "verb": "wash",
+   "noun": "liquid",
+   "segment": [
+    193.0,
+    198.0
+   ],
+   "start": 193.0,
+   "end": 198.0,
+   "score": 0.1443
+  },
+  {
+   "verb": "wash",
+   "noun": "maker:coffee",
+   "segment": [
+    193.0,
+    200.0
+   ],
+   "start": 193.0,
+   "end": 200.0,
+   "score": 0.1394
+  },
+  {
+   "verb": "wash",
+   "noun": "coffee",
+   "segment": [
+    194.0,
+    198.0
+   ],
+   "start": 194.0,
+   "end": 198.0,
+   "score": 0.134
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    196.5,
+    202.0
+   ],
+   "start": 196.5,
+   "end": 202.0,
+   "score": 0.1614
+  },
+  {
+   "verb": "wash",
+   "noun": "box",
+   "segment": [
+    196.5,
+    204.0
+   ],
+   "start": 196.5,
+   "end": 204.0,
+   "score": 0.1406
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    196.5,
+    200.0
+   ],
+   "start": 196.5,
+   "end": 200.0,
+   "score": 0.1385
+  },
+  {
+   "verb": "wash",
+   "noun": "pot",
+   "segment": [
+    196.5,
+    200.0
+   ],
+   "start": 196.5,
+   "end": 200.0,
+   "score": 0.1356
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    198.0,
+    202.0
+   ],
+   "start": 198.0,
+   "end": 202.0,
+   "score": 0.1417
+  },
+  {
+   "verb": "wash",
+   "noun": "bottle",
+   "segment": [
+    198.0,
+    203.0
+   ],
+   "start": 198.0,
+   "end": 203.0,
+   "score": 0.1402
+  },
+  {
+   "verb": "pour",
+   "noun": "lid",
+   "segment": [
+    198.0,
+    206.0
+   ],
+   "start": 198.0,
+   "end": 206.0,
+   "score": 0.1312
+  },
+  {
+   "verb": "wash",
+   "noun": "liquid",
+   "segment": [
+    200.0,
+    204.0
+   ],
+   "start": 200.0,
+   "end": 204.0,
+   "score": 0.1223
+  },
+  {
+   "verb": "wash",
+   "noun": "jug",
+   "segment": [
+    200.0,
+    204.0
+   ],
+   "start": 200.0,
+   "end": 204.0,
+   "score": 0.1168
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    202.5,
+    206.0
+   ],
+   "start": 202.5,
+   "end": 206.0,
+   "score": 0.1509
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    202.5,
+    206.0
+   ],
+   "start": 202.5,
+   "end": 206.0,
+   "score": 0.1288
+  },
+  {
+   "verb": "wash",
+   "noun": "container",
+   "segment": [
+    202.5,
+    206.0
+   ],
+   "start": 202.5,
+   "end": 206.0,
+   "score": 0.1067
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    202.5,
+    206.0
+   ],
+   "start": 202.5,
+   "end": 206.0,
+   "score": 0.1039
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    202.5,
+    206.0
+   ],
+   "start": 202.5,
+   "end": 206.0,
+   "score": 0.1004
+  },
+  {
+   "verb": "take",
+   "noun": "glass",
+   "segment": [
+    204.0,
+    208.0
+   ],
+   "start": 204.0,
+   "end": 208.0,
+   "score": 0.111
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    204.0,
+    210.0
+   ],
+   "start": 204.0,
+   "end": 210.0,
+   "score": 0.103
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    204.0,
+    210.0
+   ],
+   "start": 204.0,
+   "end": 210.0,
+   "score": 0.0995
+  },
+  {
+   "verb": "take",
+   "noun": "cup",
+   "segment": [
+    204.0,
+    208.0
+   ],
+   "start": 204.0,
+   "end": 208.0,
+   "score": 0.0985
+  },
+  {
+   "verb": "put",
+   "noun": "glass",
+   "segment": [
+    204.0,
+    208.0
+   ],
+   "start": 204.0,
+   "end": 208.0,
+   "score": 0.0985
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    204.0,
+    208.0
+   ],
+   "start": 204.0,
+   "end": 208.0,
+   "score": 0.0952
+  },
+  {
+   "verb": "take",
+   "noun": "container",
+   "segment": [
+    204.0,
+    210.0
+   ],
+   "start": 204.0,
+   "end": 210.0,
+   "score": 0.0884
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    204.0,
+    208.0
+   ],
+   "start": 204.0,
+   "end": 208.0,
+   "score": 0.0844
+  },
+  {
+   "verb": "open",
+   "noun": "glass",
+   "segment": [
+    204.0,
+    208.0
+   ],
+   "start": 204.0,
+   "end": 208.0,
+   "score": 0.0823
+  },
+  {
+   "verb": "take",
+   "noun": "drawer",
+   "segment": [
+    204.0,
+    208.0
+   ],
+   "start": 204.0,
+   "end": 208.0,
+   "score": 0.0813
+  },
+  {
+   "verb": "open",
+   "noun": "lid",
+   "segment": [
+    206.0,
+    214.0
+   ],
+   "start": 206.0,
+   "end": 214.0,
+   "score": 0.12
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    206.0,
+    215.5
+   ],
+   "start": 206.0,
+   "end": 215.5,
+   "score": 0.1192
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    206.0,
+    214.0
+   ],
+   "start": 206.0,
+   "end": 214.0,
+   "score": 0.1171
+  },
+  {
+   "verb": "put",
+   "noun": "water",
+   "segment": [
+    206.0,
+    210.0
+   ],
+   "start": 206.0,
+   "end": 210.0,
+   "score": 0.0865
+  },
+  {
+   "verb": "open",
+   "noun": "water",
+   "segment": [
+    206.0,
+    210.0
+   ],
+   "start": 206.0,
+   "end": 210.0,
+   "score": 0.0854
+  },
+  {
+   "verb": "open",
+   "noun": "bowl",
+   "segment": [
+    206.0,
+    210.0
+   ],
+   "start": 206.0,
+   "end": 210.0,
+   "score": 0.0853
+  },
+  {
+   "verb": "take",
+   "noun": "fridge",
+   "segment": [
+    206.0,
+    210.0
+   ],
+   "start": 206.0,
+   "end": 210.0,
+   "score": 0.085
+  },
+  {
+   "verb": "press",
+   "noun": "lid",
+   "segment": [
+    208.0,
+    211.5
+   ],
+   "start": 208.0,
+   "end": 211.5,
+   "score": 0.1169
+  },
+  {
+   "verb": "open",
+   "noun": "powder",
+   "segment": [
+    208.0,
+    214.0
+   ],
+   "start": 208.0,
+   "end": 214.0,
+   "score": 0.1164
+  },
+  {
+   "verb": "close",
+   "noun": "lid",
+   "segment": [
+    208.0,
+    214.0
+   ],
+   "start": 208.0,
+   "end": 214.0,
+   "score": 0.1084
+  },
+  {
+   "verb": "close",
+   "noun": "powder",
+   "segment": [
+    208.0,
+    214.0
+   ],
+   "start": 208.0,
+   "end": 214.0,
+   "score": 0.1018
+  },
+  {
+   "verb": "put",
+   "noun": "powder",
+   "segment": [
+    208.0,
+    214.0
+   ],
+   "start": 208.0,
+   "end": 214.0,
+   "score": 0.0987
+  },
+  {
+   "verb": "mix",
+   "noun": "lid",
+   "segment": [
+    208.0,
+    214.0
+   ],
+   "start": 208.0,
+   "end": 214.0,
+   "score": 0.0934
+  },
+  {
+   "verb": "take",
+   "noun": "powder",
+   "segment": [
+    208.0,
+    214.0
+   ],
+   "start": 208.0,
+   "end": 214.0,
+   "score": 0.0923
+  },
+  {
+   "verb": "pour",
+   "noun": "lid",
+   "segment": [
+    210.5,
+    214.0
+   ],
+   "start": 210.5,
+   "end": 214.0,
+   "score": 0.0788
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1756
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1345
+  },
+  {
+   "verb": "take",
+   "noun": "glass",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1247
+  },
+  {
+   "verb": "open",
+   "noun": "bowl",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1198
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1182
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1175
+  },
+  {
+   "verb": "take",
+   "noun": "cup",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1165
+  },
+  {
+   "verb": "take",
+   "noun": "bottle",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1113
+  },
+  {
+   "verb": "take",
+   "noun": "jar",
+   "segment": [
+    212.0,
+    215.5
+   ],
+   "start": 212.0,
+   "end": 215.5,
+   "score": 0.1105
+  },
+  {
+   "verb": "wash",
+   "noun": "water",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1543
+  },
+  {
+   "verb": "wash",
+   "noun": "glass",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1438
+  },
+  {
+   "verb": "wash",
+   "noun": "lid",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1372
+  },
+  {
+   "verb": "wash",
+   "noun": "cup",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1352
+  },
+  {
+   "verb": "wash",
+   "noun": "spoon",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1345
+  },
+  {
+   "verb": "wash",
+   "noun": "bowl",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.13
+  },
+  {
+   "verb": "wash",
+   "noun": "tap",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1275
+  },
+  {
+   "verb": "wash",
+   "noun": "bottle",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1275
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    214.0,
+    222.0
+   ],
+   "start": 214.0,
+   "end": 222.0,
+   "score": 0.1129
+  },
+  {
+   "verb": "take",
+   "noun": "tap",
+   "segment": [
+    214.0,
+    216.0
+   ],
+   "start": 214.0,
+   "end": 216.0,
+   "score": 0.1047
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    219.5,
+    222.0
+   ],
+   "start": 219.5,
+   "end": 222.0,
+   "score": 0.1194
+  },
+  {
+   "verb": "spray",
+   "noun": "bottle",
+   "segment": [
+    220.0,
+    224.5
+   ],
+   "start": 220.0,
+   "end": 224.5,
+   "score": 0.227
+  },
+  {
+   "verb": "take",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.0
+   ],
+   "start": 220.0,
+   "end": 224.0,
+   "score": 0.1608
+  },
+  {
+   "verb": "spray",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.5
+   ],
+   "start": 220.0,
+   "end": 224.5,
+   "score": 0.147
+  },
+  {
+   "verb": "pour",
+   "noun": "bottle",
+   "segment": [
+    220.0,
+    224.5
+   ],
+   "start": 220.0,
+   "end": 224.5,
+   "score": 0.142
+  },
+  {
+   "verb": "pour",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.5
+   ],
+   "start": 220.0,
+   "end": 224.5,
+   "score": 0.1333
+  },
+  {
+   "verb": "open",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.0
+   ],
+   "start": 220.0,
+   "end": 224.0,
+   "score": 0.1308
+  },
+  {
+   "verb": "put",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.0
+   ],
+   "start": 220.0,
+   "end": 224.0,
+   "score": 0.1155
+  },
+  {
+   "verb": "wash",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.0
+   ],
+   "start": 220.0,
+   "end": 224.0,
+   "score": 0.1107
+  },
+  {
+   "verb": "dry",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.0
+   ],
+   "start": 220.0,
+   "end": 224.0,
+   "score": 0.1091
+  },
+  {
+   "verb": "close",
+   "noun": "liquid:washing",
+   "segment": [
+    220.0,
+    224.0
+   ],
+   "start": 220.0,
+   "end": 224.0,
+   "score": 0.1089
+  },
+  {
+   "verb": "spray",
+   "noun": "milk",
+   "segment": [
+    222.0,
+    224.5
+   ],
+   "start": 222.0,
+   "end": 224.5,
+   "score": 0.133
+  },
+  {
+   "verb": "close",
+   "noun": "bottle",
+   "segment": [
+    222.0,
+    224.5
+   ],
+   "start": 222.0,
+   "end": 224.5,
+   "score": 0.1316
+  },
+  {
+   "verb": "pour",
+   "noun": "milk",
+   "segment": [
+    222.0,
+    224.5
+   ],
+   "start": 222.0,
+   "end": 224.5,
+   "score": 0.1237
+  },
+  {
+   "verb": "open",
+   "noun": "bottle",
+   "segment": [
+    222.0,
+    224.5
+   ],
+   "start": 222.0,
+   "end": 224.5,
+   "score": 0.1177
+  },
+  {
+   "verb": "take",
+   "noun": "bottle",
+   "segment": [
+    222.0,
+    224.5
+   ],
+   "start": 222.0,
+   "end": 224.5,
+   "score": 0.1139
+  },
+  {
+   "verb": "insert",
+   "noun": "bottle",
+   "segment": [
+    222.0,
+    224.5
+   ],
+   "start": 222.0,
+   "end": 224.5,
+   "score": 0.1095
+  },
+  {
+   "verb": "take",
+   "noun": "water",
+   "segment": [
+    229.5,
+    234.0
+   ],
+   "start": 229.5,
+   "end": 234.0,
+   "score": 0.1282
+  },
+  {
+   "verb": "take",
+   "noun": "bottle",
+   "segment": [
+    229.5,
+    234.0
+   ],
+   "start": 229.5,
+   "end": 234.0,
+   "score": 0.1111
+  },
+  {
+   "verb": "pour",
+   "noun": "water",
+   "segment": [
+    229.5,
+    232.0
+   ],
+   "start": 229.5,
+   "end": 232.0,
+   "score": 0.104
+  },
+  {
+   "verb": "take",
+   "noun": "jug",
+   "segment": [
+    229.5,
+    234.0
+   ],
+   "start": 229.5,
+   "end": 234.0,
+   "score": 0.103
+  },
+  {
+   "verb": "open",
+   "noun": "water",
+   "segment": [
+    229.5,
+    232.0
+   ],
+   "start": 229.5,
+   "end": 232.0,
+   "score": 0.0991
+  },
+  {
+   "verb": "put",
+   "noun": "water",
+   "segment": [
+    229.5,
+    232.0
+   ],
+   "start": 229.5,
+   "end": 232.0,
+   "score": 0.0987
+  },
+  {
+   "verb": "take",
+   "noun": "liquid:washing",
+   "segment": [
+    229.5,
+    232.0
+   ],
+   "start": 229.5,
+   "end": 232.0,
+   "score": 0.0983
+  },
+  {
+   "verb": "close",
+   "noun": "water",
+   "segment": [
+    229.5,
+    232.0
+   ],
+   "start": 229.5,
+   "end": 232.0,
+   "score": 0.0957
+  },
+  {
+   "verb": "spray",
+   "noun": "water",
+   "segment": [
+    229.5,
+    232.0
+   ],
+   "start": 229.5,
+   "end": 232.0,
+   "score": 0.0877
+  },
+  {
+   "verb": "spray",
+   "noun": "bottle",
+   "segment": [
+    229.5,
+    232.0
+   ],
+   "start": 229.5,
+   "end": 232.0,
+   "score": 0.0839
+  },
+  {
+   "verb": "take",
+   "noun": "glass",
+   "segment": [
+    230.0,
+    234.0
+   ],
+   "start": 230.0,
+   "end": 234.0,
+   "score": 0.1347
+  },
+  {
+   "verb": "take",
+   "noun": "bowl",
+   "segment": [
+    230.0,
+    236.0
+   ],
+   "start": 230.0,
+   "end": 236.0,
+   "score": 0.1295
+  },
+  {
+   "verb": "take",
+   "noun": "cup",
+   "segment": [
+    230.0,
+    234.0
+   ],
+   "start": 230.0,
+   "end": 234.0,
+   "score": 0.1183
+  },
+  {
+   "verb": "take",
+   "noun": "lid",
+   "segment": [
+    230.0,
+    234.0
+   ],
+   "start": 230.0,
+   "end": 234.0,
+   "score": 0.1143
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    230.0,
+    236.0
+   ],
+   "start": 230.0,
+   "end": 236.0,
+   "score": 0.1087
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    230.0,
+    236.0
+   ],
+   "start": 230.0,
+   "end": 236.0,
+   "score": 0.1042
+  },
+  {
+   "verb": "take",
+   "noun": "jar",
+   "segment": [
+    230.0,
+    234.0
+   ],
+   "start": 230.0,
+   "end": 234.0,
+   "score": 0.1006
+  },
+  {
+   "verb": "put",
+   "noun": "cupboard",
+   "segment": [
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "score": 0.1301
+  },
+  {
+   "verb": "take",
+   "noun": "cupboard",
+   "segment": [
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "score": 0.1279
+  },
+  {
+   "verb": "put",
+   "noun": "plate",
+   "segment": [
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "score": 0.1112
+  },
+  {
+   "verb": "take",
+   "noun": "drawer",
+   "segment": [
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "score": 0.0984
+  },
+  {
+   "verb": "put",
+   "noun": "drawer",
+   "segment": [
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "score": 0.0966
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "score": 0.096
+  },
+  {
+   "verb": "take",
+   "noun": "cutlery",
+   "segment": [
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "score": 0.087
+  },
+  {
+   "verb": "turn-off",
+   "noun": "cupboard",
+   "segment": [
+    234.0,
+    236.02
+   ],
+   "start": 234.0,
+   "end": 236.02,
+   "score": 0.1004
+  },
+  {
+   "verb": "throw",
+   "noun": "cupboard",
+   "segment": [
+    234.0,
+    236.02
+   ],
+   "start": 234.0,
+   "end": 236.02,
+   "score": 0.0936
+  },
+  {
+   "verb": "open",
+   "noun": "cupboard",
+   "segment": [
+    234.0,
+    236.02
+   ],
+   "start": 234.0,
+   "end": 236.02,
+   "score": 0.0931
+  },
+  {
+   "verb": "put",
+   "noun": "fridge",
+   "segment": [
+    234.0,
+    236.02
+   ],
+   "start": 234.0,
+   "end": 236.02,
+   "score": 0.0926
+  }
+ ],
  "highlights": [
   {
    "segment": [
-    12.75,
-    16.75
-   ]
+    0.0,
+    4.0
+   ],
+   "start": 0.0,
+   "end": 4.0,
+   "importance": 0.6829
   },
   {
    "segment": [
-    42.25,
-    46.25
-   ]
+    30.5,
+    34.5
+   ],
+   "start": 30.5,
+   "end": 34.5,
+   "importance": 0.7132
   },
   {
    "segment": [
-    71.76,
-    75.76
-   ]
+    80.5,
+    84.5
+   ],
+   "start": 80.5,
+   "end": 84.5,
+   "importance": 0.5045
   },
   {
    "segment": [
-    101.26,
-    105.26
-   ]
+    131.5,
+    135.5
+   ],
+   "start": 131.5,
+   "end": 135.5,
+   "importance": 0.6636
   },
   {
    "segment": [
-    130.76,
-    134.76
-   ]
+    152.0,
+    156.0
+   ],
+   "start": 152.0,
+   "end": 156.0,
+   "importance": 0.5993
   },
   {
    "segment": [
-    160.26,
-    164.26
-   ]
+    170.0,
+    174.0
+   ],
+   "start": 170.0,
+   "end": 174.0,
+   "importance": 0.527
   },
   {
    "segment": [
-    189.77,
-    193.77
-   ]
+    208.5,
+    212.5
+   ],
+   "start": 208.5,
+   "end": 212.5,
+   "importance": 0.7039
   },
   {
    "segment": [
-    219.27,
-    223.27
-   ]
+    232.0,
+    236.0
+   ],
+   "start": 232.0,
+   "end": 236.0,
+   "importance": 0.6099
   }
  ]
 }
