@@ -55,7 +55,7 @@ namespace Vistara
             if (cat != shown && !string.IsNullOrEmpty(cat))
             {
                 bool first = shown == null; shown = cat; string target = cat;
-                if (!first && SpaceShift.Instance != null && !SpaceShift.Instance.Busy) StartCoroutine(SpaceShift.Instance.Run(() => Build(target)));   // spatial shift into the new world
+                if (SpaceShift.Instance != null && !SpaceShift.Instance.Busy) StartCoroutine(SpaceShift.Instance.Run(() => Build(target)));   // spatial shift into the new world - also from the main menu's neon room into the first category
                 else Build(cat);
             }
             float t = Time.time;

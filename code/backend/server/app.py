@@ -103,7 +103,10 @@ def _new_job(filename: str) -> tuple[str, Path]:
 @app.get("/health")
 def health():
     import torch
-    return {"status": "ok", "cuda": torch.cuda.is_available(), "model_loaded": _pipe is not None}
+    from vistara.config import WEIGHTS_DIR, Config
+    avion = (WEIGHTS_DIR / "avion_vitl_ek100_fp16.pt").exists() and getattr(Config(), "use_avion", True)
+    return {"status": "ok", "cuda": torch.cuda.is_available(), "model_loaded": _pipe is not None,
+            "recognizer": "AVION ViT-L/14 (EPIC-100)" if avion else "CLIP + trained head"}
 
 
 @app.post("/analyze")

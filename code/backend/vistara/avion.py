@@ -40,20 +40,50 @@ class AvionRecognizer:
 
     # ---------------------------------------------------------------- frames
     @staticmethod
-    def read_clip(cap, fps: float, t0: float, t1: float):
+    def _prep(fr):
         import cv2
+        fr = cv2.cvtColor(fr, cv2.COLOR_BGR2RGB); h, w = fr.shape[:2]; s = SIZE / min(h, w)
+        fr = cv2.resize(fr, (max(SIZE, round(w * s)), max(SIZE, round(h * s))), interpolation=cv2.INTER_AREA)
+        h, w = fr.shape[:2]; y, x = (h - SIZE) // 2, (w - SIZE) // 2
+        return fr[y:y + SIZE, x:x + SIZE]
+
+    @classmethod
+    def read_clip(cls, cap, fps: float, t0: float, t1: float):
+        """One clip by random access (used by the training / evaluation scripts, which sample a few segments per video)."""
         idx = np.linspace(t0 * fps, max(t0 * fps, t1 * fps - 1), FRAMES).astype(int); out = []
         for i in idx:
-            cap.set(cv2.CAP_PROP_POS_FRAMES, int(i)); ok, fr = cap.read()
-            if not ok:
-                fr = out[-1] if out else np.zeros((SIZE, SIZE, 3), np.uint8)
-            else:
-                fr = cv2.cvtColor(fr, cv2.COLOR_BGR2RGB); h, w = fr.shape[:2]; s = SIZE / min(h, w)
-                fr = cv2.resize(fr, (max(SIZE, round(w * s)), max(SIZE, round(h * s))), interpolation=cv2.INTER_AREA)
-                h, w = fr.shape[:2]; y, x = (h - SIZE) // 2, (w - SIZE) // 2; fr = fr[y:y + SIZE, x:x + SIZE]
-            out.append(fr)
+            cap.set(1, int(i)); ok, fr = cap.read()
+            out.append(cls._prep(fr) if ok else (out[-1] if out else np.zeros((SIZE, SIZE, 3), np.uint8)))
         a = (np.stack(out).astype(np.float32) - MEAN) / STD
-        return a.transpose(3, 0, 1, 2)                                       # C,T,H,W
+        return a.transpose(3, 0, 1, 2)
+
+    @classmethod
+    def clips_sequential(cls, cap, fps: float, windows):
+        """Yields one (C,T,H,W) clip per window, reading the video FORWARD once (grab() skips decoding cost of the colour conversion;
+        random seeks re-decode from the previous keyframe for every frame, which is ~10x slower on long 1080p footage)."""
+        cur, last = -1, None
+        for t0, t1 in windows:
+            idx = np.linspace(t0 * fps, max(t0 * fps, t1 * fps - 1), FRAMES).astype(int); out = []
+            for i in idx:
+                i = int(i)
+                if i == cur and last is not None:
+                    out.append(last); continue
+                if i < cur or i - cur > 400:                          # backwards or a long jump (idle gap): one seek is cheaper than decoding through
+                    cap.set(1, i); cur = i - 1                         # cv2.CAP_PROP_POS_FRAMES == 1
+                while cur + 1 < i:
+                    if not cap.grab():
+                        break
+                    cur += 1
+                ok = cap.grab()
+                if ok:
+                    cur = i; ok, fr = cap.retrieve()
+                if ok:
+                    last = cls._prep(fr)
+                elif last is None:
+                    last = np.zeros((SIZE, SIZE, 3), np.uint8)
+                out.append(last)
+            a = (np.stack(out).astype(np.float32) - MEAN) / STD
+            yield a.transpose(3, 0, 1, 2)                              # C,T,H,W
 
     @property
     def n_actions(self) -> int:
@@ -61,21 +91,53 @@ class AvionRecognizer:
 
     def predict_windows(self, video_path: str, windows: list[tuple[float, float]], batch: int = 6, progress=None) -> np.ndarray:
         """-> (n_windows, n_actions) probabilities."""
-        import cv2
+        import cv2, hashlib
         torch = self.torch
+        cache_dir = os.environ.get("VISTARA_AVION_CACHE")          # optional: window probabilities are stored per video, so post-processing can be tuned without re-running the network
+        cfile = None
+        if cache_dir:
+            try:
+                st = os.stat(video_path); key = hashlib.sha1((f"{video_path}|{st.st_size}|{st.st_mtime_ns}|" + ",".join(f"{a:.2f}-{b:.2f}" for a, b in windows)).encode()).hexdigest()[:20]
+                cfile = Path(cache_dir) / f"{Path(video_path).stem}_{key}.npy"
+                if cfile.exists():
+                    return np.load(cfile).astype(np.float32)
+            except Exception:
+                cfile = None
         cap = cv2.VideoCapture(video_path); fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
         out = np.zeros((len(windows), self.n_actions), np.float32)
-        for b0 in range(0, len(windows), batch):
-            clips = [self.read_clip(cap, fps, t0, t1) for t0, t1 in windows[b0:b0 + batch]]
+        import queue, threading
+        q: "queue.Queue" = queue.Queue(maxsize=3 * batch)          # a reader thread decodes the next windows while the GPU works on the current batch
+        def _produce():
+            try:
+                for c in self.clips_sequential(cap, fps, windows):
+                    q.put(c)
+            finally:
+                q.put(None)
+        threading.Thread(target=_produce, daemon=True).start(); done = 0
+        while done < len(windows):
+            clips = []
+            for _ in range(batch):
+                c = q.get()
+                if c is None:
+                    break
+                clips.append(c)
+            if not clips:
+                break
             x = torch.from_numpy(np.stack(clips)).to(self.device).to(self.dt)
             with torch.no_grad():
                 emb = self.visual(x)
                 if isinstance(emb, list):
                     emb = emb[0]
-                out[b0:b0 + len(clips)] = torch.softmax(self.fc(emb).float(), -1).cpu().numpy()
+                out[done:done + len(clips)] = torch.softmax(self.fc(emb).float(), -1).cpu().numpy()
+            done += len(clips)
             if progress:
-                progress(min(1.0, (b0 + batch) / len(windows)))
+                progress(min(1.0, done / len(windows)))
         cap.release()
+        if cfile is not None:
+            try:
+                cfile.parent.mkdir(parents=True, exist_ok=True); np.save(cfile, out.astype(np.float16))
+            except Exception:
+                pass
         return out
 
     def marginals(self, p: np.ndarray) -> tuple[np.ndarray, np.ndarray]:

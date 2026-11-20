@@ -17,9 +17,13 @@ def helmet(cat, P, col, acc, dark='#22232b', visor=True):
 
 def gloves(cat, P, col, cuff, big=False):
     for sd, sx in SIDES:
-        p0, p1 = hand(sd, sx)
-        parts = [rod(tuple(p0), tuple(p1), 0.05, col, True), rod(tuple(p0 + (p1 - p0) * 0.15), tuple(p0 + (p1 - p0) * 0.35), 0.06, cuff, True)]
-        if big: parts = [sp(tuple(p1 * 0.95 + p0 * 0.05), (0.085, 0.085, 0.085), col, sub=3), rod(tuple(p0 - (p1 - p0) * 0.2), tuple(p0 + (p1 - p0) * 0.3), 0.075, cuff, True)]
+        p0, p1 = hand(sd, sx); mid = tuple(p0 + (p1 - p0) * 0.62)
+        if big:        # boxing glove: a fat fist, a thumb, a laced cuff
+            parts = [sp(tuple(p1 * 0.9 + p0 * 0.1), (0.125, 0.115, 0.115), col, sub=3), sp((p1[0] - 0.02 * sx, p1[1] - 0.075, p1[2] + 0.03), (0.05, 0.05, 0.055), col, sub=2),
+                     rod(tuple(p0 - (p1 - p0) * 0.35), tuple(p0 + (p1 - p0) * 0.25), 0.09, cuff, True), rod(tuple(p0 - (p1 - p0) * 0.1), tuple(p0 + (p1 - p0) * 0.05), 0.095, '#f4f1ea', True)]
+        else:          # riding / sport glove: covers the hand, knuckle pad on the back, contrasting cuff
+            parts = [rod(tuple(p0 - (p1 - p0) * 0.1), tuple(p1 + (p1 - p0) * 0.15), 0.066, col, True), sp(mid, (0.05, 0.05, 0.05), cuff, sub=2),
+                     rod(tuple(p0 - (p1 - p0) * 0.25), tuple(p0 + (p1 - p0) * 0.1), 0.078, cuff, True)]
         piece(cat, 'Glove' + sd, 'hand.' + sd, parts, P)
 
 

@@ -14,6 +14,7 @@ namespace Vistara
         public string BaseUrl = DefaultUrl;
         public bool Online { get; private set; }
         public bool Cuda { get; private set; }
+        public string Recognizer { get; private set; }
         public event Action<bool> OnHealthChanged;
 
         public static BackendClient Ensure()
@@ -60,7 +61,7 @@ namespace Vistara
                     yield return r.SendWebRequest();
                     if (r.result == UnityWebRequest.Result.Success)
                     {
-                        try { var h = JsonUtility.FromJson<HealthInfo>(r.downloadHandler.text); ok = h != null && h.status == "ok"; Cuda = h != null && h.cuda; }
+                        try { var h = JsonUtility.FromJson<HealthInfo>(r.downloadHandler.text); ok = h != null && h.status == "ok"; Cuda = h != null && h.cuda; if (h != null && !string.IsNullOrEmpty(h.recognizer)) Recognizer = h.recognizer; }
                         catch (Exception) { ok = false; }
                     }
                 }

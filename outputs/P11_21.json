@@ -8,1137 +8,752 @@
  },
  "actions": [
   {
-   "verb": "take",
-   "noun": "bag",
+   "verb": "pour",
+   "noun": "kale",
    "segment": [
     0.0,
-    4.0
+    9.0
    ],
    "start": 0.0,
-   "end": 4.0,
-   "score": 0.1715
+   "end": 9.0,
+   "score": 0.483
   },
   {
    "verb": "take",
-   "noun": "broccoli",
+   "noun": "kale",
    "segment": [
     0.0,
-    6.0
+    3.0
    ],
    "start": 0.0,
-   "end": 6.0,
-   "score": 0.1673
+   "end": 3.0,
+   "score": 0.0398
   },
   {
-   "verb": "put",
-   "noun": "bag",
+   "verb": "remove",
+   "noun": "lid",
    "segment": [
     0.0,
-    4.0
+    3.0
    ],
    "start": 0.0,
-   "end": 4.0,
-   "score": 0.1399
-  },
-  {
-   "verb": "take",
-   "noun": "parsley",
-   "segment": [
-    0.0,
-    4.0
-   ],
-   "start": 0.0,
-   "end": 4.0,
-   "score": 0.1337
-  },
-  {
-   "verb": "open",
-   "noun": "bag",
-   "segment": [
-    0.0,
-    4.0
-   ],
-   "start": 0.0,
-   "end": 4.0,
-   "score": 0.1258
-  },
-  {
-   "verb": "put",
-   "noun": "broccoli",
-   "segment": [
-    0.0,
-    6.0
-   ],
-   "start": 0.0,
-   "end": 6.0,
-   "score": 0.119
+   "end": 3.0,
+   "score": 0.0392
   },
   {
    "verb": "take",
-   "noun": "spinach",
+   "noun": "lid",
    "segment": [
     0.0,
-    6.0
+    3.0
    ],
    "start": 0.0,
-   "end": 6.0,
-   "score": 0.1151
+   "end": 3.0,
+   "score": 0.0314
+  },
+  {
+   "verb": "uncover",
+   "noun": "cooker:slow",
+   "segment": [
+    0.0,
+    3.0
+   ],
+   "start": 0.0,
+   "end": 3.0,
+   "score": 0.0312
+  },
+  {
+   "verb": "uncover",
+   "noun": "pot",
+   "segment": [
+    0.0,
+    3.0
+   ],
+   "start": 0.0,
+   "end": 3.0,
+   "score": 0.022
   },
   {
    "verb": "move",
-   "noun": "bag",
+   "noun": "pot",
    "segment": [
     0.0,
-    4.0
+    3.0
    ],
    "start": 0.0,
-   "end": 4.0,
-   "score": 0.111
+   "end": 3.0,
+   "score": 0.0191
   },
   {
-   "verb": "close",
-   "noun": "bag",
+   "verb": "lift",
+   "noun": "lid",
    "segment": [
     0.0,
-    4.0
+    3.0
    ],
    "start": 0.0,
-   "end": 4.0,
-   "score": 0.111
+   "end": 3.0,
+   "score": 0.018
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    0.0,
+    3.0
+   ],
+   "start": 0.0,
+   "end": 3.0,
+   "score": 0.0149
+  },
+  {
+   "verb": "turn-on",
+   "noun": "tap",
+   "segment": [
+    0.0,
+    9.0
+   ],
+   "start": 0.0,
+   "end": 9.0,
+   "score": 0.0114
   },
   {
    "verb": "insert",
-   "noun": "bag",
+   "noun": "salad",
    "segment": [
-    0.0,
-    4.0
-   ],
-   "start": 0.0,
-   "end": 4.0,
-   "score": 0.1085
-  },
-  {
-   "verb": "put",
-   "noun": "spinach",
-   "segment": [
-    2.0,
+    3.0,
     6.0
    ],
-   "start": 2.0,
+   "start": 3.0,
    "end": 6.0,
-   "score": 0.1066
+   "score": 0.0424
   },
   {
-   "verb": "put",
+   "verb": "mix",
    "noun": "kale",
    "segment": [
-    2.0,
-    6.0
+    3.0,
+    9.0
    ],
-   "start": 2.0,
-   "end": 6.0,
-   "score": 0.1033
+   "start": 3.0,
+   "end": 9.0,
+   "score": 0.0207
   },
   {
-   "verb": "open",
+   "verb": "pour",
+   "noun": "broccoli",
+   "segment": [
+    3.0,
+    9.0
+   ],
+   "start": 3.0,
+   "end": 9.0,
+   "score": 0.0146
+  },
+  {
+   "verb": "insert",
    "noun": "spinach",
    "segment": [
-    2.0,
+    3.0,
+    9.0
+   ],
+   "start": 3.0,
+   "end": 9.0,
+   "score": 0.0133
+  },
+  {
+   "verb": "insert",
+   "noun": "mint",
+   "segment": [
+    3.0,
+    9.0
+   ],
+   "start": 3.0,
+   "end": 9.0,
+   "score": 0.0132
+  },
+  {
+   "verb": "insert",
+   "noun": "bean:green",
+   "segment": [
+    3.0,
     6.0
    ],
-   "start": 2.0,
+   "start": 3.0,
    "end": 6.0,
-   "score": 0.095
+   "score": 0.0062
+  },
+  {
+   "verb": "insert",
+   "noun": "vegetable",
+   "segment": [
+    3.0,
+    9.0
+   ],
+   "start": 3.0,
+   "end": 9.0,
+   "score": 0.0061
+  },
+  {
+   "verb": "put",
+   "noun": "spinach",
+   "segment": [
+    3.0,
+    6.0
+   ],
+   "start": 3.0,
+   "end": 6.0,
+   "score": 0.0056
   },
   {
    "verb": "take",
    "noun": "kale",
    "segment": [
-    2.0,
-    6.0
-   ],
-   "start": 2.0,
-   "end": 6.0,
-   "score": 0.0927
-  },
-  {
-   "verb": "open",
-   "noun": "kale",
-   "segment": [
-    2.0,
-    6.0
-   ],
-   "start": 2.0,
-   "end": 6.0,
-   "score": 0.0907
-  },
-  {
-   "verb": "put",
-   "noun": "lettuce",
-   "segment": [
-    2.0,
-    6.0
-   ],
-   "start": 2.0,
-   "end": 6.0,
-   "score": 0.0905
-  },
-  {
-   "verb": "put",
-   "noun": "choi:pak",
-   "segment": [
-    2.0,
-    6.0
-   ],
-   "start": 2.0,
-   "end": 6.0,
-   "score": 0.0883
-  },
-  {
-   "verb": "mix",
-   "noun": "choi:pak",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.1828
-  },
-  {
-   "verb": "mix",
-   "noun": "spinach",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.1522
-  },
-  {
-   "verb": "mix",
-   "noun": "lettuce",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.1424
-  },
-  {
-   "verb": "mix",
-   "noun": "celery",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.1374
-  },
-  {
-   "verb": "mix",
-   "noun": "parsley",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.1321
-  },
-  {
-   "verb": "mix",
-   "noun": "kale",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.1257
-  },
-  {
-   "verb": "pour",
-   "noun": "choi:pak",
-   "segment": [
-    4.0,
-    8.0
-   ],
-   "start": 4.0,
-   "end": 8.0,
-   "score": 0.0904
-  },
-  {
-   "verb": "mix",
-   "noun": "salad",
-   "segment": [
-    4.0,
-    8.0
-   ],
-   "start": 4.0,
-   "end": 8.0,
-   "score": 0.0883
-  },
-  {
-   "verb": "mix",
-   "noun": "broccoli",
-   "segment": [
-    4.0,
-    8.0
-   ],
-   "start": 4.0,
-   "end": 8.0,
-   "score": 0.0875
-  },
-  {
-   "verb": "pour",
-   "noun": "lettuce",
-   "segment": [
-    4.0,
-    8.0
-   ],
-   "start": 4.0,
-   "end": 8.0,
-   "score": 0.0864
-  },
-  {
-   "verb": "mix",
-   "noun": "sprout",
-   "segment": [
     6.0,
-    12.0
+    9.0
    ],
    "start": 6.0,
-   "end": 12.0,
-   "score": 0.1402
+   "end": 9.0,
+   "score": 0.005
   },
   {
-   "verb": "mix",
-   "noun": "cabbage",
-   "segment": [
-    6.0,
-    10.0
-   ],
-   "start": 6.0,
-   "end": 10.0,
-   "score": 0.1346
-  },
-  {
-   "verb": "mix",
+   "verb": "remove",
    "noun": "coriander",
    "segment": [
     6.0,
-    10.0
+    9.0
    ],
    "start": 6.0,
-   "end": 10.0,
-   "score": 0.133
+   "end": 9.0,
+   "score": 0.0045
   },
   {
-   "verb": "mix",
-   "noun": "water",
+   "verb": "pour",
+   "noun": "bean:green",
    "segment": [
     6.0,
-    10.0
+    9.0
    ],
    "start": 6.0,
-   "end": 10.0,
-   "score": 0.1313
-  },
-  {
-   "verb": "mix",
-   "noun": "salad",
-   "segment": [
-    8.5,
-    12.0
-   ],
-   "start": 8.5,
-   "end": 12.0,
-   "score": 0.1105
-  },
-  {
-   "verb": "mix",
-   "noun": "bag",
-   "segment": [
-    8.5,
-    14.0
-   ],
-   "start": 8.5,
-   "end": 14.0,
-   "score": 0.108
-  },
-  {
-   "verb": "pour",
-   "noun": "choi:pak",
-   "segment": [
-    8.5,
-    12.0
-   ],
-   "start": 8.5,
-   "end": 12.0,
-   "score": 0.1058
-  },
-  {
-   "verb": "take",
-   "noun": "bag",
-   "segment": [
-    11.5,
-    14.0
-   ],
-   "start": 11.5,
-   "end": 14.0,
-   "score": 0.1159
-  },
-  {
-   "verb": "insert",
-   "noun": "bag",
-   "segment": [
-    11.5,
-    14.0
-   ],
-   "start": 11.5,
-   "end": 14.0,
-   "score": 0.109
-  },
-  {
-   "verb": "pour",
-   "noun": "bag",
-   "segment": [
-    11.5,
-    14.0
-   ],
-   "start": 11.5,
-   "end": 14.0,
-   "score": 0.1076
-  },
-  {
-   "verb": "close",
-   "noun": "bag",
-   "segment": [
-    11.5,
-    14.0
-   ],
-   "start": 11.5,
-   "end": 14.0,
-   "score": 0.1057
-  },
-  {
-   "verb": "put",
-   "noun": "choi:pak",
-   "segment": [
-    11.5,
-    14.0
-   ],
-   "start": 11.5,
-   "end": 14.0,
-   "score": 0.1051
-  },
-  {
-   "verb": "put",
-   "noun": "lettuce",
-   "segment": [
-    11.5,
-    14.0
-   ],
-   "start": 11.5,
-   "end": 14.0,
-   "score": 0.1032
+   "end": 9.0,
+   "score": 0.0034
   },
   {
    "verb": "throw",
-   "noun": "bag",
-   "segment": [
-    11.5,
-    14.0
-   ],
-   "start": 11.5,
-   "end": 14.0,
-   "score": 0.0987
-  },
-  {
-   "verb": "take",
-   "noun": "fridge",
-   "segment": [
-    12.0,
-    20.0
-   ],
-   "start": 12.0,
-   "end": 20.0,
-   "score": 0.1649
-  },
-  {
-   "verb": "open",
-   "noun": "fridge",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.1555
-  },
-  {
-   "verb": "put",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.1535
-  },
-  {
-   "verb": "put",
-   "noun": "fridge",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.1516
-  },
-  {
-   "verb": "open",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.1161
-  },
-  {
-   "verb": "insert",
-   "noun": "fridge",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.1077
-  },
-  {
-   "verb": "throw",
-   "noun": "fridge",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.1064
-  },
-  {
-   "verb": "move",
-   "noun": "fridge",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.1047
-  },
-  {
-   "verb": "open",
    "noun": "package",
    "segment": [
     12.0,
-    16.0
+    15.0
    ],
    "start": 12.0,
-   "end": 16.0,
-   "score": 0.0996
-  },
-  {
-   "verb": "close",
-   "noun": "fridge",
-   "segment": [
-    12.0,
-    16.0
-   ],
-   "start": 12.0,
-   "end": 16.0,
-   "score": 0.0968
-  },
-  {
-   "verb": "take",
-   "noun": "liquid:washing",
-   "segment": [
-    14.0,
-    20.0
-   ],
-   "start": 14.0,
-   "end": 20.0,
-   "score": 0.1448
-  },
-  {
-   "verb": "take",
-   "noun": "towel",
-   "segment": [
-    14.0,
-    18.0
-   ],
-   "start": 14.0,
-   "end": 18.0,
-   "score": 0.1276
-  },
-  {
-   "verb": "take",
-   "noun": "cupboard",
-   "segment": [
-    14.0,
-    20.0
-   ],
-   "start": 14.0,
-   "end": 20.0,
-   "score": 0.1255
-  },
-  {
-   "verb": "take",
-   "noun": "hand",
-   "segment": [
-    14.0,
-    20.0
-   ],
-   "start": 14.0,
-   "end": 20.0,
-   "score": 0.1193
-  },
-  {
-   "verb": "take",
-   "noun": "bin",
-   "segment": [
-    14.0,
-    18.0
-   ],
-   "start": 14.0,
-   "end": 18.0,
-   "score": 0.119
-  },
-  {
-   "verb": "take",
-   "noun": "drawer",
-   "segment": [
-    14.0,
-    18.0
-   ],
-   "start": 14.0,
-   "end": 18.0,
-   "score": 0.1159
-  },
-  {
-   "verb": "take",
-   "noun": "box",
-   "segment": [
-    14.0,
-    18.0
-   ],
-   "start": 14.0,
-   "end": 18.0,
-   "score": 0.1104
-  },
-  {
-   "verb": "take",
-   "noun": "glove",
-   "segment": [
-    14.0,
-    18.0
-   ],
-   "start": 14.0,
-   "end": 18.0,
-   "score": 0.1096
-  },
-  {
-   "verb": "take",
-   "noun": "cloth",
-   "segment": [
-    14.0,
-    18.0
-   ],
-   "start": 14.0,
-   "end": 18.0,
-   "score": 0.1083
-  },
-  {
-   "verb": "take",
-   "noun": "kettle",
-   "segment": [
-    16.5,
-    20.0
-   ],
-   "start": 16.5,
-   "end": 20.0,
-   "score": 0.1205
-  },
-  {
-   "verb": "take",
-   "noun": "pan",
-   "segment": [
-    16.5,
-    20.5
-   ],
-   "start": 16.5,
-   "end": 20.5,
-   "score": 0.1116
-  },
-  {
-   "verb": "take",
-   "noun": "bowl",
-   "segment": [
-    16.5,
-    20.0
-   ],
-   "start": 16.5,
-   "end": 20.0,
-   "score": 0.103
-  },
-  {
-   "verb": "take",
-   "noun": "cup",
-   "segment": [
-    16.5,
-    20.0
-   ],
-   "start": 16.5,
-   "end": 20.0,
-   "score": 0.1028
+   "end": 15.0,
+   "score": 0.1294
   },
   {
    "verb": "put",
-   "noun": "fridge",
+   "noun": "package",
    "segment": [
-    16.5,
-    20.0
+    12.0,
+    15.0
    ],
-   "start": 16.5,
-   "end": 20.0,
-   "score": 0.1008
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0939
+  },
+  {
+   "verb": "insert",
+   "noun": "package",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0358
+  },
+  {
+   "verb": "take",
+   "noun": "package",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0311
+  },
+  {
+   "verb": "throw",
+   "noun": "bag",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.017
+  },
+  {
+   "verb": "turn-on",
+   "noun": "tap",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0083
+  },
+  {
+   "verb": "insert",
+   "noun": "maker:coffee",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0072
+  },
+  {
+   "verb": "insert",
+   "noun": "wrap:plastic",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0069
+  },
+  {
+   "verb": "put",
+   "noun": "wrap:plastic",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0065
   },
   {
    "verb": "take",
    "noun": "spoon",
    "segment": [
-    16.5,
-    20.0
+    12.0,
+    15.0
    ],
-   "start": 16.5,
-   "end": 20.0,
-   "score": 0.0991
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0061
   },
   {
-   "verb": "take",
-   "noun": "hob",
+   "verb": "check",
+   "noun": "alarm",
    "segment": [
-    18.0,
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.4067
+  },
+  {
+   "verb": "turn-off",
+   "noun": "alarm",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.2046
+  },
+  {
+   "verb": "transition",
+   "noun": "kitchen",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0182
+  },
+  {
+   "verb": "set",
+   "noun": "alarm",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0155
+  },
+  {
+   "verb": "check",
+   "noun": "oven",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.011
+  },
+  {
+   "verb": "turn-on",
+   "noun": "oven",
+   "segment": [
+    15.0,
     20.5
    ],
-   "start": 18.0,
+   "start": 15.0,
    "end": 20.5,
-   "score": 0.1544
+   "score": 0.0091
   },
   {
-   "verb": "put",
-   "noun": "pan",
+   "verb": "press",
+   "noun": "button",
    "segment": [
-    18.0,
-    20.5
+    15.0,
+    18.0
    ],
-   "start": 18.0,
-   "end": 20.5,
-   "score": 0.1208
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0052
   },
   {
-   "verb": "put",
-   "noun": "hob",
-   "segment": [
-    18.0,
-    20.5
-   ],
-   "start": 18.0,
-   "end": 20.5,
-   "score": 0.1091
-  },
-  {
-   "verb": "mix",
-   "noun": "pan",
-   "segment": [
-    18.0,
-    24.0
-   ],
-   "start": 18.0,
-   "end": 24.0,
-   "score": 0.1019
-  },
-  {
-   "verb": "mix",
-   "noun": "hob",
-   "segment": [
-    18.0,
-    20.5
-   ],
-   "start": 18.0,
-   "end": 20.5,
-   "score": 0.0952
-  },
-  {
-   "verb": "put",
+   "verb": "turn-on",
    "noun": "kettle",
    "segment": [
-    18.0,
-    20.5
+    15.0,
+    18.0
    ],
-   "start": 18.0,
-   "end": 20.5,
-   "score": 0.0912
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0046
+  },
+  {
+   "verb": "turn-off",
+   "noun": "light",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0039
   },
   {
    "verb": "put",
-   "noun": "parsley",
+   "noun": "phone",
    "segment": [
-    18.0,
-    20.5
+    15.0,
+    18.0
    ],
-   "start": 18.0,
-   "end": 20.5,
-   "score": 0.0901
-  },
-  {
-   "verb": "pour",
-   "noun": "pan",
-   "segment": [
-    18.0,
-    20.5
-   ],
-   "start": 18.0,
-   "end": 20.5,
-   "score": 0.0877
-  },
-  {
-   "verb": "close",
-   "noun": "pan",
-   "segment": [
-    18.0,
-    20.5
-   ],
-   "start": 18.0,
-   "end": 20.5,
-   "score": 0.085
-  },
-  {
-   "verb": "mix",
-   "noun": "choi:pak",
-   "segment": [
-    20.0,
-    28.0
-   ],
-   "start": 20.0,
-   "end": 28.0,
-   "score": 0.1523
-  },
-  {
-   "verb": "mix",
-   "noun": "spinach",
-   "segment": [
-    20.0,
-    28.0
-   ],
-   "start": 20.0,
-   "end": 28.0,
-   "score": 0.1445
-  },
-  {
-   "verb": "mix",
-   "noun": "parsley",
-   "segment": [
-    20.0,
-    28.0
-   ],
-   "start": 20.0,
-   "end": 28.0,
-   "score": 0.1308
-  },
-  {
-   "verb": "mix",
-   "noun": "onion:spring",
-   "segment": [
-    20.0,
-    28.0
-   ],
-   "start": 20.0,
-   "end": 28.0,
-   "score": 0.1169
-  },
-  {
-   "verb": "mix",
-   "noun": "food",
-   "segment": [
-    20.0,
-    30.0
-   ],
-   "start": 20.0,
-   "end": 30.0,
-   "score": 0.109
-  },
-  {
-   "verb": "cut",
-   "noun": "choi:pak",
-   "segment": [
-    20.0,
-    26.0
-   ],
-   "start": 20.0,
-   "end": 26.0,
-   "score": 0.1068
-  },
-  {
-   "verb": "pour",
-   "noun": "choi:pak",
-   "segment": [
-    20.0,
-    26.0
-   ],
-   "start": 20.0,
-   "end": 26.0,
-   "score": 0.1055
-  },
-  {
-   "verb": "mix",
-   "noun": "celery",
-   "segment": [
-    20.0,
-    26.0
-   ],
-   "start": 20.0,
-   "end": 26.0,
-   "score": 0.0915
-  },
-  {
-   "verb": "mix",
-   "noun": "lettuce",
-   "segment": [
-    20.0,
-    24.0
-   ],
-   "start": 20.0,
-   "end": 24.0,
-   "score": 0.0801
-  },
-  {
-   "verb": "put",
-   "noun": "choi:pak",
-   "segment": [
-    23.0,
-    26.0
-   ],
-   "start": 23.0,
-   "end": 26.0,
-   "score": 0.0915
-  },
-  {
-   "verb": "mix",
-   "noun": "coriander",
-   "segment": [
-    23.0,
-    26.0
-   ],
-   "start": 23.0,
-   "end": 26.0,
-   "score": 0.091
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0034
   },
   {
    "verb": "mix",
    "noun": "kale",
    "segment": [
-    25.0,
-    28.0
-   ],
-   "start": 25.0,
-   "end": 28.0,
-   "score": 0.11
-  },
-  {
-   "verb": "mix",
-   "noun": "hob",
-   "segment": [
-    25.5,
+    18.0,
     30.0
    ],
-   "start": 25.5,
+   "start": 18.0,
    "end": 30.0,
-   "score": 0.1527
-  },
-  {
-   "verb": "mix",
-   "noun": "kettle",
-   "segment": [
-    25.5,
-    30.5
-   ],
-   "start": 25.5,
-   "end": 30.5,
-   "score": 0.1272
-  },
-  {
-   "verb": "mix",
-   "noun": "pan",
-   "segment": [
-    25.5,
-    30.0
-   ],
-   "start": 25.5,
-   "end": 30.0,
-   "score": 0.1201
-  },
-  {
-   "verb": "mix",
-   "noun": "pot",
-   "segment": [
-    25.5,
-    30.0
-   ],
-   "start": 25.5,
-   "end": 30.0,
-   "score": 0.1062
-  },
-  {
-   "verb": "take",
-   "noun": "hob",
-   "segment": [
-    26.0,
-    30.5
-   ],
-   "start": 26.0,
-   "end": 30.5,
-   "score": 0.1688
-  },
-  {
-   "verb": "put",
-   "noun": "kettle",
-   "segment": [
-    26.0,
-    30.5
-   ],
-   "start": 26.0,
-   "end": 30.5,
-   "score": 0.1373
-  },
-  {
-   "verb": "put",
-   "noun": "hob",
-   "segment": [
-    26.0,
-    30.5
-   ],
-   "start": 26.0,
-   "end": 30.5,
-   "score": 0.11
-  },
-  {
-   "verb": "open",
-   "noun": "hob",
-   "segment": [
-    26.0,
-    30.0
-   ],
-   "start": 26.0,
-   "end": 30.0,
-   "score": 0.1035
-  },
-  {
-   "verb": "mix",
-   "noun": "fridge",
-   "segment": [
-    26.0,
-    30.0
-   ],
-   "start": 26.0,
-   "end": 30.0,
-   "score": 0.0907
-  },
-  {
-   "verb": "take",
-   "noun": "kettle",
-   "segment": [
-    28.0,
-    30.5
-   ],
-   "start": 28.0,
-   "end": 30.5,
-   "score": 0.1239
-  },
-  {
-   "verb": "open",
-   "noun": "kettle",
-   "segment": [
-    28.0,
-    30.5
-   ],
-   "start": 28.0,
-   "end": 30.5,
-   "score": 0.1092
-  },
-  {
-   "verb": "insert",
-   "noun": "kettle",
-   "segment": [
-    28.0,
-    30.5
-   ],
-   "start": 28.0,
-   "end": 30.5,
-   "score": 0.1037
-  },
-  {
-   "verb": "close",
-   "noun": "kettle",
-   "segment": [
-    28.0,
-    30.5
-   ],
-   "start": 28.0,
-   "end": 30.5,
-   "score": 0.0869
+   "score": 0.1907
   },
   {
    "verb": "pour",
-   "noun": "kettle",
+   "noun": "kale",
    "segment": [
-    28.0,
-    30.5
+    18.0,
+    30.0
    ],
-   "start": 28.0,
-   "end": 30.5,
-   "score": 0.086
+   "start": 18.0,
+   "end": 30.0,
+   "score": 0.0473
   },
   {
-   "verb": "wash",
-   "noun": "kettle",
+   "verb": "take",
+   "noun": "knife",
    "segment": [
-    28.0,
-    30.5
+    18.0,
+    27.0
    ],
-   "start": 28.0,
-   "end": 30.5,
-   "score": 0.084
+   "start": 18.0,
+   "end": 27.0,
+   "score": 0.019
+  },
+  {
+   "verb": "insert",
+   "noun": "kale",
+   "segment": [
+    18.0,
+    30.0
+   ],
+   "start": 18.0,
+   "end": 30.0,
+   "score": 0.0111
+  },
+  {
+   "verb": "take",
+   "noun": "kale",
+   "segment": [
+    18.0,
+    20.0
+   ],
+   "start": 18.0,
+   "end": 20.0,
+   "score": 0.0108
+  },
+  {
+   "verb": "pour",
+   "noun": "leek",
+   "segment": [
+    18.0,
+    20.0
+   ],
+   "start": 18.0,
+   "end": 20.0,
+   "score": 0.0099
+  },
+  {
+   "verb": "press",
+   "noun": "kale",
+   "segment": [
+    18.0,
+    20.0
+   ],
+   "start": 18.0,
+   "end": 20.0,
+   "score": 0.0093
+  },
+  {
+   "verb": "take",
+   "noun": "rack:drying",
+   "segment": [
+    18.0,
+    20.0
+   ],
+   "start": 18.0,
+   "end": 20.0,
+   "score": 0.006
+  },
+  {
+   "verb": "check",
+   "noun": "pot",
+   "segment": [
+    18.0,
+    20.0
+   ],
+   "start": 18.0,
+   "end": 20.0,
+   "score": 0.0059
+  },
+  {
+   "verb": "insert",
+   "noun": "vegetable",
+   "segment": [
+    21.5,
+    27.0
+   ],
+   "start": 21.5,
+   "end": 27.0,
+   "score": 0.0143
+  },
+  {
+   "verb": "turn-on",
+   "noun": "tap",
+   "segment": [
+    21.5,
+    27.0
+   ],
+   "start": 21.5,
+   "end": 27.0,
+   "score": 0.0094
+  },
+  {
+   "verb": "pour",
+   "noun": "broccoli",
+   "segment": [
+    21.5,
+    24.0
+   ],
+   "start": 21.5,
+   "end": 24.0,
+   "score": 0.0084
+  },
+  {
+   "verb": "turn-off",
+   "noun": "tap",
+   "segment": [
+    21.5,
+    24.0
+   ],
+   "start": 21.5,
+   "end": 24.0,
+   "score": 0.0055
+  },
+  {
+   "verb": "take",
+   "noun": "basil",
+   "segment": [
+    21.5,
+    24.0
+   ],
+   "start": 21.5,
+   "end": 24.0,
+   "score": 0.0049
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    21.5,
+    24.0
+   ],
+   "start": 21.5,
+   "end": 24.0,
+   "score": 0.0047
+  },
+  {
+   "verb": "put",
+   "noun": "knife",
+   "segment": [
+    25.0,
+    27.0
+   ],
+   "start": 25.0,
+   "end": 27.0,
+   "score": 0.0212
+  },
+  {
+   "verb": "put",
+   "noun": "board:chopping",
+   "segment": [
+    25.0,
+    27.0
+   ],
+   "start": 25.0,
+   "end": 27.0,
+   "score": 0.0201
+  },
+  {
+   "verb": "sort",
+   "noun": "broccoli",
+   "segment": [
+    25.0,
+    27.0
+   ],
+   "start": 25.0,
+   "end": 27.0,
+   "score": 0.0127
+  },
+  {
+   "verb": "gather",
+   "noun": "broccoli",
+   "segment": [
+    25.0,
+    27.0
+   ],
+   "start": 25.0,
+   "end": 27.0,
+   "score": 0.0084
+  },
+  {
+   "verb": "check",
+   "noun": "alarm",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0193
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0134
+  },
+  {
+   "verb": "wait",
+   "noun": "oil",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0113
+  },
+  {
+   "verb": "wrap",
+   "noun": "pot",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0092
+  },
+  {
+   "verb": "take",
+   "noun": "kale",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0084
+  },
+  {
+   "verb": "pour",
+   "noun": "broccoli",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0077
+  },
+  {
+   "verb": "uncover",
+   "noun": "pot",
+   "segment": [
+    27.0,
+    30.0
+   ],
+   "start": 27.0,
+   "end": 30.0,
+   "score": 0.0072
   }
  ],
  "highlights": [
   {
    "segment": [
-    0.0,
-    4.0
+    14.0,
+    18.0
    ],
-   "start": 0.0,
-   "end": 4.0,
-   "importance": 0.6477
+   "start": 14.0,
+   "end": 18.0,
+   "importance": 0.7679
   }
  ]
 }

@@ -376,7 +376,7 @@ namespace Vistara
 
             string cat = AppState.Category;                       // a new category was chosen in the carousel
             if (cat != shownCategory && !string.IsNullOrEmpty(cat)) { shownCategory = cat; OnCategoryChosen(cat); }
-            if (AppState.HasResult != hadResult) { hadResult = AppState.HasResult; RelabelAsks(); if (hadResult) { PlayAnim("Happy"); Say(Name, "Analysis done! Want me to show you the highlights?"); } }
+            if (AppState.HasResult != hadResult) { hadResult = AppState.HasResult; RelabelAsks(); if (hadResult) { PlayAnim("Happy"); StartCoroutine(NarrateRoutine()); } }
             Observe();
             if (chatText != null) { reveal += Time.deltaTime * 55f; chatText.maxVisibleCharacters = Mathf.FloorToInt(reveal); }
         }
@@ -471,16 +471,16 @@ namespace Vistara
             string reply = null, err = null; statusText.text = "thinking...";
             yield return llm.Chat(msgs, r => reply = r, e => err = e);
             if (reply != null) { PlayAnim("Happy"); history.Add(new OMsg { role = "assistant", content = reply }); Say(Name, reply); statusText.text = "Llama online"; }
-            else { Say(Name, "I can't reach my brain right now (" + err + "). Is Ollama running with " + llm.model + "?"); statusText.text = "Llama offline"; }
+            else { Say(Name, AppState.HasResult ? SummaryText() : "I can't chat freely right now (Ollama is offline), but pick a video and I will still analyse it for you."); statusText.text = "Llama offline"; }
             busy = false;
         }
 
         // ---------------------------------------------------------------- awareness: she watches what you do and speaks her mind
-        VideoController vc; string lastVideo, lastPhase; bool lastRunning, lastHud, lastPlaying, reacting, demoRunning; float lastVideoT = -1f, lastSpoke, lastEventTime, gazeTime, lastPoll;
+        VideoController vc; string lastVideo, lastPhase; bool lastRunning, lastHud, lastPlaying, reacting, demoRunning, narrating; float lastVideoT = -1f, lastSpoke, lastEventTime, gazeTime, lastPoll;
 
         void Observe()
         {
-            if (busy || reacting || demoRunning) return;
+            if (busy || reacting || demoRunning || narrating) return;
             var cam = Camera.main; if (cam == null) return;
             if (vc == null) vc = journey != null ? journey.Source : FindFirstObjectByType<VideoController>();
             string ev = null;
@@ -533,6 +533,36 @@ namespace Vistara
             if (string.IsNullOrEmpty(reply)) reply = FallbackReaction(ev);
             Say(Name, reply); lastSpoke = Time.time; PlayAnim(ev.Contains("jumped") || ev.Contains("looking") ? "Wave" : "Happy");
             reacting = false;
+        }
+
+        // ---------------------------------------------------------------- the analysis, in words (built from the engine's result - no LLM needed), then the highlight tour with Vee re-enacting each moment
+        static string TopList(IEnumerable<string> items, int n) { return string.Join(", ", items.Where(x => !string.IsNullOrEmpty(x)).Take(n)); }
+
+        string SummaryText()
+        {
+            if (!AppState.HasResult) return "No video has been analysed yet.";
+            var o = AppState.Result.output; var acts = o.actions ?? new ActionItem[0]; var hl = (o.highlights ?? new SegmentItem[0]).Select(h => h.segment).OrderBy(x => x[0]).ToList();
+            float kept = hl.Sum(h => h[1] - h[0]); string label = o.label != null ? o.label.name : "first-person";
+            var verbs = acts.GroupBy(x => Clean(x.verb)).OrderByDescending(g => g.Sum(x => x.End - x.Start)).Select(g => g.Key);
+            var nouns = acts.GroupBy(x => Clean(x.noun)).OrderByDescending(g => g.Sum(x => x.End - x.Start)).Select(g => g.Key);
+            return "This is a " + label + " video, " + T(o.duration_sec) + " long. I recognised " + acts.Length + " actions, mostly " + TopList(verbs, 3) + " with " + TopList(nouns, 3) + ". The summary keeps " + hl.Count + " key moments, " + Mathf.RoundToInt(kept / Mathf.Max(1f, o.duration_sec) * 100f) + "% of the video.";
+        }
+
+        IEnumerator NarrateRoutine()
+        {
+            narrating = true;
+            var o = AppState.Result.output; var acts = o.actions ?? new ActionItem[0]; var hl = (o.highlights ?? new SegmentItem[0]).Select(h => h.segment).OrderBy(x => x[0]).ToList();
+            string model = BackendClient.Instance != null && !string.IsNullOrEmpty(BackendClient.Instance.Recognizer) ? BackendClient.Instance.Recognizer : "the AI model";
+            string label = o.label != null ? o.label.name : "first-person";
+            Say(Name, "Analysis done! " + model + " watched " + T(o.duration_sec) + " of " + label + " footage."); yield return new WaitForSeconds(4.5f);
+            if (!AppState.HasResult) { narrating = false; yield break; }
+            var verbs = acts.GroupBy(x => Clean(x.verb)).OrderByDescending(g => g.Sum(x => x.End - x.Start)).Select(g => g.Key);
+            var nouns = acts.GroupBy(x => Clean(x.noun)).OrderByDescending(g => g.Sum(x => x.End - x.Start)).Select(g => g.Key);
+            Say(Name, "I recognised " + acts.Length + " actions: mostly " + TopList(verbs, 3) + ", with " + TopList(nouns, 3) + "."); yield return new WaitForSeconds(5f);
+            float kept = hl.Sum(h => h[1] - h[0]);
+            Say(Name, "I kept " + hl.Count + " key moments, " + Mathf.RoundToInt(kept / Mathf.Max(1f, o.duration_sec) * 100f) + "% of the video."); yield return new WaitForSeconds(4f);
+            narrating = false;
+            if (AppState.HasResult && hl.Count > 0 && !demoRunning) { Say(Name, "Come closer! Vee acts out each one while I tell you what is happening."); yield return new WaitForSeconds(3.5f); if (AppState.HasResult && !demoRunning) StartCoroutine(DemoRoutine()); }
         }
 
         // ---------------------------------------------------------------- she demonstrates the key highlights: seeks the video to each one and tells you what happens

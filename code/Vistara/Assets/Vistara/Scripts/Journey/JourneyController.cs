@@ -94,7 +94,7 @@ namespace Vistara
         {
             if (statusDot == null) return;
             statusDot.color = online ? Theme.Green : Theme.Magenta;
-            statusText.text = online ? "" : "Connecting to the model...";
+            statusText.text = online ? (string.IsNullOrEmpty(client.Recognizer) ? "" : "Model: " + client.Recognizer) : "Connecting to the model...";
         }
 
         /// <summary>Video location for the player: the file itself on a PC, streamed from the engine on a headset.</summary>

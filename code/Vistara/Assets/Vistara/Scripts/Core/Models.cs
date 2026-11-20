@@ -44,7 +44,7 @@ namespace Vistara
 
     [Serializable] public class JobHandle { public string job_id; }
     [Serializable] public class JobList { public JobStatus[] items; }
-    [Serializable] public class HealthInfo { public string status; public bool cuda; public bool model_loaded; }
+    [Serializable] public class HealthInfo { public string status; public bool cuda; public bool model_loaded; public string recognizer; }
 
     // ---- model info + held-out evaluation (engine: server/eval_api.py) ----
     [Serializable] public class HeadInfo { public string name; public string sha256_16; public long bytes; public float blend; public int best_epoch; public float heldout_zero_shot; public float heldout_trained; public int n_videos; }

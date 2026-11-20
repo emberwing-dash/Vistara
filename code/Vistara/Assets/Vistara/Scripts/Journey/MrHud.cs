@@ -10,7 +10,7 @@ namespace Vistara
     /// <summary>
     /// Video-summary viewer (stage 3). After the analysis you see the WHOLE video with what the model found marked on it:
     ///  * overlay on the video   - sign badge with the action at the current time (verb noun, confidence), object tags, KEY MOMENT flag when the time is inside a highlight
-    ///  * full-length timeline    - importance curve, the selected highlights (orange), action ticks, playhead; tap / pinch-drag anywhere to scrub
+    ///  * full-length timeline    - the selected highlights (orange), action ticks, playhead; tap / pinch-drag anywhere to scrub
     ///  * KEY MOMENTS list        - the highlights with the best action inside each; tap one to jump there
     ///  * FULL VIDEO / HIGHLIGHT REEL - play everything, or only the selected highlights back to back (the summary, cut from the original footage)
     /// It is a summariser, not a tutorial: nothing asks you to repeat what you see. The panel is held close to your chest, follows you when you turn away
@@ -35,7 +35,7 @@ namespace Vistara
         Image signBg, signIcon, keyBadge, frameOutline, playhead, playIcon; RectTransform overlayRoot, tl, tlBars, rowsRoot;
         Image[] tagBg = new Image[3]; TextMeshProUGUI[] tagTxt = new TextMeshProUGUI[3];
         // follow-me
-        Vector3 offsetLocal, followVel; bool followMoving; float dragUntil; const float Tilt = 25f;
+        Vector3 offsetLocal, followVel; bool followMoving; float dragUntil; const float Tilt = 38f;
 
         public void Build(VideoController v)
         {
@@ -84,7 +84,7 @@ namespace Vistara
             rowsRoot = UIKit.Rect(rt, "Rows"); UIKit.TL(rowsRoot, 664, 98, 352, 250);
             objText = UIKit.TextAt(rt, "", 20, 668, 354, 348, 62, Theme.TextDim, TextAlignmentOptions.TopLeft);
 
-            // full-length timeline: importance curve, highlights, action ticks, playhead
+            // full-length timeline: highlights, action ticks, playhead
             var tlBg = UIKit.Box(rt, "Timeline", new Color(0, 0, 0, 0.45f), 8); UIKit.TL(tlBg.rectTransform, TlX, TlY, TlW, TlH + 22); tl = tlBg.rectTransform;
             tlBg.gameObject.AddComponent<PointerScrub>().Scrub += OnScrub;
             tlBars = UIKit.Rect(tl, "Bars");
@@ -129,7 +129,7 @@ namespace Vistara
         {
             var cam = Camera.main; if (cam == null) return;
             Vector3 f = cam.transform.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) f = Vector3.forward; f.Normalize();
-            root.position = cam.transform.position + f * 0.48f + Vector3.down * 0.20f;
+            root.position = cam.transform.position + f * 0.50f + Vector3.down * 0.36f;          // low in your view: the middle of your sight stays free for Vee and the scene
             root.rotation = Quaternion.LookRotation(f, Vector3.up) * Quaternion.Euler(Tilt, 0f, 0f);
             offsetLocal = Quaternion.Inverse(Quaternion.LookRotation(f, Vector3.up)) * (root.position - cam.transform.position);
             followMoving = false;
@@ -150,23 +150,10 @@ namespace Vistara
         {
             UIKit.ClearChildren(tlBars);
             UIKit.TL(tlBars, 0, 0, TlW, TlH + 22);
-            var c = res.analysis?.curve; float bw = TlW / Buckets;
-            for (int i = 0; i < Buckets; i++)                     // importance curve as thin bars
-            {
-                float t0 = dur * i / Buckets, t1 = dur * (i + 1) / Buckets; float v = 0.15f;
-                if (c != null && c.t != null && c.t.Length > 0)
-                {
-                    float sum = 0; int n = 0;
-                    for (int k = 0; k < c.t.Length; k++) if (c.t[k] >= t0 && c.t[k] < t1) { sum += c.importance[k]; n++; }
-                    if (n > 0) v = Mathf.Clamp01(sum / n);
-                }
-                float h = Mathf.Max(4f, v * (TlH - 14));
-                var b = UIKit.Box(tlBars, "b", Theme.Ramp(v) * new Color(1, 1, 1, 0.8f), 0, false); UIKit.TL(b.rectTransform, i * bw + 1, TlH - 10 - h, Mathf.Max(2f, bw - 2f), h);
-            }
             foreach (var h in hls)                                // selected highlights: orange strip along the bottom
             {
-                var b = UIKit.Box(tlBars, "hl", Theme.Orange, 4, false);
-                UIKit.TL(b.rectTransform, h[0] / dur * TlW, TlH - 8, Mathf.Max(6f, (h[1] - h[0]) / dur * TlW), 14);
+                var b = UIKit.Box(tlBars, "hl", Theme.Orange * new Color(1, 1, 1, 0.85f), 4, false);
+                UIKit.TL(b.rectTransform, h[0] / dur * TlW, 14, Mathf.Max(6f, (h[1] - h[0]) / dur * TlW), TlH - 22);
             }
             foreach (var a in acts.OrderByDescending(a => a.score).Take(40))      // the most confident actions as ticks along the top
             {
@@ -300,7 +287,7 @@ namespace Vistara
         {
             if (!Visible || res == null || video == null) return;
             if (playIcon != null) playIcon.sprite = Sprites.IconSprite(paused ? Sprites.Icon.Play : Sprites.Icon.Pause);
-            FollowMe();
+            if (PanelDock.Follow) FollowMe();
             if (video.Prepared)
             {
                 float t = video.TimeSec;
@@ -329,9 +316,9 @@ namespace Vistara
             Vector3 desired = cam.transform.position + yaw * offsetLocal;
             Vector3 toRoot = root.position - cam.transform.position; toRoot.y = 0;
             float ang = toRoot.sqrMagnitude > 1e-4f ? Vector3.Angle(f, toRoot.normalized) : 0f;
-            if (ang > 45f || Vector3.Distance(root.position, desired) > 0.45f) followMoving = true;
+            if (ang > 24f || Vector3.Distance(root.position, desired) > 0.24f) followMoving = true;       // tight follow: it stays attached to your sight
             if (!followMoving) return;
-            root.position = Vector3.SmoothDamp(root.position, desired, ref followVel, 0.4f);
+            root.position = Vector3.SmoothDamp(root.position, desired, ref followVel, 0.26f);
             root.rotation = Quaternion.Slerp(root.rotation, yaw * Quaternion.Euler(Tilt, 0f, 0f), 1f - Mathf.Exp(-6f * Time.unscaledDeltaTime));
             if (Vector3.Distance(root.position, desired) < 0.04f) followMoving = false;
         }

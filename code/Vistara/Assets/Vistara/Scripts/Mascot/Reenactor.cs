@@ -26,6 +26,7 @@ namespace Vistara
         const float FX = -0.70f, CX = -0.20f, SX = 0.30f, KX = 0.80f;        // fridge, cupboard, stove, sink (centre x along the row)
 
         void Awake() { girl = GetComponent<GuideGirl>(); sport = new SportStage(this, girl); }
+        public bool CarryingItem { get { return itemOn && held != null; } }
         public void Carry(GameObject go, bool on, float tilt) { held = go; itemOn = on; itemTilt = tilt; }
 
         // ---------------------------------------------------------------- stage geometry

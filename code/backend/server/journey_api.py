@@ -69,7 +69,7 @@ def category_videos(cat: str):
         if _category(r["video_id"], r["dataset"]) == cat and r["video_id"] in local:
             items.append({"video_id": r["video_id"], "dataset": r["dataset"], "duration_sec": float(r["duration_sec"]),
                           "path": str(local[r["video_id"]])})
-    items.sort(key=lambda x: x["duration_sec"])
+    items.sort(key=lambda x: (not 120.0 <= x["duration_sec"] <= 600.0, -x["duration_sec"] if 120.0 <= x["duration_sec"] <= 600.0 else x["duration_sec"]))     # the typical 2-10 minute test videos first, tiny clips last
     return {"category": cat, "count": len(items), "items": items}
 
 
@@ -146,3 +146,28 @@ def media(path: str):
     if not ok:
         raise HTTPException(404, "unknown video")
     return FileResponse(str(p), media_type="video/mp4")
+
+@router.get("/frame")
+def frame_at(path: str, t: float = 0.0, w: int = 360):
+    """JPEG of the video at second t (cached): the storyboard of key moments in the VR app."""
+    import cv2
+    p = Path(path)
+    if not p.is_file() or p.stem not in _local_videos():
+        raise HTTPException(404, "unknown video")
+    w = max(120, min(960, int(w)))
+    THUMB_DIR.mkdir(parents=True, exist_ok=True)
+    key = hashlib.sha1(f"{p}|{p.stat().st_mtime_ns}|{round(t, 1)}|{w}|f".encode()).hexdigest()[:16]
+    cached = THUMB_DIR / f"{key}.jpg"
+    if cached.exists():
+        return Response(cached.read_bytes(), media_type="image/jpeg")
+    cap = cv2.VideoCapture(str(p))
+    cap.set(cv2.CAP_PROP_POS_MSEC, max(0.0, t) * 1000.0)
+    ok, frame = cap.read()
+    cap.release()
+    if not ok:
+        raise HTTPException(404, "cannot read a frame")
+    h0, w0 = frame.shape[:2]
+    frame = cv2.resize(frame, (w, max(1, int(h0 * w / w0))))
+    ok, buf = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 86])
+    cached.write_bytes(buf.tobytes())
+    return Response(buf.tobytes(), media_type="image/jpeg")

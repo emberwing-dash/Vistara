@@ -72,7 +72,7 @@ def Parkour():
           [b((x, 0.04, 1.566), (0.028, 0.15, 0.010), DK, bev=False) for x in (-0.075, 0.075)] + [rod((s * 0.225, 0.03, 1.30), (s * 0.075, -0.07, 1.10), 0.016, DK) for s in (-1, 1)] + [b((0, -0.09, 1.09), (0.065, 0.028, 0.032), DK), tc((0, 0.045, 1.302), 0.248, 0.248, 0.02, DK, seg=20)], P)
     for sd, sx in (('L', 1), ('R', -1)):
         p0, p1 = hand(sd, sx)
-        piece('Parkour', 'Glove' + sd, 'hand.' + sd, [rod(tuple(p0), tuple(p1), 0.05, DK, True), rod(tuple(p0 + (p1 - p0) * 0.15), tuple(p0 + (p1 - p0) * 0.35), 0.06, OR, True)], P)
+        piece('Parkour', 'Glove' + sd, 'hand.' + sd, [rod(tuple(p0 - (p1 - p0) * 0.1), tuple(p1 + (p1 - p0) * 0.15), 0.066, DK, True), sp(tuple(p0 + (p1 - p0) * 0.62), (0.05, 0.05, 0.05), OR, sub=2), rod(tuple(p0 - (p1 - p0) * 0.25), tuple(p0 + (p1 - p0) * 0.1), 0.078, OR, True)], P)
         kx = 0.088 * sx
         piece('Parkour', 'KneePad' + sd, 'shin.' + sd, [sp((kx, -0.078, 0.325), (0.058, 0.03, 0.062), DK, sub=3), sp((kx, -0.092, 0.325), (0.04, 0.012, 0.04), OR, sub=3), cy((kx, -0.011, 0.30), 0.066, 0.04, OR, seg=14), cy((kx, -0.011, 0.36), 0.064, 0.03, DK, seg=14)], P)
         piece('Parkour', 'Reflector' + sd, 'shin.' + sd, [cy((kx, 0.0, 0.18), 0.058, 0.025, '#d9ff3c', seg=14)], P)

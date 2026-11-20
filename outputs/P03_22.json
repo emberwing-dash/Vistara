@@ -8,40 +8,51 @@
  },
  "actions": [
   {
-   "verb": "take",
-   "noun": "cupboard",
-   "segment": [
-    0.5,
-    7.5
-   ],
-   "start": 0.5,
-   "end": 7.5,
-   "score": 0.236
-  },
-  {
-   "verb": "take",
-   "noun": "fridge",
-   "segment": [
-    0.5,
-    14.0
-   ],
-   "start": 0.5,
-   "end": 14.0,
-   "score": 0.231
-  },
-  {
    "verb": "put",
-   "noun": "cupboard",
+   "noun": "bag",
    "segment": [
     0.5,
-    5.5
+    3.0
    ],
    "start": 0.5,
-   "end": 5.5,
-   "score": 0.1823
+   "end": 3.0,
+   "score": 0.7705
+  },
+  {
+   "verb": "take",
+   "noun": "bag",
+   "segment": [
+    0.5,
+    3.0
+   ],
+   "start": 0.5,
+   "end": 3.0,
+   "score": 0.0421
   },
   {
    "verb": "move",
+   "noun": "bag",
+   "segment": [
+    0.5,
+    3.0
+   ],
+   "start": 0.5,
+   "end": 3.0,
+   "score": 0.0086
+  },
+  {
+   "verb": "transition",
+   "noun": "kitchen",
+   "segment": [
+    0.5,
+    5.5
+   ],
+   "start": 0.5,
+   "end": 5.5,
+   "score": 0.0059
+  },
+  {
+   "verb": "open",
    "noun": "cupboard",
    "segment": [
     0.5,
@@ -49,1853 +60,1787 @@
    ],
    "start": 0.5,
    "end": 5.5,
-   "score": 0.1769
-  },
-  {
-   "verb": "open",
-   "noun": "cupboard",
-   "segment": [
-    0.5,
-    7.5
-   ],
-   "start": 0.5,
-   "end": 7.5,
-   "score": 0.1765
+   "score": 0.0035
   },
   {
    "verb": "close",
-   "noun": "cupboard",
-   "segment": [
-    0.5,
-    5.5
-   ],
-   "start": 0.5,
-   "end": 5.5,
-   "score": 0.1739
-  },
-  {
-   "verb": "dry",
-   "noun": "cupboard",
-   "segment": [
-    0.5,
-    5.5
-   ],
-   "start": 0.5,
-   "end": 5.5,
-   "score": 0.1727
-  },
-  {
-   "verb": "turn-on",
-   "noun": "cupboard",
-   "segment": [
-    0.5,
-    5.5
-   ],
-   "start": 0.5,
-   "end": 5.5,
-   "score": 0.1674
-  },
-  {
-   "verb": "throw",
-   "noun": "cupboard",
-   "segment": [
-    0.5,
-    5.5
-   ],
-   "start": 0.5,
-   "end": 5.5,
-   "score": 0.152
-  },
-  {
-   "verb": "take",
-   "noun": "cloth",
-   "segment": [
-    0.5,
-    4.0
-   ],
-   "start": 0.5,
-   "end": 4.0,
-   "score": 0.1146
-  },
-  {
-   "verb": "take",
-   "noun": "tap",
-   "segment": [
-    2.0,
-    5.5
-   ],
-   "start": 2.0,
-   "end": 5.5,
-   "score": 0.1159
-  },
-  {
-   "verb": "close",
-   "noun": "fridge",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.2555
-  },
-  {
-   "verb": "open",
-   "noun": "fridge",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.2187
-  },
-  {
-   "verb": "insert",
-   "noun": "fridge",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.2086
-  },
-  {
-   "verb": "put",
-   "noun": "fridge",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.2043
-  },
-  {
-   "verb": "move",
-   "noun": "fridge",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.189
-  },
-  {
-   "verb": "turn-off",
-   "noun": "fridge",
-   "segment": [
-    4.0,
-    10.0
-   ],
-   "start": 4.0,
-   "end": 10.0,
-   "score": 0.1876
-  },
-  {
-   "verb": "turn-on",
-   "noun": "fridge",
-   "segment": [
-    4.0,
-    12.0
-   ],
-   "start": 4.0,
-   "end": 12.0,
-   "score": 0.1842
-  },
-  {
-   "verb": "take",
-   "noun": "freezer",
-   "segment": [
-    6.0,
-    10.0
-   ],
-   "start": 6.0,
-   "end": 10.0,
-   "score": 0.1223
-  },
-  {
-   "verb": "take",
-   "noun": "salami",
-   "segment": [
-    6.0,
-    10.0
-   ],
-   "start": 6.0,
-   "end": 10.0,
-   "score": 0.1047
-  },
-  {
-   "verb": "take",
-   "noun": "cupboard",
-   "segment": [
-    8.5,
-    15.5
-   ],
-   "start": 8.5,
-   "end": 15.5,
-   "score": 0.1715
-  },
-  {
-   "verb": "throw",
-   "noun": "fridge",
-   "segment": [
-    8.5,
-    12.0
-   ],
-   "start": 8.5,
-   "end": 12.0,
-   "score": 0.1619
-  },
-  {
-   "verb": "open",
-   "noun": "cupboard",
-   "segment": [
-    8.5,
-    14.0
-   ],
-   "start": 8.5,
-   "end": 14.0,
-   "score": 0.1376
-  },
-  {
-   "verb": "take",
-   "noun": "box",
-   "segment": [
-    10.0,
-    14.0
-   ],
-   "start": 10.0,
-   "end": 14.0,
-   "score": 0.1287
-  },
-  {
-   "verb": "put",
-   "noun": "cupboard",
-   "segment": [
-    10.0,
-    14.0
-   ],
-   "start": 10.0,
-   "end": 14.0,
-   "score": 0.1268
-  },
-  {
-   "verb": "take",
    "noun": "drawer",
    "segment": [
-    10.0,
-    14.0
+    0.5,
+    5.5
    ],
-   "start": 10.0,
-   "end": 14.0,
-   "score": 0.1258
-  },
-  {
-   "verb": "throw",
-   "noun": "cupboard",
-   "segment": [
-    10.0,
-    14.0
-   ],
-   "start": 10.0,
-   "end": 14.0,
-   "score": 0.1235
-  },
-  {
-   "verb": "take",
-   "noun": "bin",
-   "segment": [
-    10.0,
-    15.5
-   ],
-   "start": 10.0,
-   "end": 15.5,
-   "score": 0.1201
-  },
-  {
-   "verb": "take",
-   "noun": "container",
-   "segment": [
-    10.0,
-    14.0
-   ],
-   "start": 10.0,
-   "end": 14.0,
-   "score": 0.112
-  },
-  {
-   "verb": "take",
-   "noun": "plate",
-   "segment": [
-    10.0,
-    14.0
-   ],
-   "start": 10.0,
-   "end": 14.0,
-   "score": 0.1091
-  },
-  {
-   "verb": "dry",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    24.0
-   ],
-   "start": 12.0,
-   "end": 24.0,
-   "score": 0.2601
-  },
-  {
-   "verb": "take",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    24.0
-   ],
-   "start": 12.0,
-   "end": 24.0,
-   "score": 0.2377
+   "start": 0.5,
+   "end": 5.5,
+   "score": 0.0035
   },
   {
    "verb": "put",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    24.0
-   ],
-   "start": 12.0,
-   "end": 24.0,
-   "score": 0.2092
-  },
-  {
-   "verb": "open",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    24.0
-   ],
-   "start": 12.0,
-   "end": 24.0,
-   "score": 0.2062
-  },
-  {
-   "verb": "move",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    20.0
-   ],
-   "start": 12.0,
-   "end": 20.0,
-   "score": 0.2029
-  },
-  {
-   "verb": "throw",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    24.0
-   ],
-   "start": 12.0,
-   "end": 24.0,
-   "score": 0.1879
-  },
-  {
-   "verb": "close",
-   "noun": "bag",
-   "segment": [
-    12.0,
-    24.0
-   ],
-   "start": 12.0,
-   "end": 24.0,
-   "score": 0.1867
-  },
-  {
-   "verb": "insert",
-   "noun": "bag",
-   "segment": [
-    14.0,
-    24.0
-   ],
-   "start": 14.0,
-   "end": 24.0,
-   "score": 0.1894
-  },
-  {
-   "verb": "dry",
    "noun": "backpack",
    "segment": [
-    14.0,
-    20.0
+    0.5,
+    3.0
    ],
-   "start": 14.0,
-   "end": 20.0,
-   "score": 0.1037
-  },
-  {
-   "verb": "take",
-   "noun": "machine:washing",
-   "segment": [
-    16.5,
-    21.0
-   ],
-   "start": 16.5,
-   "end": 21.0,
-   "score": 0.0953
-  },
-  {
-   "verb": "wash",
-   "noun": "bag",
-   "segment": [
-    18.0,
-    24.0
-   ],
-   "start": 18.0,
-   "end": 24.0,
-   "score": 0.1849
-  },
-  {
-   "verb": "take",
-   "noun": "bin",
-   "segment": [
-    18.0,
-    21.0
-   ],
-   "start": 18.0,
-   "end": 21.0,
-   "score": 0.0833
-  },
-  {
-   "verb": "open",
-   "noun": "fridge",
-   "segment": [
-    20.0,
-    26.0
-   ],
-   "start": 20.0,
-   "end": 26.0,
-   "score": 0.2657
-  },
-  {
-   "verb": "open",
-   "noun": "machine:washing",
-   "segment": [
-    20.0,
-    24.0
-   ],
-   "start": 20.0,
-   "end": 24.0,
-   "score": 0.1008
-  },
-  {
-   "verb": "take",
-   "noun": "fridge",
-   "segment": [
-    22.0,
-    28.0
-   ],
-   "start": 22.0,
-   "end": 28.0,
-   "score": 0.2661
-  },
-  {
-   "verb": "close",
-   "noun": "fridge",
-   "segment": [
-    22.0,
-    28.0
-   ],
-   "start": 22.0,
-   "end": 28.0,
-   "score": 0.2631
-  },
-  {
-   "verb": "insert",
-   "noun": "fridge",
-   "segment": [
-    22.0,
-    26.0
-   ],
-   "start": 22.0,
-   "end": 26.0,
-   "score": 0.2605
-  },
-  {
-   "verb": "move",
-   "noun": "fridge",
-   "segment": [
-    22.0,
-    26.0
-   ],
-   "start": 22.0,
-   "end": 26.0,
-   "score": 0.2537
-  },
-  {
-   "verb": "turn-on",
-   "noun": "fridge",
-   "segment": [
-    22.0,
-    26.0
-   ],
-   "start": 22.0,
-   "end": 26.0,
-   "score": 0.244
+   "start": 0.5,
+   "end": 3.0,
+   "score": 0.0025
   },
   {
    "verb": "put",
-   "noun": "fridge",
+   "noun": "plate",
    "segment": [
-    22.0,
-    26.0
+    0.5,
+    3.0
    ],
-   "start": 22.0,
-   "end": 26.0,
-   "score": 0.237
+   "start": 0.5,
+   "end": 3.0,
+   "score": 0.0025
   },
   {
-   "verb": "turn-off",
-   "noun": "fridge",
+   "verb": "put",
+   "noun": "pan:dust",
    "segment": [
-    22.0,
-    26.0
+    0.5,
+    3.0
    ],
-   "start": 22.0,
-   "end": 26.0,
-   "score": 0.2336
-  },
-  {
-   "verb": "open",
-   "noun": "cupboard",
-   "segment": [
-    22.0,
-    26.0
-   ],
-   "start": 22.0,
-   "end": 26.0,
-   "score": 0.1118
+   "start": 0.5,
+   "end": 3.0,
+   "score": 0.0021
   },
   {
    "verb": "take",
-   "noun": "cupboard",
+   "noun": "knife",
    "segment": [
-    22.0,
-    26.0
+    0.5,
+    3.0
    ],
-   "start": 22.0,
-   "end": 26.0,
-   "score": 0.1003
+   "start": 0.5,
+   "end": 3.0,
+   "score": 0.0018
   },
   {
-   "verb": "take",
-   "noun": "liquid:washing",
+   "verb": "put",
+   "noun": "glass",
    "segment": [
-    24.0,
-    29.0
+    3.0,
+    5.5
    ],
-   "start": 24.0,
-   "end": 29.0,
-   "score": 0.2334
-  },
-  {
-   "verb": "take",
-   "noun": "milk",
-   "segment": [
-    24.0,
-    28.0
-   ],
-   "start": 24.0,
-   "end": 28.0,
-   "score": 0.141
-  },
-  {
-   "verb": "take",
-   "noun": "bottle",
-   "segment": [
-    24.0,
-    28.0
-   ],
-   "start": 24.0,
-   "end": 28.0,
-   "score": 0.1301
+   "start": 3.0,
+   "end": 5.5,
+   "score": 0.6445
   },
   {
    "verb": "take",
    "noun": "glass",
    "segment": [
-    24.0,
-    28.0
+    3.0,
+    5.5
    ],
-   "start": 24.0,
-   "end": 28.0,
-   "score": 0.1288
-  },
-  {
-   "verb": "take",
-   "noun": "cap",
-   "segment": [
-    24.0,
-    28.0
-   ],
-   "start": 24.0,
-   "end": 28.0,
-   "score": 0.1157
-  },
-  {
-   "verb": "take",
-   "noun": "liquid",
-   "segment": [
-    24.0,
-    28.0
-   ],
-   "start": 24.0,
-   "end": 28.0,
-   "score": 0.1149
-  },
-  {
-   "verb": "take",
-   "noun": "water",
-   "segment": [
-    24.0,
-    28.0
-   ],
-   "start": 24.0,
-   "end": 28.0,
-   "score": 0.1136
-  },
-  {
-   "verb": "take",
-   "noun": "salami",
-   "segment": [
-    24.0,
-    28.0
-   ],
-   "start": 24.0,
-   "end": 28.0,
-   "score": 0.1128
-  },
-  {
-   "verb": "spray",
-   "noun": "liquid:washing",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.2632
-  },
-  {
-   "verb": "open",
-   "noun": "liquid:washing",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.1942
-  },
-  {
-   "verb": "put",
-   "noun": "liquid:washing",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.1931
-  },
-  {
-   "verb": "close",
-   "noun": "liquid:washing",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.1866
-  },
-  {
-   "verb": "dry",
-   "noun": "liquid:washing",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.186
-  },
-  {
-   "verb": "insert",
-   "noun": "liquid:washing",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.1841
-  },
-  {
-   "verb": "spray",
-   "noun": "bag",
-   "segment": [
-    26.0,
-    30.5
-   ],
-   "start": 26.0,
-   "end": 30.5,
-   "score": 0.1785
-  },
-  {
-   "verb": "wash",
-   "noun": "liquid:washing",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.1724
-  },
-  {
-   "verb": "spray",
-   "noun": "bottle",
-   "segment": [
-    26.0,
-    29.0
-   ],
-   "start": 26.0,
-   "end": 29.0,
-   "score": 0.1095
-  },
-  {
-   "verb": "dry",
-   "noun": "bag",
-   "segment": [
-    28.0,
-    36.0
-   ],
-   "start": 28.0,
-   "end": 36.0,
-   "score": 0.1982
-  },
-  {
-   "verb": "dry",
-   "noun": "backpack",
-   "segment": [
-    28.0,
-    32.0
-   ],
-   "start": 28.0,
-   "end": 32.0,
-   "score": 0.176
-  },
-  {
-   "verb": "take",
-   "noun": "bag",
-   "segment": [
-    28.0,
-    36.0
-   ],
-   "start": 28.0,
-   "end": 36.0,
-   "score": 0.174
-  },
-  {
-   "verb": "put",
-   "noun": "bag",
-   "segment": [
-    28.0,
-    36.0
-   ],
-   "start": 28.0,
-   "end": 36.0,
-   "score": 0.1698
-  },
-  {
-   "verb": "wash",
-   "noun": "bag",
-   "segment": [
-    28.0,
-    36.0
-   ],
-   "start": 28.0,
-   "end": 36.0,
-   "score": 0.1653
-  },
-  {
-   "verb": "throw",
-   "noun": "bag",
-   "segment": [
-    28.0,
-    36.0
-   ],
-   "start": 28.0,
-   "end": 36.0,
-   "score": 0.1584
-  },
-  {
-   "verb": "close",
-   "noun": "bag",
-   "segment": [
-    28.0,
-    36.0
-   ],
-   "start": 28.0,
-   "end": 36.0,
-   "score": 0.1571
-  },
-  {
-   "verb": "open",
-   "noun": "bag",
-   "segment": [
-    28.0,
-    36.0
-   ],
-   "start": 28.0,
-   "end": 36.0,
-   "score": 0.1533
-  },
-  {
-   "verb": "spray",
-   "noun": "backpack",
-   "segment": [
-    28.0,
-    32.0
-   ],
-   "start": 28.0,
-   "end": 32.0,
-   "score": 0.0974
-  },
-  {
-   "verb": "insert",
-   "noun": "bag",
-   "segment": [
-    34.0,
-    36.0
-   ],
-   "start": 34.0,
-   "end": 36.0,
-   "score": 0.1214
-  },
-  {
-   "verb": "put",
-   "noun": "machine:washing",
-   "segment": [
-    34.0,
-    36.0
-   ],
-   "start": 34.0,
-   "end": 36.0,
-   "score": 0.074
-  },
-  {
-   "verb": "take",
-   "noun": "machine:washing",
-   "segment": [
-    34.0,
-    36.0
-   ],
-   "start": 34.0,
-   "end": 36.0,
-   "score": 0.0715
-  },
-  {
-   "verb": "take",
-   "noun": "fridge",
-   "segment": [
-    34.5,
-    41.5
-   ],
-   "start": 34.5,
-   "end": 41.5,
-   "score": 0.2848
-  },
-  {
-   "verb": "open",
-   "noun": "fridge",
-   "segment": [
-    34.5,
-    44.0
-   ],
-   "start": 34.5,
-   "end": 44.0,
-   "score": 0.2692
+   "start": 3.0,
+   "end": 5.5,
+   "score": 0.0643
   },
   {
    "verb": "close",
    "noun": "fridge",
    "segment": [
-    34.5,
-    41.5
+    3.0,
+    5.5
    ],
-   "start": 34.5,
-   "end": 41.5,
-   "score": 0.2611
-  },
-  {
-   "verb": "move",
-   "noun": "fridge",
-   "segment": [
-    34.5,
-    40.0
-   ],
-   "start": 34.5,
-   "end": 40.0,
-   "score": 0.2468
-  },
-  {
-   "verb": "insert",
-   "noun": "fridge",
-   "segment": [
-    34.5,
-    41.5
-   ],
-   "start": 34.5,
-   "end": 41.5,
-   "score": 0.2393
-  },
-  {
-   "verb": "put",
-   "noun": "fridge",
-   "segment": [
-    34.5,
-    40.0
-   ],
-   "start": 34.5,
-   "end": 40.0,
-   "score": 0.2304
-  },
-  {
-   "verb": "throw",
-   "noun": "fridge",
-   "segment": [
-    34.5,
-    38.0
-   ],
-   "start": 34.5,
-   "end": 38.0,
-   "score": 0.1674
-  },
-  {
-   "verb": "dry",
-   "noun": "fridge",
-   "segment": [
-    34.5,
-    38.0
-   ],
-   "start": 34.5,
-   "end": 38.0,
-   "score": 0.141
-  },
-  {
-   "verb": "open",
-   "noun": "cupboard",
-   "segment": [
-    34.5,
-    40.0
-   ],
-   "start": 34.5,
-   "end": 40.0,
-   "score": 0.1152
-  },
-  {
-   "verb": "take",
-   "noun": "cupboard",
-   "segment": [
-    34.5,
-    38.0
-   ],
-   "start": 34.5,
-   "end": 38.0,
-   "score": 0.0955
+   "start": 3.0,
+   "end": 5.5,
+   "score": 0.0077
   },
   {
    "verb": "turn-on",
+   "noun": "tap",
+   "segment": [
+    3.0,
+    9.0
+   ],
+   "start": 3.0,
+   "end": 9.0,
+   "score": 0.0052
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    3.0,
+    5.5
+   ],
+   "start": 3.0,
+   "end": 5.5,
+   "score": 0.0045
+  },
+  {
+   "verb": "open",
    "noun": "fridge",
    "segment": [
-    36.0,
-    40.0
+    3.0,
+    5.5
    ],
-   "start": 36.0,
-   "end": 40.0,
-   "score": 0.2403
+   "start": 3.0,
+   "end": 5.5,
+   "score": 0.0041
+  },
+  {
+   "verb": "move",
+   "noun": "glass",
+   "segment": [
+    3.0,
+    5.5
+   ],
+   "start": 3.0,
+   "end": 5.5,
+   "score": 0.0028
+  },
+  {
+   "verb": "take",
+   "noun": "box",
+   "segment": [
+    6.0,
+    15.0
+   ],
+   "start": 6.0,
+   "end": 15.0,
+   "score": 0.5199
   },
   {
    "verb": "turn-off",
-   "noun": "fridge",
+   "noun": "tap",
    "segment": [
-    36.0,
-    40.0
+    6.0,
+    12.0
    ],
-   "start": 36.0,
-   "end": 40.0,
-   "score": 0.2353
+   "start": 6.0,
+   "end": 12.0,
+   "score": 0.0048
   },
   {
    "verb": "take",
-   "noun": "freezer",
+   "noun": "butter",
    "segment": [
-    36.0,
-    41.5
+    6.0,
+    9.0
    ],
-   "start": 36.0,
-   "end": 41.5,
-   "score": 0.1422
+   "start": 6.0,
+   "end": 9.0,
+   "score": 0.0044
   },
   {
    "verb": "take",
-   "noun": "cheese",
+   "noun": "bread",
    "segment": [
-    38.0,
-    41.5
+    6.0,
+    9.0
    ],
-   "start": 38.0,
-   "end": 41.5,
-   "score": 0.1265
-  },
-  {
-   "verb": "unfreeze",
-   "noun": "fridge",
-   "segment": [
-    38.0,
-    41.5
-   ],
-   "start": 38.0,
-   "end": 41.5,
-   "score": 0.1263
-  },
-  {
-   "verb": "open",
-   "noun": "freezer",
-   "segment": [
-    38.0,
-    41.5
-   ],
-   "start": 38.0,
-   "end": 41.5,
-   "score": 0.1153
-  },
-  {
-   "verb": "close",
-   "noun": "cheese",
-   "segment": [
-    38.0,
-    41.5
-   ],
-   "start": 38.0,
-   "end": 41.5,
-   "score": 0.1134
-  },
-  {
-   "verb": "close",
-   "noun": "freezer",
-   "segment": [
-    38.0,
-    41.5
-   ],
-   "start": 38.0,
-   "end": 41.5,
-   "score": 0.1123
-  },
-  {
-   "verb": "open",
-   "noun": "package",
-   "segment": [
-    40.5,
-    46.0
-   ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.2294
-  },
-  {
-   "verb": "take",
-   "noun": "package",
-   "segment": [
-    40.5,
-    46.0
-   ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.2097
-  },
-  {
-   "verb": "close",
-   "noun": "package",
-   "segment": [
-    40.5,
-    46.0
-   ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.1898
-  },
-  {
-   "verb": "open",
-   "noun": "bag",
-   "segment": [
-    40.5,
-    46.0
-   ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.1844
-  },
-  {
-   "verb": "put",
-   "noun": "package",
-   "segment": [
-    40.5,
-    46.0
-   ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.1816
+   "start": 6.0,
+   "end": 9.0,
+   "score": 0.0039
   },
   {
    "verb": "insert",
-   "noun": "package",
+   "noun": "box",
    "segment": [
-    40.5,
-    46.0
+    6.0,
+    9.0
    ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.155
-  },
-  {
-   "verb": "move",
-   "noun": "package",
-   "segment": [
-    40.5,
-    46.0
-   ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.1517
-  },
-  {
-   "verb": "look",
-   "noun": "package",
-   "segment": [
-    40.5,
-    44.0
-   ],
-   "start": 40.5,
-   "end": 44.0,
-   "score": 0.1433
-  },
-  {
-   "verb": "remove",
-   "noun": "package",
-   "segment": [
-    40.5,
-    46.0
-   ],
-   "start": 40.5,
-   "end": 46.0,
-   "score": 0.1366
-  },
-  {
-   "verb": "throw",
-   "noun": "package",
-   "segment": [
-    42.0,
-    46.0
-   ],
-   "start": 42.0,
-   "end": 46.0,
-   "score": 0.1485
+   "start": 6.0,
+   "end": 9.0,
+   "score": 0.0031
   },
   {
    "verb": "take",
-   "noun": "bag",
+   "noun": "drink",
    "segment": [
-    42.0,
-    46.0
+    6.0,
+    9.0
    ],
-   "start": 42.0,
-   "end": 46.0,
-   "score": 0.1462
+   "start": 6.0,
+   "end": 9.0,
+   "score": 0.003
   },
   {
-   "verb": "open",
-   "noun": "cupboard",
+   "verb": "wash",
+   "noun": "box",
    "segment": [
-    45.0,
-    50.0
+    6.0,
+    9.0
    ],
-   "start": 45.0,
-   "end": 50.0,
-   "score": 0.2331
-  },
-  {
-   "verb": "take",
-   "noun": "cupboard",
-   "segment": [
-    45.0,
-    50.0
-   ],
-   "start": 45.0,
-   "end": 50.0,
-   "score": 0.2298
-  },
-  {
-   "verb": "close",
-   "noun": "cupboard",
-   "segment": [
-    45.0,
-    50.0
-   ],
-   "start": 45.0,
-   "end": 50.0,
-   "score": 0.205
-  },
-  {
-   "verb": "put",
-   "noun": "cupboard",
-   "segment": [
-    45.0,
-    50.0
-   ],
-   "start": 45.0,
-   "end": 50.0,
-   "score": 0.1967
-  },
-  {
-   "verb": "insert",
-   "noun": "cupboard",
-   "segment": [
-    45.0,
-    50.0
-   ],
-   "start": 45.0,
-   "end": 50.0,
-   "score": 0.1837
-  },
-  {
-   "verb": "turn-on",
-   "noun": "cupboard",
-   "segment": [
-    45.0,
-    50.0
-   ],
-   "start": 45.0,
-   "end": 50.0,
-   "score": 0.1658
-  },
-  {
-   "verb": "move",
-   "noun": "cupboard",
-   "segment": [
-    45.0,
-    50.0
-   ],
-   "start": 45.0,
-   "end": 50.0,
-   "score": 0.159
-  },
-  {
-   "verb": "open",
-   "noun": "drawer",
-   "segment": [
-    45.0,
-    48.0
-   ],
-   "start": 45.0,
-   "end": 48.0,
-   "score": 0.1421
+   "start": 6.0,
+   "end": 9.0,
+   "score": 0.0029
   },
   {
    "verb": "open",
    "noun": "box",
    "segment": [
-    45.0,
-    48.0
+    6.0,
+    9.0
    ],
-   "start": 45.0,
-   "end": 48.0,
-   "score": 0.1343
+   "start": 6.0,
+   "end": 9.0,
+   "score": 0.0025
   },
   {
-   "verb": "open",
-   "noun": "fridge",
+   "verb": "put",
+   "noun": "spoon",
    "segment": [
-    45.0,
-    48.0
+    6.0,
+    9.0
    ],
-   "start": 45.0,
-   "end": 48.0,
-   "score": 0.127
+   "start": 6.0,
+   "end": 9.0,
+   "score": 0.0025
   },
   {
    "verb": "take",
-   "noun": "cereal",
+   "noun": "knife",
    "segment": [
-    46.0,
-    52.0
+    9.0,
+    15.0
    ],
-   "start": 46.0,
-   "end": 52.0,
-   "score": 0.2197
+   "start": 9.0,
+   "end": 15.0,
+   "score": 0.4899
   },
   {
-   "verb": "pour",
+   "verb": "put",
+   "noun": "knife",
+   "segment": [
+    9.0,
+    15.0
+   ],
+   "start": 9.0,
+   "end": 15.0,
+   "score": 0.0418
+  },
+  {
+   "verb": "take",
+   "noun": "fork",
+   "segment": [
+    9.0,
+    12.0
+   ],
+   "start": 9.0,
+   "end": 12.0,
+   "score": 0.0128
+  },
+  {
+   "verb": "take",
+   "noun": "spoon",
+   "segment": [
+    9.0,
+    12.0
+   ],
+   "start": 9.0,
+   "end": 12.0,
+   "score": 0.009
+  },
+  {
+   "verb": "close",
+   "noun": "fridge",
+   "segment": [
+    9.0,
+    12.0
+   ],
+   "start": 9.0,
+   "end": 12.0,
+   "score": 0.0067
+  },
+  {
+   "verb": "open",
    "noun": "cupboard",
    "segment": [
-    46.0,
-    50.0
+    9.0,
+    12.0
    ],
-   "start": 46.0,
-   "end": 50.0,
-   "score": 0.1596
+   "start": 9.0,
+   "end": 12.0,
+   "score": 0.005
+  },
+  {
+   "verb": "close",
+   "noun": "cupboard",
+   "segment": [
+    9.0,
+    12.0
+   ],
+   "start": 9.0,
+   "end": 12.0,
+   "score": 0.0045
   },
   {
    "verb": "take",
+   "noun": "plate",
+   "segment": [
+    9.0,
+    12.0
+   ],
+   "start": 9.0,
+   "end": 12.0,
+   "score": 0.0043
+  },
+  {
+   "verb": "put",
    "noun": "box",
    "segment": [
-    46.0,
-    50.0
+    12.0,
+    15.0
    ],
-   "start": 46.0,
-   "end": 50.0,
-   "score": 0.0945
-  },
-  {
-   "verb": "put",
-   "noun": "cereal",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.2034
-  },
-  {
-   "verb": "move",
-   "noun": "cereal",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.2012
-  },
-  {
-   "verb": "close",
-   "noun": "cereal",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.1771
-  },
-  {
-   "verb": "open",
-   "noun": "cereal",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.1627
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.1522
   },
   {
    "verb": "insert",
-   "noun": "cereal",
+   "noun": "box",
    "segment": [
-    48.0,
-    52.0
+    12.0,
+    15.0
    ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.1483
-  },
-  {
-   "verb": "remove",
-   "noun": "cereal",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.1381
-  },
-  {
-   "verb": "pour",
-   "noun": "cereal",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.1241
-  },
-  {
-   "verb": "put",
-   "noun": "package",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.0966
-  },
-  {
-   "verb": "close",
-   "noun": "package",
-   "segment": [
-    48.0,
-    52.0
-   ],
-   "start": 48.0,
-   "end": 52.0,
-   "score": 0.0942
-  },
-  {
-   "verb": "take",
-   "noun": "fridge",
-   "segment": [
-    50.0,
-    61.0
-   ],
-   "start": 50.0,
-   "end": 61.0,
-   "score": 0.1549
-  },
-  {
-   "verb": "put",
-   "noun": "fridge",
-   "segment": [
-    50.0,
-    56.0
-   ],
-   "start": 50.0,
-   "end": 56.0,
-   "score": 0.1388
-  },
-  {
-   "verb": "open",
-   "noun": "fridge",
-   "segment": [
-    50.0,
-    56.0
-   ],
-   "start": 50.0,
-   "end": 56.0,
-   "score": 0.136
-  },
-  {
-   "verb": "close",
-   "noun": "fridge",
-   "segment": [
-    50.0,
-    56.0
-   ],
-   "start": 50.0,
-   "end": 56.0,
-   "score": 0.11
-  },
-  {
-   "verb": "move",
-   "noun": "fridge",
-   "segment": [
-    50.0,
-    56.0
-   ],
-   "start": 50.0,
-   "end": 56.0,
-   "score": 0.1001
-  },
-  {
-   "verb": "insert",
-   "noun": "fridge",
-   "segment": [
-    50.0,
-    54.0
-   ],
-   "start": 50.0,
-   "end": 54.0,
-   "score": 0.099
-  },
-  {
-   "verb": "throw",
-   "noun": "fridge",
-   "segment": [
-    50.0,
-    54.0
-   ],
-   "start": 50.0,
-   "end": 54.0,
-   "score": 0.0986
-  },
-  {
-   "verb": "throw",
-   "noun": "board:chopping",
-   "segment": [
-    50.0,
-    54.0
-   ],
-   "start": 50.0,
-   "end": 54.0,
+   "start": 12.0,
+   "end": 15.0,
    "score": 0.096
   },
   {
-   "verb": "put",
-   "noun": "cupboard",
+   "verb": "insert",
+   "noun": "food",
    "segment": [
-    50.0,
-    54.0
+    12.0,
+    21.0
    ],
-   "start": 50.0,
-   "end": 54.0,
-   "score": 0.0959
+   "start": 12.0,
+   "end": 21.0,
+   "score": 0.0726
+  },
+  {
+   "verb": "empty",
+   "noun": "box",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.041
+  },
+  {
+   "verb": "insert",
+   "noun": "package",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0225
+  },
+  {
+   "verb": "wash",
+   "noun": "knife",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0129
+  },
+  {
+   "verb": "insert",
+   "noun": "drink",
+   "segment": [
+    12.0,
+    15.0
+   ],
+   "start": 12.0,
+   "end": 15.0,
+   "score": 0.0095
   },
   {
    "verb": "open",
-   "noun": "cupboard",
+   "noun": "bag",
    "segment": [
-    50.0,
-    56.0
+    15.0,
+    18.0
    ],
-   "start": 50.0,
-   "end": 56.0,
-   "score": 0.0959
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.3044
   },
   {
-   "verb": "take",
+   "verb": "open",
+   "noun": "backpack",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.1
+  },
+  {
+   "verb": "open",
    "noun": "package",
    "segment": [
-    52.0,
-    58.0
+    15.0,
+    18.0
    ],
-   "start": 52.0,
-   "end": 58.0,
-   "score": 0.1151
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0253
   },
   {
    "verb": "take",
-   "noun": "cupboard",
+   "noun": "backpack",
    "segment": [
-    52.0,
-    56.0
+    15.0,
+    18.0
    ],
-   "start": 52.0,
-   "end": 56.0,
-   "score": 0.1063
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0212
+  },
+  {
+   "verb": "close",
+   "noun": "bag",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0172
+  },
+  {
+   "verb": "remove",
+   "noun": "top",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.008
+  },
+  {
+   "verb": "remove",
+   "noun": "package",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0077
+  },
+  {
+   "verb": "take",
+   "noun": "rubbish",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0061
+  },
+  {
+   "verb": "wrap",
+   "noun": "bag",
+   "segment": [
+    15.0,
+    18.0
+   ],
+   "start": 15.0,
+   "end": 18.0,
+   "score": 0.0059
+  },
+  {
+   "verb": "insert",
+   "noun": "box",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.1759
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.1639
+  },
+  {
+   "verb": "insert",
+   "noun": "container",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.0551
+  },
+  {
+   "verb": "put",
+   "noun": "container",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.0338
+  },
+  {
+   "verb": "empty",
+   "noun": "colander",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.0244
+  },
+  {
+   "verb": "empty",
+   "noun": "box",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.0232
+  },
+  {
+   "verb": "insert",
+   "noun": "lid",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.0204
+  },
+  {
+   "verb": "insert",
+   "noun": "package",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.0203
+  },
+  {
+   "verb": "take",
+   "noun": "box",
+   "segment": [
+    18.0,
+    21.0
+   ],
+   "start": 18.0,
+   "end": 21.0,
+   "score": 0.0091
+  },
+  {
+   "verb": "open",
+   "noun": "fridge",
+   "segment": [
+    22.0,
+    27.0
+   ],
+   "start": 22.0,
+   "end": 27.0,
+   "score": 0.4118
+  },
+  {
+   "verb": "close",
+   "noun": "fridge",
+   "segment": [
+    22.0,
+    27.0
+   ],
+   "start": 22.0,
+   "end": 27.0,
+   "score": 0.2938
+  },
+  {
+   "verb": "take",
+   "noun": "bottle",
+   "segment": [
+    22.0,
+    29.0
+   ],
+   "start": 22.0,
+   "end": 29.0,
+   "score": 0.0522
+  },
+  {
+   "verb": "take",
+   "noun": "squash",
+   "segment": [
+    22.0,
+    27.0
+   ],
+   "start": 22.0,
+   "end": 27.0,
+   "score": 0.0339
+  },
+  {
+   "verb": "take",
+   "noun": "backpack",
+   "segment": [
+    22.0,
+    24.0
+   ],
+   "start": 22.0,
+   "end": 24.0,
+   "score": 0.0109
+  },
+  {
+   "verb": "take",
+   "noun": "bag",
+   "segment": [
+    22.0,
+    24.0
+   ],
+   "start": 22.0,
+   "end": 24.0,
+   "score": 0.0091
+  },
+  {
+   "verb": "remove",
+   "noun": "salmon",
+   "segment": [
+    22.0,
+    24.0
+   ],
+   "start": 22.0,
+   "end": 24.0,
+   "score": 0.008
+  },
+  {
+   "verb": "take",
+   "noun": "rubbish",
+   "segment": [
+    22.0,
+    24.0
+   ],
+   "start": 22.0,
+   "end": 24.0,
+   "score": 0.0057
+  },
+  {
+   "verb": "remove",
+   "noun": "bag",
+   "segment": [
+    22.0,
+    24.0
+   ],
+   "start": 22.0,
+   "end": 24.0,
+   "score": 0.005
   },
   {
    "verb": "take",
    "noun": "towel",
    "segment": [
-    52.0,
-    56.0
+    22.0,
+    24.0
    ],
-   "start": 52.0,
-   "end": 56.0,
-   "score": 0.1033
+   "start": 22.0,
+   "end": 24.0,
+   "score": 0.004
+  },
+  {
+   "verb": "close",
+   "noun": "bottle",
+   "segment": [
+    24.0,
+    27.0
+   ],
+   "start": 24.0,
+   "end": 27.0,
+   "score": 0.1381
+  },
+  {
+   "verb": "close",
+   "noun": "lid",
+   "segment": [
+    24.0,
+    27.0
+   ],
+   "start": 24.0,
+   "end": 27.0,
+   "score": 0.0143
+  },
+  {
+   "verb": "close",
+   "noun": "squash",
+   "segment": [
+    24.0,
+    27.0
+   ],
+   "start": 24.0,
+   "end": 27.0,
+   "score": 0.0082
+  },
+  {
+   "verb": "turn-off",
+   "noun": "tap",
+   "segment": [
+    24.0,
+    27.0
+   ],
+   "start": 24.0,
+   "end": 27.0,
+   "score": 0.0068
   },
   {
    "verb": "take",
-   "noun": "liquid:washing",
+   "noun": "juice",
    "segment": [
-    52.0,
-    56.0
+    24.0,
+    27.0
    ],
-   "start": 52.0,
-   "end": 56.0,
-   "score": 0.0858
+   "start": 24.0,
+   "end": 27.0,
+   "score": 0.0064
+  },
+  {
+   "verb": "turn-on",
+   "noun": "tap",
+   "segment": [
+    24.0,
+    27.0
+   ],
+   "start": 24.0,
+   "end": 27.0,
+   "score": 0.0061
+  },
+  {
+   "verb": "insert",
+   "noun": "bottle",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.6807
+  },
+  {
+   "verb": "put",
+   "noun": "bottle",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0531
+  },
+  {
+   "verb": "throw",
+   "noun": "bottle",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0179
+  },
+  {
+   "verb": "insert",
+   "noun": "container",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0061
+  },
+  {
+   "verb": "insert",
+   "noun": "box",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0053
+  },
+  {
+   "verb": "insert",
+   "noun": "package",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0044
+  },
+  {
+   "verb": "put",
+   "noun": "squash",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0037
+  },
+  {
+   "verb": "insert",
+   "noun": "food",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0036
+  },
+  {
+   "verb": "insert",
+   "noun": "squash",
+   "segment": [
+    27.0,
+    29.0
+   ],
+   "start": 27.0,
+   "end": 29.0,
+   "score": 0.0027
+  },
+  {
+   "verb": "take",
+   "noun": "backpack",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.2054
+  },
+  {
+   "verb": "take",
+   "noun": "bag",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.1139
+  },
+  {
+   "verb": "close",
+   "noun": "bag",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.0598
+  },
+  {
+   "verb": "open",
+   "noun": "bag",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.0455
+  },
+  {
+   "verb": "open",
+   "noun": "backpack",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.0125
+  },
+  {
+   "verb": "take",
+   "noun": "rubbish",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.0101
+  },
+  {
+   "verb": "close",
+   "noun": "drawer",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.0096
+  },
+  {
+   "verb": "remove",
+   "noun": "package",
+   "segment": [
+    33.0,
+    36.0
+   ],
+   "start": 33.0,
+   "end": 36.0,
+   "score": 0.0077
+  },
+  {
+   "verb": "open",
+   "noun": "cupboard",
+   "segment": [
+    34.5,
+    38.5
+   ],
+   "start": 34.5,
+   "end": 38.5,
+   "score": 0.0076
+  },
+  {
+   "verb": "turn-on",
+   "noun": "tap",
+   "segment": [
+    34.5,
+    38.5
+   ],
+   "start": 34.5,
+   "end": 38.5,
+   "score": 0.007
+  },
+  {
+   "verb": "open",
+   "noun": "fridge",
+   "segment": [
+    36.0,
+    38.5
+   ],
+   "start": 36.0,
+   "end": 38.5,
+   "score": 0.8916
+  },
+  {
+   "verb": "take",
+   "noun": "bread",
+   "segment": [
+    36.0,
+    44.0
+   ],
+   "start": 36.0,
+   "end": 44.0,
+   "score": 0.0279
+  },
+  {
+   "verb": "turn-off",
+   "noun": "tap",
+   "segment": [
+    36.0,
+    48.0
+   ],
+   "start": 36.0,
+   "end": 48.0,
+   "score": 0.0076
   },
   {
    "verb": "take",
    "noun": "plate",
    "segment": [
-    54.0,
-    60.0
+    36.0,
+    38.5
    ],
-   "start": 54.0,
-   "end": 60.0,
-   "score": 0.1274
+   "start": 36.0,
+   "end": 38.5,
+   "score": 0.0005
   },
   {
    "verb": "take",
-   "noun": "napkin",
+   "noun": "lid",
    "segment": [
-    54.0,
-    58.0
+    36.0,
+    38.5
    ],
-   "start": 54.0,
-   "end": 58.0,
-   "score": 0.1243
+   "start": 36.0,
+   "end": 38.5,
+   "score": 0.0004
+  },
+  {
+   "verb": "open",
+   "noun": "lid",
+   "segment": [
+    36.0,
+    38.5
+   ],
+   "start": 36.0,
+   "end": 38.5,
+   "score": 0.0004
+  },
+  {
+   "verb": "put",
+   "noun": "lid",
+   "segment": [
+    36.0,
+    38.5
+   ],
+   "start": 36.0,
+   "end": 38.5,
+   "score": 0.0003
   },
   {
    "verb": "take",
-   "noun": "tray",
+   "noun": "salami",
    "segment": [
-    54.0,
-    58.0
+    36.0,
+    38.5
    ],
-   "start": 54.0,
-   "end": 58.0,
-   "score": 0.106
+   "start": 36.0,
+   "end": 38.5,
+   "score": 0.0003
+  },
+  {
+   "verb": "close",
+   "noun": "fridge",
+   "segment": [
+    39.5,
+    41.5
+   ],
+   "start": 39.5,
+   "end": 41.5,
+   "score": 0.5698
+  },
+  {
+   "verb": "take",
+   "noun": "sausage",
+   "segment": [
+    39.5,
+    41.5
+   ],
+   "start": 39.5,
+   "end": 41.5,
+   "score": 0.0388
+  },
+  {
+   "verb": "take",
+   "noun": "pancake",
+   "segment": [
+    39.5,
+    44.0
+   ],
+   "start": 39.5,
+   "end": 44.0,
+   "score": 0.0243
+  },
+  {
+   "verb": "take",
+   "noun": "biscuit",
+   "segment": [
+    39.5,
+    41.5
+   ],
+   "start": 39.5,
+   "end": 41.5,
+   "score": 0.0102
+  },
+  {
+   "verb": "take",
+   "noun": "egg",
+   "segment": [
+    39.5,
+    41.5
+   ],
+   "start": 39.5,
+   "end": 41.5,
+   "score": 0.0048
+  },
+  {
+   "verb": "take",
+   "noun": "package",
+   "segment": [
+    39.5,
+    41.5
+   ],
+   "start": 39.5,
+   "end": 41.5,
+   "score": 0.0043
+  },
+  {
+   "verb": "close",
+   "noun": "package",
+   "segment": [
+    39.5,
+    41.5
+   ],
+   "start": 39.5,
+   "end": 41.5,
+   "score": 0.004
+  },
+  {
+   "verb": "take",
+   "noun": "carrot",
+   "segment": [
+    39.5,
+    41.5
+   ],
+   "start": 39.5,
+   "end": 41.5,
+   "score": 0.004
+  },
+  {
+   "verb": "remove",
+   "noun": "bread",
+   "segment": [
+    42.0,
+    44.0
+   ],
+   "start": 42.0,
+   "end": 44.0,
+   "score": 0.0256
+  },
+  {
+   "verb": "take",
+   "noun": "wrap",
+   "segment": [
+    42.0,
+    44.0
+   ],
+   "start": 42.0,
+   "end": 44.0,
+   "score": 0.0149
+  },
+  {
+   "verb": "take",
+   "noun": "cheese",
+   "segment": [
+    42.0,
+    48.0
+   ],
+   "start": 42.0,
+   "end": 48.0,
+   "score": 0.0138
+  },
+  {
+   "verb": "take",
+   "noun": "sponge",
+   "segment": [
+    42.0,
+    44.0
+   ],
+   "start": 42.0,
+   "end": 44.0,
+   "score": 0.0112
+  },
+  {
+   "verb": "open",
+   "noun": "drawer",
+   "segment": [
+    42.0,
+    48.0
+   ],
+   "start": 42.0,
+   "end": 48.0,
+   "score": 0.0111
+  },
+  {
+   "verb": "remove",
+   "noun": "wrap",
+   "segment": [
+    42.0,
+    44.0
+   ],
+   "start": 42.0,
+   "end": 44.0,
+   "score": 0.0091
+  },
+  {
+   "verb": "turn-on",
+   "noun": "tap",
+   "segment": [
+    42.0,
+    48.0
+   ],
+   "start": 42.0,
+   "end": 48.0,
+   "score": 0.008
+  },
+  {
+   "verb": "open",
+   "noun": "cupboard",
+   "segment": [
+    45.0,
+    48.0
+   ],
+   "start": 45.0,
+   "end": 48.0,
+   "score": 0.793
   },
   {
    "verb": "put",
    "noun": "plate",
    "segment": [
+    45.0,
+    50.5
+   ],
+   "start": 45.0,
+   "end": 50.5,
+   "score": 0.0167
+  },
+  {
+   "verb": "take",
+   "noun": "plate",
+   "segment": [
+    45.0,
+    54.0
+   ],
+   "start": 45.0,
+   "end": 54.0,
+   "score": 0.0101
+  },
+  {
+   "verb": "close",
+   "noun": "cupboard",
+   "segment": [
+    45.0,
+    50.5
+   ],
+   "start": 45.0,
+   "end": 50.5,
+   "score": 0.0099
+  },
+  {
+   "verb": "open",
+   "noun": "top",
+   "segment": [
+    45.0,
+    48.0
+   ],
+   "start": 45.0,
+   "end": 48.0,
+   "score": 0.0035
+  },
+  {
+   "verb": "take",
+   "noun": "pan",
+   "segment": [
+    45.0,
+    48.0
+   ],
+   "start": 45.0,
+   "end": 48.0,
+   "score": 0.0013
+  },
+  {
+   "verb": "remove",
+   "noun": "wrap",
+   "segment": [
+    48.0,
+    54.0
+   ],
+   "start": 48.0,
+   "end": 54.0,
+   "score": 0.0177
+  },
+  {
+   "verb": "put",
+   "noun": "pasta",
+   "segment": [
+    48.0,
+    50.5
+   ],
+   "start": 48.0,
+   "end": 50.5,
+   "score": 0.0152
+  },
+  {
+   "verb": "put",
+   "noun": "nut",
+   "segment": [
+    48.0,
+    50.5
+   ],
+   "start": 48.0,
+   "end": 50.5,
+   "score": 0.011
+  },
+  {
+   "verb": "insert",
+   "noun": "nut",
+   "segment": [
+    48.0,
+    50.5
+   ],
+   "start": 48.0,
+   "end": 50.5,
+   "score": 0.0093
+  },
+  {
+   "verb": "put",
+   "noun": "bowl",
+   "segment": [
+    48.0,
+    50.5
+   ],
+   "start": 48.0,
+   "end": 50.5,
+   "score": 0.0081
+  },
+  {
+   "verb": "put",
+   "noun": "pancake",
+   "segment": [
+    48.0,
+    50.5
+   ],
+   "start": 48.0,
+   "end": 50.5,
+   "score": 0.0078
+  },
+  {
+   "verb": "put",
+   "noun": "oatmeal",
+   "segment": [
+    48.0,
+    50.5
+   ],
+   "start": 48.0,
+   "end": 50.5,
+   "score": 0.0064
+  },
+  {
+   "verb": "take",
+   "noun": "pancake",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0501
+  },
+  {
+   "verb": "take",
+   "noun": "package",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0162
+  },
+  {
+   "verb": "take",
+   "noun": "food",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0131
+  },
+  {
+   "verb": "open",
+   "noun": "almond",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0131
+  },
+  {
+   "verb": "open",
+   "noun": "cheese",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0109
+  },
+  {
+   "verb": "remove",
+   "noun": "food",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0072
+  },
+  {
+   "verb": "take",
+   "noun": "wrap",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0061
+  },
+  {
+   "verb": "look",
+   "noun": "bag",
+   "segment": [
+    51.0,
+    54.0
+   ],
+   "start": 51.0,
+   "end": 54.0,
+   "score": 0.0061
+  },
+  {
+   "verb": "insert",
+   "noun": "bag",
+   "segment": [
     54.0,
-    58.0
+    57.0
    ],
    "start": 54.0,
-   "end": 58.0,
-   "score": 0.1057
+   "end": 57.0,
+   "score": 0.0639
+  },
+  {
+   "verb": "put",
+   "noun": "bread",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0484
+  },
+  {
+   "verb": "put",
+   "noun": "food",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0383
+  },
+  {
+   "verb": "insert",
+   "noun": "package",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.033
+  },
+  {
+   "verb": "insert",
+   "noun": "food",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0328
+  },
+  {
+   "verb": "insert",
+   "noun": "crisp",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0294
+  },
+  {
+   "verb": "put",
+   "noun": "package",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0257
+  },
+  {
+   "verb": "insert",
+   "noun": "skin",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0143
+  },
+  {
+   "verb": "take",
+   "noun": "cutlery",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0106
+  },
+  {
+   "verb": "take",
+   "noun": "bread",
+   "segment": [
+    54.0,
+    57.0
+   ],
+   "start": 54.0,
+   "end": 57.0,
+   "score": 0.0093
+  },
+  {
+   "verb": "take",
+   "noun": "bag",
+   "segment": [
+    57.0,
+    61.0
+   ],
+   "start": 57.0,
+   "end": 61.0,
+   "score": 0.1378
+  },
+  {
+   "verb": "take",
+   "noun": "crisp",
+   "segment": [
+    57.0,
+    60.0
+   ],
+   "start": 57.0,
+   "end": 60.0,
+   "score": 0.0708
+  },
+  {
+   "verb": "take",
+   "noun": "backpack",
+   "segment": [
+    57.0,
+    61.0
+   ],
+   "start": 57.0,
+   "end": 61.0,
+   "score": 0.0317
   },
   {
    "verb": "take",
    "noun": "box",
    "segment": [
-    54.0,
-    58.0
-   ],
-   "start": 54.0,
-   "end": 58.0,
-   "score": 0.1036
-  },
-  {
-   "verb": "take",
-   "noun": "milk",
-   "segment": [
-    54.0,
-    58.0
-   ],
-   "start": 54.0,
-   "end": 58.0,
-   "score": 0.1021
-  },
-  {
-   "verb": "take",
-   "noun": "cup",
-   "segment": [
-    54.0,
+    57.0,
     60.0
    ],
-   "start": 54.0,
+   "start": 57.0,
    "end": 60.0,
-   "score": 0.1012
-  },
-  {
-   "verb": "take",
-   "noun": "bag",
-   "segment": [
-    54.0,
-    58.0
-   ],
-   "start": 54.0,
-   "end": 58.0,
-   "score": 0.1008
-  },
-  {
-   "verb": "take",
-   "noun": "cupboard",
-   "segment": [
-    56.0,
-    61.0
-   ],
-   "start": 56.0,
-   "end": 61.0,
-   "score": 0.2069
+   "score": 0.0243
   },
   {
    "verb": "put",
-   "noun": "cupboard",
+   "noun": "plate",
    "segment": [
-    56.0,
-    61.0
-   ],
-   "start": 56.0,
-   "end": 61.0,
-   "score": 0.1486
-  },
-  {
-   "verb": "put",
-   "noun": "fridge",
-   "segment": [
-    56.0,
+    57.0,
     60.0
    ],
-   "start": 56.0,
+   "start": 57.0,
    "end": 60.0,
-   "score": 0.1348
-  },
-  {
-   "verb": "open",
-   "noun": "fridge",
-   "segment": [
-    56.0,
-    61.0
-   ],
-   "start": 56.0,
-   "end": 61.0,
-   "score": 0.1158
+   "score": 0.0174
   },
   {
    "verb": "move",
-   "noun": "fridge",
+   "noun": "bin",
    "segment": [
-    56.0,
+    57.0,
     60.0
    ],
-   "start": 56.0,
+   "start": 57.0,
    "end": 60.0,
-   "score": 0.1002
+   "score": 0.0173
   },
   {
    "verb": "take",
-   "noun": "drawer",
+   "noun": "pan:dust",
    "segment": [
-    56.0,
+    57.0,
+    61.0
+   ],
+   "start": 57.0,
+   "end": 61.0,
+   "score": 0.015
+  },
+  {
+   "verb": "remove",
+   "noun": "salmon",
+   "segment": [
+    57.0,
     60.0
    ],
-   "start": 56.0,
+   "start": 57.0,
    "end": 60.0,
-   "score": 0.0995
-  },
-  {
-   "verb": "close",
-   "noun": "fridge",
-   "segment": [
-    56.0,
-    60.0
-   ],
-   "start": 56.0,
-   "end": 60.0,
-   "score": 0.0966
-  },
-  {
-   "verb": "open",
-   "noun": "cupboard",
-   "segment": [
-    58.0,
-    61.0
-   ],
-   "start": 58.0,
-   "end": 61.0,
-   "score": 0.1847
-  },
-  {
-   "verb": "close",
-   "noun": "cupboard",
-   "segment": [
-    58.0,
-    61.0
-   ],
-   "start": 58.0,
-   "end": 61.0,
-   "score": 0.1546
-  },
-  {
-   "verb": "throw",
-   "noun": "cupboard",
-   "segment": [
-    58.0,
-    61.0
-   ],
-   "start": 58.0,
-   "end": 61.0,
-   "score": 0.1292
-  },
-  {
-   "verb": "move",
-   "noun": "cupboard",
-   "segment": [
-    58.0,
-    61.0
-   ],
-   "start": 58.0,
-   "end": 61.0,
-   "score": 0.1262
+   "score": 0.014
   },
   {
    "verb": "take",
-   "noun": "bag",
+   "noun": "plate",
    "segment": [
-    58.0,
-    61.0
+    57.0,
+    60.0
    ],
-   "start": 58.0,
-   "end": 61.0,
-   "score": 0.1195
+   "start": 57.0,
+   "end": 60.0,
+   "score": 0.012
   },
   {
-   "verb": "open",
+   "verb": "remove",
    "noun": "bag",
    "segment": [
-    58.0,
-    61.0
+    57.0,
+    60.0
    ],
-   "start": 58.0,
-   "end": 61.0,
-   "score": 0.104
+   "start": 57.0,
+   "end": 60.0,
+   "score": 0.0095
   },
   {
-   "verb": "dry",
-   "noun": "cupboard",
+   "verb": "transition",
+   "noun": "kitchen",
    "segment": [
     60.0,
     61.34
    ],
    "start": 60.0,
    "end": 61.34,
-   "score": 0.1336
+   "score": 0.1808
   },
   {
-   "verb": "insert",
-   "noun": "cupboard",
+   "verb": "put",
+   "noun": "bag",
    "segment": [
     60.0,
     61.34
    ],
    "start": 60.0,
    "end": 61.34,
-   "score": 0.1248
+   "score": 0.0983
+  },
+  {
+   "verb": "close",
+   "noun": "fridge",
+   "segment": [
+    60.0,
+    61.34
+   ],
+   "start": 60.0,
+   "end": 61.34,
+   "score": 0.0126
+  },
+  {
+   "verb": "put",
+   "noun": "pan:dust",
+   "segment": [
+    60.0,
+    61.34
+   ],
+   "start": 60.0,
+   "end": 61.34,
+   "score": 0.0124
+  },
+  {
+   "verb": "put",
+   "noun": "backpack",
+   "segment": [
+    60.0,
+    61.34
+   ],
+   "start": 60.0,
+   "end": 61.34,
+   "score": 0.0088
+  },
+  {
+   "verb": "put",
+   "noun": "clothes",
+   "segment": [
+    60.0,
+    61.34
+   ],
+   "start": 60.0,
+   "end": 61.34,
+   "score": 0.0079
+  },
+  {
+   "verb": "take",
+   "noun": "clothes",
+   "segment": [
+    60.0,
+    61.34
+   ],
+   "start": 60.0,
+   "end": 61.34,
+   "score": 0.0074
   }
  ],
  "highlights": [
   {
    "segment": [
-    23.0,
-    27.0
+    0.5,
+    4.5
    ],
-   "start": 23.0,
-   "end": 27.0,
-   "importance": 0.8107
+   "start": 0.5,
+   "end": 4.5,
+   "importance": 0.7948
   },
   {
    "segment": [
-    47.5,
-    51.5
+    45.5,
+    49.5
    ],
-   "start": 47.5,
-   "end": 51.5,
-   "importance": 0.7856
+   "start": 45.5,
+   "end": 49.5,
+   "importance": 0.7763
   }
  ]
 }

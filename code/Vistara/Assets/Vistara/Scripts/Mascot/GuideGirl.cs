@@ -158,7 +158,9 @@ namespace Vistara
                         var r = t.GetComponent<Renderer>(); var ms = r.sharedMaterials;
                         for (int i = 0; i < ms.Length; i++) ms[i] = Flat(ColorOf(ms[i] != null ? ms[i].name : ""), 0.8f);
                         r.sharedMaterials = ms; r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-                        t.SetParent(bones.TryGetValue(bn, out var bone) ? bone : outfitRoot.transform, true); outfitPieces.Add(t.gameObject);
+                        bones.TryGetValue(bn, out var bone);
+                        t.SetParent(bone != null ? bone : outfitRoot.transform, true); outfitPieces.Add(t.gameObject);
+
                     }
                     Destroy(inst);
                 }
@@ -243,7 +245,6 @@ namespace Vistara
         {
             BuildProps(); if (curProp != null) curProp.SetActive(false); curProp = null;
             if (name != null && props.TryGetValue(name, out var go)) { curProp = go; go.SetActive(true); }
-            Debug.Log("[Vee] prop=" + name + " found=" + (curProp != null) + " total=" + props.Count + " names=" + string.Join(",", props.Keys));
         }
         void TickProp()
         {
@@ -296,12 +297,11 @@ namespace Vistara
             if (journey == null) journey = FindFirstObjectByType<JourneyController>();
             string cat = AppState.Category;
             if (cat != shownCat) { bool first = shownCat == null; shownCat = cat ?? ""; rescanAt = Time.time + (first ? 0.6f : 1.5f); if (!string.IsNullOrEmpty(cat)) { SetOutfit(cat); OnCategory(cat); } else SetOutfit(null); }
-            if (AppState.HasResult != hadResult) { hadResult = AppState.HasResult; if (hadResult) { StaraChat("Come closer and watch what Vee does. She acts out exactly what happened in your video!"); gesture = "Wave"; gestureT = 0f; } else if (reen != null) reen.End(); }
+            if (AppState.HasResult != hadResult) { hadResult = AppState.HasResult; if (hadResult) { gesture = "Wave"; gestureT = 0f; } else if (reen != null) reen.End(); }
             if (cat == null || cat == "") { if (Time.time > nextIdleChat && !Speaking) { nextIdleChat = Time.time + 14f; Speak(MenuLines[Random.Range(0, MenuLines.Length)]); gesture = "Wave"; gestureT = 0f; } }
 
             { bool hudNow = journey != null && journey.Hud != null && journey.Hud.Visible; if (!hudNow && !forceStage && reen != null && reen.Active) reen.End(); }
             Place(cam); TickProp();
-            if (Time.time > dbgAt) { dbgAt = Time.time + 6f; var rb = model.GetComponentsInChildren<Renderer>(); Debug.Log("[Vee] pos=" + transform.position + " cam=" + cam.transform.position + " fwd=" + cam.transform.forward + " rend=" + rb.Length + " vis=" + rb.Count(r => r.isVisible) + " scale=" + model.lossyScale + " bones=" + bones.Count + " cat=" + shownCat); }
             if (bubble != null)
             {
                 bool on = Speaking; if (bubble.gameObject.activeSelf != on) bubble.gameObject.SetActive(on);
@@ -354,8 +354,8 @@ namespace Vistara
         Vector3 PickSpot(Camera cam, Vector3 fpos, bool preferRight)
         {
             Vector3 camF = cam.transform.position; Vector3 dir = fpos - camF; dir.y = 0; if (dir.sqrMagnitude < 0.01f) { dir = cam.transform.forward; dir.y = 0; } dir.Normalize();
-            Vector3 right = Vector3.Cross(Vector3.up, dir); Vector3 baseP = new Vector3(camF.x, floorY, camF.z);
-            float[] dists = closeUp ? new[] { 1.7f, 1.5f, 1.9f, 2.2f, 2.6f } : new[] { 2.3f, 2.0f, 2.7f, 1.8f, 3.1f, 3.6f }; float[] lat = closeUp ? new[] { 0.9f, 0.6f, 1.2f, 1.6f, 2.0f } : new[] { 1.35f, 1.0f, 1.7f, 2.1f, 2.6f };
+            Vector3 right = Vector3.Cross(Vector3.up, dir); Vector3 baseP = new Vector3(camF.x, floorY, camF.z); var sa = MascotAssistant.Instance; Transform stara = sa != null ? sa.transform : null;
+            float[] dists = closeUp ? new[] { 1.7f, 1.5f, 1.9f, 2.2f, 2.6f } : new[] { 2.3f, 2.0f, 2.7f, 1.8f, 3.1f, 3.6f }; float[] lat = closeUp ? new[] { 1.1f, 0.9f, 1.4f, 1.7f, 2.1f } : new[] { 1.35f, 1.0f, 1.7f, 2.1f, 2.6f };
             Vector3 best = baseP + dir * 2.3f + right * (preferRight ? 1.35f : -1.35f); float bestM = -1f;
             foreach (float sgn in new[] { preferRight ? 1f : -1f, preferRight ? -1f : 1f })
                 foreach (float d in dists) foreach (float l in lat)
@@ -363,6 +363,7 @@ namespace Vistara
                         Vector3 c = baseP + dir * d + right * (sgn * l);
                         Vector3 toC = c - baseP; toC.y = 0; Vector3 cf = cam.transform.forward; cf.y = 0;
                         if (Vector3.Angle(cf, toC) > 50f) continue;                                    // keep her where the user is looking
+                        if (stara != null) { Vector3 toS = stara.position - camF; toS.y = 0; if (Vector3.Angle(toC, toS) < 17f) continue; }          // never stand in front of / behind Stara
                         if (Free(c)) return c;
                         float m = Margin(c); if (m > bestM) { bestM = m; best = c; }
                     }
@@ -421,6 +422,30 @@ namespace Vistara
                 PointLimb(th, sh, td); PointLimb(sh, ft, sd);
             }
         }
+        static readonly string[] FingerNames = { "f_index", "f_middle", "f_ring", "f_pinky" };
+        /// <summary>Wraps the fingers (and thumb) of one hand around whatever it holds: every joint bends towards the grip direction.</summary>
+        void Grip(bool right, float amount, Vector3 towards)
+        {
+            string sd = right ? ".R" : ".L"; if (amount < 0.02f) return;
+            foreach (var fn in FingerNames)
+            {
+                float[] ang = { 55f, 65f, 45f };
+                for (int j = 1; j <= 3; j++)
+                {
+                    var b = B(fn + ".0" + j + sd); var nx = j < 3 ? B(fn + ".0" + (j + 1) + sd) : null; if (b == null) continue;
+                    Vector3 dir = nx != null ? nx.position - b.position : b.position - (B(fn + ".0" + (j - 1) + sd) != null ? B(fn + ".0" + (j - 1) + sd).position : b.position);
+                    if (dir.sqrMagnitude < 1e-8f) continue; Vector3 axis = Vector3.Cross(dir.normalized, towards.normalized); if (axis.sqrMagnitude < 1e-6f) continue;
+                    b.rotation = Quaternion.AngleAxis(ang[j - 1] * amount, axis.normalized) * b.rotation;
+                }
+            }
+            for (int j = 1; j <= 3; j++)
+            {
+                var b = B("thumb.0" + j + sd); var nx = j < 3 ? B("thumb.0" + (j + 1) + sd) : null; if (b == null || nx == null) continue;
+                Vector3 dir = nx.position - b.position; Vector3 axis = Vector3.Cross(dir.normalized, towards.normalized); if (axis.sqrMagnitude < 1e-6f) continue;
+                b.rotation = Quaternion.AngleAxis(32f * amount, axis.normalized) * b.rotation;
+            }
+        }
+
         void TwoBone(Transform u, Transform f, Transform h, Vector3 target, Vector3 pole)
         {
             if (u == null || f == null || h == null) return;
@@ -453,7 +478,7 @@ namespace Vistara
             foreach (var side in new[] { 0, 1 })
             {
                 Transform u = side == 0 ? armUL : armUR, f = side == 0 ? armFL : armFR, h = side == 0 ? handL : handR; if (u == null) continue;
-                Vector3 o = Out(u); Vector3 ud = (o * 0.28f - up).normalized, fd = (o * 0.12f - up + fw * 0.18f).normalized;      // relaxed, hanging
+                Vector3 o = Out(u); Vector3 ud = (o * 0.42f - up * 0.9f + fw * 0.12f).normalized, fd = (o * 0.1f - up * 0.35f + fw * 0.85f).normalized;      // relaxed: forearms forward, hands in front of the body where gloves, bands and held items show      // relaxed, hanging
                 bool right = (side == 1); float ph = right ? 0f : Mathf.PI;
                 if (reen != null && reen.Active && (right ? reen.hasR : reen.hasL)) { TwoBone(u, f, h, right ? reen.tR : reen.tL, (o * 0.6f - up - fw * 0.3f).normalized); continue; }
                 if (walkingNow) { ud = (o * 0.2f - up + fw * Mathf.Sin(walkPh + ph) * 0.5f).normalized; fd = (o * 0.1f - up + fw * (0.2f + Mathf.Sin(walkPh + ph) * 0.35f)).normalized; }
@@ -477,6 +502,11 @@ namespace Vistara
             {
                 float sw = walkingNow ? Mathf.Sin(walkPh) * 28f : (g == "Ride" || g == "Swim" ? Mathf.Sin(t * 5f) * 18f : 0f);
                 thighL.rotation = Quaternion.AngleAxis(sw, transform.right) * thighL.rotation; thighR.rotation = Quaternion.AngleAxis(-sw, transform.right) * thighR.rotation;
+            }
+            if (reen != null && reen.Active)       // hands that work on something close around it
+            {
+                Vector3 hold = transform.forward * 0.6f - Vector3.up * 0.5f;
+                if (reen.hasR) Grip(true, reen.CarryingItem ? 1f : 0.55f, hold); if (reen.hasL) Grip(false, 0.55f, hold);
             }
             if (reen != null) reen.AfterPose();
             if (model != null) model.localPosition = new Vector3(0, walkingNow ? Mathf.Abs(Mathf.Sin(walkPh)) * 0.02f : (g == "Climb" || g == "Fly" ? 0.02f + Mathf.Sin(t * 3f) * 0.015f : 0f), 0);

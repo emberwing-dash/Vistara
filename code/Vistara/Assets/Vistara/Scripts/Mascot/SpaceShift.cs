@@ -102,7 +102,13 @@ namespace Vistara
         void Gather()
         {
             var env = CategoryEnvironment.Instance; if (env != null) foreach (var t in env.WarpTargets()) if (!warped.ContainsKey(t) && Eligible(t)) Add(t);
-            var sc = UnityEngine.SceneManagement.SceneManager.GetActiveScene(); if (sc.IsValid()) foreach (var go in sc.GetRootGameObjects()) { var t = go.transform; if (!warped.ContainsKey(t) && Eligible(t)) Add(t); }
+            var sc = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (sc.IsValid()) foreach (var go in sc.GetRootGameObjects())
+                {
+                    var t = go.transform; if (warped.ContainsKey(t)) continue;
+                    if (Eligible(t)) { Add(t); continue; }
+                    if (t.name == "Environment" || t.name == "Dust") for (int i = 0; i < t.childCount; i++) { var c = t.GetChild(i); if (!warped.ContainsKey(c) && c.GetComponentInChildren<Collider>(true) == null && c.GetComponentInChildren<Renderer>(true) != null) Add(c); }       // the neon room: its parts fly outward too (the floor collider stays so you cannot fall)
+                }
         }
         void Add(Transform t)
         {
@@ -144,15 +150,15 @@ namespace Vistara
         /// <summary>The main-menu "Start": exactly the same spatial shift as between categories (Cosmic Warrior's glitch shift), with the next scene loaded at the peak.</summary>
         public void Dive(string scene) { if (!Busy) StartCoroutine(Run(() => UnityEngine.SceneManagement.SceneManager.LoadScene(scene))); }
 
-        public IEnumerator Run(Action swap, bool outward = false, float up = 0.55f, float hold = 0.25f, float down = 0.9f)
+        public IEnumerator Run(Action swap, bool outward = false, float up = 0.32f, float hold = 0.18f, float down = 0.6f)
         {
             if (outward) { lensMax = -0.6f; scaleDrop = 0.16f; bloomGain = 3.2f; vignetteMax = 0.55f; chromaGain = 1.5f; fovGain = 28f; baseFov = Camera.main != null ? Camera.main.fieldOfView : 60f; }
-            else { lensMax = -0.32f; scaleDrop = 0.08f; bloomGain = 2.6f; vignetteMax = 0.45f; chromaGain = 1.2f; fovGain = 0f; }
+            else { lensMax = -0.55f; scaleDrop = 0.12f; bloomGain = 3.0f; vignetteMax = 0.3f; chromaGain = 1.2f; fovGain = 0f; }       // Cosmic Warrior's PostFX values
             if (Camera.main != null) { var data = Camera.main.GetUniversalAdditionalCameraData(); if (data != null) data.renderPostProcessing = true; }
-            Busy = true; PlaySfx(); float t = 0f;
+            Busy = true; PlaySfx(); float t = 0f; Debug.Log("[Shift] start " + Time.unscaledTime.ToString("0.00") + " targets=" + warped.Count);
             while (t < up) { t += Time.unscaledDeltaTime; SetAmount(Mathf.SmoothStep(0, 1, t / up)); yield return null; }
             SetAmount(1f);
-            swap?.Invoke();
+            Debug.Log("[Shift] peak " + Time.unscaledTime.ToString("0.00") + " targets=" + warped.Count + " lens=" + lens.intensity.value.ToString("0.00")); swap?.Invoke();
             if (outward) { var nc = Camera.main; if (nc != null) { var d2 = nc.GetUniversalAdditionalCameraData(); if (d2 != null) d2.renderPostProcessing = true; baseFov = nc.fieldOfView; } }
             yield return new WaitForSecondsRealtime(hold);
             t = 0f;

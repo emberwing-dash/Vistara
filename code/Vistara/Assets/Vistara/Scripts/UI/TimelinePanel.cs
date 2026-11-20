@@ -88,7 +88,7 @@ namespace Vistara
 
             // importance bars (original footage representation)
             var c = a.curve;
-            if (c != null && c.t != null && c.t.Length > 1)
+            if (false && c != null && c.t != null && c.t.Length > 1)          // the importance chart is no longer shown (the app shows real frames instead)
             {
                 int n = c.t.Length;
                 float bw = SW / n;
