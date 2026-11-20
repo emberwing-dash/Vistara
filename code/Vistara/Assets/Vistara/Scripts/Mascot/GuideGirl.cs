@@ -18,6 +18,7 @@ namespace Vistara
         class Look { public string tee, sleeve, line; }
         static readonly Dictionary<string, Look> Looks = new Dictionary<string, Look>
         {
+            { "Menu",         new Look { tee = "#1f3d60", sleeve = "#0a0c16", line = "" } },
             { "Kitchen",      new Look { tee = "#f6f3ee", sleeve = "#4fc3b0", line = "All set. Let's cook!" } },
             { "Bike",         new Look { tee = "#2d7ff9", sleeve = "#f4f1ea", line = "Let's go for a ride!" } },
             { "BikePolo",     new Look { tee = "#e5384f", sleeve = "#f4f1ea", line = "Let's play bike polo!" } },
@@ -50,8 +51,8 @@ namespace Vistara
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void Boot()
         {
-            SceneManager.sceneLoaded += (s, m) => { if (s.name == "Workspace" || s.name == "Journey") Spawn(); };
-            var n = SceneManager.GetActiveScene().name; if (n == "Workspace" || n == "Journey") Spawn();
+            SceneManager.sceneLoaded += (s, m) => { if (s.name == "Workspace" || s.name == "Journey" || s.name == "MainMenu") Spawn(); };
+            var n = SceneManager.GetActiveScene().name; if (n == "Workspace" || n == "Journey" || n == "MainMenu") Spawn();
         }
         static void Spawn() { if (Instance == null) new GameObject("VeeGuide").AddComponent<GuideGirl>(); }
         void Awake() { Instance = this; }
@@ -74,7 +75,7 @@ namespace Vistara
             thighL = B("thigh.L"); thighR = B("thigh.R"); shinL = B("shin.L"); shinR = B("shin.R"); footL = B("foot.L"); footR = B("foot.R"); head = B("Head"); spine = B("spine.001"); spine2 = B("spine.003"); tailL = B("Tail.L"); tailR = B("Tail.R");
             foreach (var b in new[] { armUL, armUR, armFL, armFR, thighL, thighR, shinL, shinR, footL, footR, head, spine, spine2, tailL, tailR }) if (b != null) rest[b] = b.localRotation;
             foreach (var n in bones.Keys.Where(k => k.StartsWith("Tail.") || k.StartsWith("Hair ")).ToList()) rest[bones[n]] = bones[n].localRotation;
-            BuildMaterials();
+            BuildMaterials(); SetOutfit(null);
             BuildBubble(); reen = gameObject.AddComponent<Reenactor>();
             blinkAt = Time.time + 2f; nextIdleChat = Time.time + 1.5f; rescanAt = Time.time + 0.6f;
             if (!bones.ContainsKey("upper_arm.L")) Debug.LogWarning("[Vistara] girl rig bones not found: " + string.Join(",", bones.Keys.Take(12)));
@@ -137,13 +138,16 @@ namespace Vistara
         }
 
         // ---------------------------------------------------------------- outfits
+        const bool UseMenuHoodie = false;          // flip to true once the cyberpunk hoodie (Outfit_Menu) is approved
         void SetOutfit(string cat)
         {
             if (outfitRoot != null) Destroy(outfitRoot); outfitRoot = null;
             foreach (var pc in outfitPieces) if (pc != null) Destroy(pc); outfitPieces.Clear();
             foreach (var kv in rest) kv.Key.localRotation = kv.Value;            // rest pose, so the pieces (authored in rest pose) land exactly on their bones
-            bool covered = false;
-            if (!string.IsNullOrEmpty(cat) && Looks.TryGetValue(cat, out var look))
+            bool covered = false; bool isMenu = string.IsNullOrEmpty(cat);
+            if (isMenu && !UseMenuHoodie) { if (teeMat != null) teeMat.SetFloat("_Recolor", 0f); if (starPin != null) starPin.SetActive(true); return; }          // original outfit until the hoodie design is approved
+            if (isMenu) cat = "Menu";          // main menu: the cyberpunk zip hoodie
+            if (Looks.TryGetValue(cat, out var look))
             {
                 if (teeMat != null) { teeMat.SetFloat("_Recolor", 1f); teeMat.SetColor("_TeeColor", C(look.tee)); teeMat.SetColor("_SleeveColor", C(look.sleeve)); }
                 var prefab = Resources.Load<GameObject>("Girl/Outfits/Outfit_" + cat);
@@ -165,7 +169,6 @@ namespace Vistara
                     Destroy(inst);
                 }
             }
-            else if (teeMat != null) teeMat.SetFloat("_Recolor", 0f);
             if (starPin != null) starPin.SetActive(!covered);
         }
 
@@ -375,7 +378,7 @@ namespace Vistara
             bool hudOn = journey != null && journey.Hud != null && journey.Hud.Visible && journey.Hud.Root != null;
             bool stage = !hudOn && journey != null && journey.Stage != null;
             int mode = hudOn ? 1 : stage ? 0 : 2;
-            Vector3 fpos = hudOn ? journey.Hud.Root.position : stage ? journey.transform.position : cam.transform.position + cam.transform.forward * 1.2f;
+            Vector3 fpos = hudOn ? journey.Hud.Root.position : stage ? journey.transform.position : (MainMenuController.Instance != null ? MainMenuController.Instance.transform.position : cam.transform.position + cam.transform.forward * 1.2f);
             bool snap = false;
             if (rescanAt > 0f && Time.time >= rescanAt) { rescanAt = -1f; ScanObstacles(); lastMode = -1; snap = true; }          // the world was swapped under the shift: re-pick her spot and put her there
             if (mode != lastMode || (fpos - lastFramePos).sqrMagnitude > 0.04f || !placed)

@@ -83,6 +83,12 @@ namespace Vistara.EditorTools
             catch (Exception e) { Log("mock failed: " + e.Message); return null; }
         }
 
+        static void HeroCam(float back)
+        {
+            var m = Camera.main; if (m == null) return; var go = new GameObject("HeroCam"); var c = go.AddComponent<Camera>(); c.depth = 50; c.fieldOfView = 48; c.clearFlags = CameraClearFlags.Skybox;
+            Vector3 f = m.transform.forward; f.y = 0; f.Normalize(); go.transform.position = m.transform.position - f * back + Vector3.up * 0.1f; go.transform.rotation = Quaternion.LookRotation(f, Vector3.up) * Quaternion.Euler(8, 0, 0);
+        }
+
         static string[] sports; static int si; static int wi;
         static string[] SportAct(string c)
         {
@@ -98,10 +104,14 @@ namespace Vistara.EditorTools
                 if (stage == 0)
                 {
                     if (!Directory.Exists("Assets/Scenes") || !File.Exists("Assets/Scenes/Journey.unity")) { Log("building scenes"); VistaraSceneBuilder.BuildAll(); }
+                    if (Arg("-previewMenu") != null) { EditorSceneManager.OpenScene("Assets/Scenes/MainMenu.unity"); stage = 60; startedAt = EditorApplication.timeSinceStartup; EditorApplication.isPlaying = true; return; }
                     EditorSceneManager.OpenScene("Assets/Scenes/Journey.unity"); stage = 1; startedAt = EditorApplication.timeSinceStartup; EditorApplication.isPlaying = true; return;
                 }
                 if (!EditorApplication.isPlaying) return;
                 if (EditorApplication.timeSinceStartup < until) return;
+                if (stage == 60) { if (GameObject.Find("HeroCam") == null && EditorApplication.timeSinceStartup - startedAt > 20) HeroCam(float.Parse(Arg("-previewMenu"))); if (EditorApplication.timeSinceStartup - startedAt > 31) { Shot("00_menu_a"); until = EditorApplication.timeSinceStartup + 4; stage = 61; } return; }
+                if (stage == 61) { Shot("00_menu_b"); until = EditorApplication.timeSinceStartup + 3; stage = 62; return; }
+                if (stage == 62) { Finish(0); return; }
                 var j = UnityEngine.Object.FindFirstObjectByType<JourneyController>();
                 if (j == null) { if (EditorApplication.timeSinceStartup - startedAt > 120) { Log("no JourneyController"); Finish(2); } return; }
                 switch (stage)

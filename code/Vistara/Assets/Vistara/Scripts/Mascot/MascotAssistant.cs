@@ -115,7 +115,7 @@ namespace Vistara
             SceneManager.sceneLoaded += (s, m) => { if (IsAppScene(s.name)) Spawn(); };
             if (IsAppScene(SceneManager.GetActiveScene().name)) Spawn();
         }
-        static bool IsAppScene(string n) { return n == "Workspace" || n == "Journey"; }
+        static bool IsAppScene(string n) { return n == "Workspace" || n == "Journey" || n == "MainMenu"; }
         public static void Spawn() { if (Instance == null) new GameObject("Stara").AddComponent<MascotAssistant>(); }
 
         void Awake() { Instance = this; }

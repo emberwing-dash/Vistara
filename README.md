@@ -1,5 +1,29 @@
-# Vistara - Action-Aware Video Summarization (Samsung R&D PRISM 2026, Track 04)
+# 🌟 Vistara - Action-Aware Video Summarization (Samsung R&D PRISM 2026, Track 04)
 
+<p align="center"><img src="docs/img/hero.jpg" alt="Stara, Vee and the video panel" width="85%"></p>
+
+![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
+![Unity](https://img.shields.io/badge/Unity-6000.2.7f2-000000?logo=unity&logoColor=white)
+![Model](https://img.shields.io/badge/Model-AVION%20ViT--L%2F14%20%2B%20CLIP-FF6F00)
+![Videos](https://img.shields.io/badge/Outputs-187%20valid%20JSON-2EA44F)
+![VR](https://img.shields.io/badge/VR-Quest%203%20%2F%20OpenXR-7B3FE4)
+
+## 👀 Previews
+Meet **Vee** (the guide) and **Stara** (the star mascot, here with the video panel). Each of the 15 categories has its own world and its own outfit for Vee, and she re-enacts what the video highlighted.
+
+| 🚲 Bike | 🏑 Bike Polo | 🥊 Boxing | 🐎 Horse | 🪂 Jumping |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src='docs/img/cat_Bike.jpg' width='240'> | <img src='docs/img/cat_BikePolo.jpg' width='240'> | <img src='docs/img/cat_Boxing.jpg' width='240'> | <img src='docs/img/cat_Horse.jpg' width='240'> | <img src='docs/img/cat_Jumping.jpg' width='240'> |
+
+| 🍳 Cooking | 🛹 Longboarding | 🏍️ Motor | 🤸 Parkour | ✈️ Plane |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src='docs/img/cat_Kitchen.jpg' width='240'> | <img src='docs/img/cat_Longboarding.jpg' width='240'> | <img src='docs/img/cat_Motor.jpg' width='240'> | <img src='docs/img/cat_Parkour.jpg' width='240'> | <img src='docs/img/cat_Plane.jpg' width='240'> |
+
+| 🧗 Rock Climbing | 🤿 Scuba | ⛸️ Skate | ⛷️ Ski | 🏄 Surfing |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src='docs/img/cat_RockClimbing.jpg' width='240'> | <img src='docs/img/cat_Scuba.jpg' width='240'> | <img src='docs/img/cat_Skate.jpg' width='240'> | <img src='docs/img/cat_Ski.jpg' width='240'> | <img src='docs/img/cat_Surfing.jpg' width='240'> |
+
+## 🚀 Quick start
 `TEAM_ID = vistara`. One run command, one JSON per video, the same format for every video:
 
 ```bash
@@ -9,7 +33,7 @@
 Vistara watches a 2-10 minute first-person video, recognises fine-grained verb-noun actions, scores how important each moment is, labels the video,
 and selects <= 15 % highlights (each >= 4.0 s) from the original footage. A Unity VR app shows the result and re-enacts it with a 3D guide.
 
-## Repository layout
+## 📁 Repository layout
 ```text
 run.sh                 <video.mp4> -> <out.json>
 requirements.txt       Python dependencies
@@ -26,7 +50,7 @@ code/
   assets/              Blender sources (.blend) and exported FBX: category worlds + props, the guide character and her outfits, the star mascot
 ```
 
-## Setup
+## ⚙️ Setup
 Python 3.11+ (developed on 3.14 / Windows 11 / RTX 4060 Laptop). A GPU is recommended; CPU works, slower.
 ```bash
 git lfs install && git lfs pull                 # the CLIP backbone and the AVION weights in weights/
@@ -38,7 +62,7 @@ python code/backend/validate.py --dir outputs --manifest code/backend/data/manif
 ```
 `TEAM_ID` (env, default `vistara`) sets `team_id`. ffmpeg comes from PATH or the bundled `imageio-ffmpeg`.
 
-## Output format
+## 🧾 Output format
 ```json
 { "team_id": "vistara", "video_id": "P01_11", "duration_sec": 512.3,
   "label": {"name": "cooking", "score": 0.93},
@@ -48,7 +72,7 @@ python code/backend/validate.py --dir outputs --manifest code/backend/data/manif
 `label` is `cooking` for EPIC videos and one of the 14 FPVSum categories (or `other`) otherwise. Highlights are chronological, non-overlapping, each >= 4.0 s,
 and within 15 % of the duration (videos shorter than ~27 s keep the >= 4 s rule).
 
-## Model
+## 🧠 Model
 | Stage | Method |
 |---|---|
 | Decode | 2 fps sampling; Farneback optical flow with dominant-motion subtraction -> hand / object residual motion |
@@ -61,7 +85,7 @@ and within 15 % of the duration (videos shorter than ~27 s keep the >= 4 s rule)
 AVION on 816 held-out segments of 25 EPIC validation videos: verb top-1 75.7 %, noun 64.8 %, action 53.4 % (the CLIP-head fallback: verb ~20 %, noun ~29 %).
 Nothing uses video IDs or ground truth at inference; no manifest video was used for training. The AVION weights are a third-party public checkpoint (not trained by us); our own training is the residual head, priors and label prompts (`code/backend/training/`).
 
-## Measured results (local, 185 videos)
+## 📊 Measured results (local, 185 videos)
 Our own approximation of the metrics, computed against the public ground truth with `code/backend/evaluation/evaluate_heldout.py` (not the official scorer):
 
 | Set | Videos | Result |
@@ -70,16 +94,16 @@ Our own approximation of the metrics, computed against the public ground truth w
 | FPVSum | 47 | label accuracy 0.915, highlight F1 0.232 |
 | All | 185 | schema valid 100 %, within the 15 % budget 98.4 % (mean 14.0 %) |
 
-## Weights (`weights/`)
+## 🏋️ Weights (`weights/`)
 `head.pt`, `pair_prior.npz` (small, plain git); `avion_vitl_ek100_fp16.pt` (~590 MB) and the CLIP ViT-L/14 backbone (~1.6 GB) are stored with Git LFS (`.gitattributes`).
 Regenerate the AVION file from the public checkpoint with `code/backend/training/export_avion.py`.
 
-## Outputs status
+## ✅ Outputs status
 `outputs/` holds 187 valid files (`validate.py`: 0 invalid). **185 are produced by the full model (AVION + CLIP); 2 are placeholders** (label `other`, no actions, evenly spaced 4 s highlights)
 for two Scuba videos that could not be obtained; they are listed in `code/backend/outputs_degraded.txt`.
 Regenerate with `python code/backend/make_outputs.py --roots <EPIC dir> <FPVSum dir> --redo`.
 
-## VR app (`code/Vistara`)
+## 🥽 VR app (`code/Vistara`)
 Open the folder in Unity 6000.2.7f2 (run **Vistara > Build Scenes** once), press Play (XR Interaction Simulator or Quest 3). The app starts the engine from `code/backend` with the weights in `weights/`
 (Python from `.venv` at the repo root; set `VISTARA_PYTHON` to use another interpreter).
 
@@ -93,13 +117,13 @@ Open the folder in Unity 6000.2.7f2 (run **Vistara > Build Scenes** once), press
 
 Not verified on a physical headset. Details: `code/Vistara/README.md`.
 
-## Assets (`code/assets`)
+## 🎨 Assets (`code/assets`)
 The 3D content of the VR app, as Blender sources plus the exported FBX files Unity imports:
 - **Vee** - the guide character (`character/`): model, textures and one outfit per category.
 - **Stara** - the star mascot (`VStar.blend`).
 - **Category worlds** (`categories/<Category>/`) - the 15 environments with all their props, each as a `.blend` and as FBX.
 - `_build/` - the Blender scripts that generate the worlds and outfits.
 
-## Credits
+## 🙏 Credits
 Samsung R&D Institute India PRISM Hackathon 2026; [EPIC-KITCHENS-100](https://epic-kitchens.github.io/2020) (University of Bristol, non-commercial licence); FPVSum (Ho et al., ECCV 2018);
 [AVION](https://github.com/zhaoyue-zephyrus/avion) (MIT); OpenAI CLIP via open_clip / timm.
