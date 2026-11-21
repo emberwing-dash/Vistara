@@ -25,7 +25,7 @@ CLASSES_PATH = PKG_DIR / "supported_classes.json"
 
 @dataclass
 class Config:
-    team_id: str = os.environ.get("TEAM_ID", "vistara")
+    team_id: str = os.environ.get("TEAM_ID", "team_protoxr")
 
     # --- sampling ---
     sample_fps: float = 2.0          # CLIP + importance sampling rate

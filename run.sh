@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Usage: ./run.sh <video.mp4> <out.json>
-# Env:   TEAM_ID (default "vistara"), VISTARA_WEIGHTS (default ./weights)
+# Env:   TEAM_ID (default "team_protoxr"), VISTARA_WEIGHTS (default ./weights)
 set -euo pipefail
 if [ "$#" -lt 2 ]; then echo "usage: $0 <video.mp4> <out.json>" >&2; exit 2; fi
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

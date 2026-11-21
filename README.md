@@ -5,7 +5,7 @@
 **What it does:** you give it a first-person video (2-10 minutes). It finds the actions (like "open fridge"), picks the best moments (at most 15 % of the video, each at least 4 s) and writes one JSON file.
 A VR app shows the result, and a 3D guide called **Vee** acts out what happens in the video.
 
-`TEAM_ID = vistara`
+`TEAM_ID = team_protoxr`
 
 ---
 
@@ -63,7 +63,7 @@ python validate.py --dir outputs/        # expect: 187 files, 0 invalid
 
 ## 🧾 Output format
 ```json
-{ "team_id": "vistara", "video_id": "P01_11", "duration_sec": 512.3,
+{ "team_id": "team_protoxr", "video_id": "P01_11", "duration_sec": 512.3,
   "label": {"name": "cooking", "score": 0.93},
   "actions":    [{"segment": [12.4, 18.2], "start": 12.4, "end": 18.2, "verb": "open", "noun": "fridge", "score": 0.88}],
   "highlights": [{"segment": [11.0, 19.5], "start": 11.0, "end": 19.5, "importance": 0.93}] }
