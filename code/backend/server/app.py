@@ -30,6 +30,13 @@ JOBS_DIR = HERE.parent / "data" / "jobs"
 JOBS_DIR.mkdir(parents=True, exist_ok=True)
 
 app = FastAPI(title="Vistara Engine", version="1.0.0")
+
+
+@app.on_event("startup")
+def _warm_up():
+    """Load the models while the app is still showing its menus, so the first analysis starts at once."""
+    import threading
+    threading.Thread(target=lambda: pipeline(), daemon=True).start()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 from eval_api import router as _eval_router  # noqa: E402

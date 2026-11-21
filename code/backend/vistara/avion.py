@@ -9,6 +9,8 @@ import csv, logging, os
 from pathlib import Path
 import numpy as np
 
+from . import gpu_yield
+
 log = logging.getLogger("vistara.avion")
 MEAN = np.array([108.3272985, 116.7460125, 104.09373615000001], np.float32)
 STD = np.array([68.5005327, 66.6321579, 70.32316305], np.float32)
@@ -101,15 +103,29 @@ class AvionRecognizer:
                 cfile = Path(cache_dir) / f"{Path(video_path).stem}_{key}.npy"
                 if cfile.exists():
                     return np.load(cfile).astype(np.float32)
+                for alt in sorted(Path(cache_dir).glob(f"{Path(video_path).stem}_*.npy")):          # the same video reached through another path spelling (slashes, drive): same windows = same result
+                    try:
+                        arr = np.load(alt, mmap_mode="r")
+                        if arr.shape[0] == len(windows):
+                            return np.asarray(arr).astype(np.float32)
+                    except Exception:
+                        continue
             except Exception:
                 cfile = None
         cap = cv2.VideoCapture(video_path); fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
         out = np.zeros((len(windows), self.n_actions), np.float32)
         import queue, threading
+        batch = gpu_yield.batch(batch, "VISTARA_AVION_BATCH")
+        if gpu_yield.YIELD_MS > 0:
+            try:
+                import cv2; cv2.setNumThreads(2)          # the video decoder must not take every core while the headset / editor is rendering
+            except Exception:
+                pass
         q: "queue.Queue" = queue.Queue(maxsize=3 * batch)          # a reader thread decodes the next windows while the GPU works on the current batch
         def _produce():
             try:
                 for c in self.clips_sequential(cap, fps, windows):
+                    gpu_yield.pause()          # the reader also leaves gaps (CPU)
                     q.put(c)
             finally:
                 q.put(None)
@@ -129,7 +145,7 @@ class AvionRecognizer:
                 if isinstance(emb, list):
                     emb = emb[0]
                 out[done:done + len(clips)] = torch.softmax(self.fc(emb).float(), -1).cpu().numpy()
-            done += len(clips)
+            done += len(clips); gpu_yield.pause()
             if progress:
                 progress(min(1.0, done / len(windows)))
         cap.release()

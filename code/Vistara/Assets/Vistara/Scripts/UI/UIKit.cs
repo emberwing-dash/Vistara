@@ -38,6 +38,9 @@ namespace Vistara
         /// <summary>World size of one canvas pixel. Journey / menu use a small value (UI close to the head); the old Workspace keeps 0.001.</summary>
         public static float CanvasScale = 0.001f;
 
+        /// <summary>Panels are sized and placed for CONTROLLER pointing (about 0.8 m away, about 0.7 m wide), not for finger touch at arm's length.</summary>
+        public const float Reach = 1.9f;
+
         public static Canvas WorldCanvas(string name, float w, float h, Transform parent = null, float scale = -1f)
         {
             if (scale <= 0f) scale = CanvasScale;

@@ -28,7 +28,7 @@ namespace Vistara
             last = cam.transform.position;
             bool tracked = cam.transform.position.y > 0.6f;       // HMD pose is valid once it reports a head height
             if (tracked && stable > 0.3f && t > 0.3f) { Recenter(); trackedPlaced = true; }   // ideal: valid head pose
-            else if (!Placed && t > 12f) Recenter();                                              // fallback; re-placed once tracking becomes valid
+            else if (!Placed && t > 1.5f) Recenter();                                              // fallback; re-placed once tracking becomes valid
         }
 
         public void Recenter()
@@ -40,6 +40,11 @@ namespace Vistara
             {
                 transform.position = cam.transform.position + f * distance + Vector3.up * heightOffset;
                 transform.rotation = Quaternion.LookRotation(f, Vector3.up) * Quaternion.Euler(tilt, 0f, 0f);
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "MainMenu")          // the main menu opens facing down the neon corridor
+                {
+                    var menuEnv = GameObject.Find("Environment");
+                    if (menuEnv) { menuEnv.transform.position = new Vector3(cam.transform.position.x, 0f, cam.transform.position.z); menuEnv.transform.rotation = Quaternion.LookRotation(f, Vector3.up); }
+                }
                 Placed = true;
                 Debug.Log("[Vistara] UI placed near the body at " + transform.position + " (" + distance.ToString("0.00") + " m ahead, " + (-heightOffset).ToString("0.00") + " m below the eyes)");
                 return;

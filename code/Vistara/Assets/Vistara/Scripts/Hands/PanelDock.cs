@@ -27,8 +27,8 @@ namespace Vistara
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void Boot()
         {
-            SceneManager.sceneLoaded += (s, m) => { if (s.name == "Journey" || s.name == "Workspace") Spawn(); };
-            var n = SceneManager.GetActiveScene().name; if (n == "Journey" || n == "Workspace") Spawn();
+            SceneManager.sceneLoaded += (s, m) => { if (s.name == "Journey" || s.name == "Workspace" || s.name == "MainMenu") Spawn(); };
+            var n = SceneManager.GetActiveScene().name; if (n == "Journey" || n == "Workspace" || n == "MainMenu") Spawn();
         }
         static void Spawn() { if (FindFirstObjectByType<PanelDock>() == null) new GameObject("PanelDock").AddComponent<PanelDock>(); }
 
@@ -84,8 +84,8 @@ namespace Vistara
         /// <summary>The menu panel (everything but the results viewer, which follows itself): keep it in front of you as you walk and turn.</summary>
         void FollowStage(Camera cam)
         {
-            if (!Follow || journey == null) return; bool hud = journey.Hud != null && journey.Hud.Visible; if (hud) { haveOffset = false; return; }
-            var root = journey.transform; Vector3 f = cam.transform.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) return; f.Normalize(); Quaternion yaw = Quaternion.LookRotation(f, Vector3.up);
+            Transform root = journey != null ? journey.transform : (MainMenuController.Instance != null ? MainMenuController.Instance.transform : null);          // the journey panel, or the start menu
+            if (!Follow || root == null) return; bool hud = journey != null && journey.Hud != null && journey.Hud.Visible; if (hud) { haveOffset = false; return; } Vector3 f = cam.transform.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) return; f.Normalize(); Quaternion yaw = Quaternion.LookRotation(f, Vector3.up);
             if (!haveOffset) { offsetLocal = Quaternion.Inverse(yaw) * (root.position - cam.transform.position); haveOffset = true; lastSet = root.position; return; }
             if ((root.position - lastSet).sqrMagnitude > 0.0001f) { offsetLocal = Quaternion.Inverse(yaw) * (root.position - cam.transform.position); lastSet = root.position; pauseUntil = Time.unscaledTime + 1.2f; return; }     // you moved it by hand: keep it there
             if (Time.unscaledTime < pauseUntil) return;

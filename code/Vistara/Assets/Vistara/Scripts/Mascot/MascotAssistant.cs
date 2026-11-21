@@ -364,6 +364,7 @@ namespace Vistara
             TickProp();
             if (hudOn) FollowFrame(journey.Hud.Root, 1040f * 0.00026f, 640f * 0.00026f, +1f, 40f);          // right of the video, turned a little towards it (never her back)
             else if (journey != null && journey.Stage != null) FollowFrame(journey.transform, JourneyController.SW * 0.00022f, JourneyController.SH * 0.00022f, -1f, inspecting ? -40f : 0f);
+            else if (MainMenuController.Instance != null) FollowFrame(MainMenuController.Instance.transform, MainMenuController.W * 0.00022f, MainMenuController.H * 0.00022f, -1f, 0f);          // start menu: she stands on the panel's left edge, exactly as in the journey
             else           // no journey panel (workspace scene): stand near the user and billboard the dialogue
             {
                 if (!placed) { Vector3 f = cam.transform.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) f = Vector3.forward; f.Normalize(); basePos = cam.transform.position + f * 0.85f + Vector3.Cross(Vector3.up, f) * 0.55f + Vector3.down * 0.62f; transform.position = basePos; placed = true; }

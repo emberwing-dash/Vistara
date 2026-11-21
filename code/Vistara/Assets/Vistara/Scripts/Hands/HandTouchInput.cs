@@ -22,6 +22,7 @@ namespace Vistara
         public struct Finger { public bool tracked; public Vector3 tip, thumb; }
         public static readonly List<Canvas> Canvases = new List<Canvas>();
         public static Func<int, Finger> TestFeed;
+        public static Func<int, Finger> ControllerFeed;          // a controller ray + trigger, delivered as a fingertip on the panel (see ControllerPointer)
         public static HandTouchInput Instance { get; private set; }
         public bool HandsTracked { get; private set; }
         public string Status { get; private set; } = "no hand subsystem";
@@ -51,6 +52,7 @@ namespace Vistara
         Finger GetFinger(int i)
         {
             if (TestFeed != null) return TestFeed(i);
+            if (ControllerFeed != null) { var cf = ControllerFeed(i); if (cf.tracked) return cf; }
             if (sub == null || !sub.running)
             {
                 if (Time.unscaledTime < nextFind) return default;
@@ -82,8 +84,8 @@ namespace Vistara
         void DisableXriUi()
         {
             xriUiOff = true;
-            foreach (var p in FindObjectsByType<XRPokeInteractor>(FindObjectsInactive.Include, FindObjectsSortMode.None)) p.enableUIInteraction = false;
-            foreach (var n in FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Include, FindObjectsSortMode.None)) n.enableUIInteraction = false;
+            foreach (var p in FindObjectsByType<XRPokeInteractor>(FindObjectsInactive.Include, FindObjectsSortMode.None)) if (!ControllerPointer.IsController(p)) p.enableUIInteraction = false;
+            foreach (var n in FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Include, FindObjectsSortMode.None)) if (!ControllerPointer.IsController(n)) n.enableUIInteraction = false;
             Debug.Log("[Vistara] direct hand touch / pinch input active (toolkit UI pointers off)");
         }
 

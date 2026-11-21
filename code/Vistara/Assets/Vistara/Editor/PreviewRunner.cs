@@ -83,10 +83,26 @@ namespace Vistara.EditorTools
             catch (Exception e) { Log("mock failed: " + e.Message); return null; }
         }
 
-        static void HeroCam(float back)
+        static void HeroCam(float dist)
         {
-            var m = Camera.main; if (m == null) return; var go = new GameObject("HeroCam"); var c = go.AddComponent<Camera>(); c.depth = 50; c.fieldOfView = 48; c.clearFlags = CameraClearFlags.Skybox;
-            Vector3 f = m.transform.forward; f.y = 0; f.Normalize(); go.transform.position = m.transform.position - f * back + Vector3.up * 0.1f; go.transform.rotation = Quaternion.LookRotation(f, Vector3.up) * Quaternion.Euler(8, 0, 0);
+            var m = Camera.main; var vee = Vistara.GuideGirl.Instance; var st = Vistara.MascotAssistant.Instance; if (m == null || vee == null) return;
+            var mm = Vistara.MainMenuController.Instance; Vector3 center = vee.transform.position; int n = 1; if (st != null) { center += st.transform.position; n++; } if (mm != null) { center += mm.transform.position; n++; } center /= n;
+            Vector3 toCam = m.transform.position - center; toCam.y = 0; if (toCam.sqrMagnitude < 0.01f) toCam = -Vector3.forward; toCam.Normalize();
+            var go = new GameObject("HeroCam"); var c = go.AddComponent<Camera>(); c.depth = 50; c.fieldOfView = 38; c.clearFlags = CameraClearFlags.Skybox;
+            Vector3 look = center + Vector3.up * 0.42f; go.transform.position = look + toCam * dist + Vector3.up * 0.12f; go.transform.rotation = Quaternion.LookRotation(look - go.transform.position, Vector3.up);
+        }
+
+        /// <summary>Capture framing for -previewHero: every world-space UI canvas is switched off (what Y does), and a camera in front of Vee shows only her and what she is doing.</summary>
+        static void HeroOnVee()
+        {
+            var vee = Vistara.GuideGirl.Instance; if (vee == null) return;
+            foreach (var c in UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsInactive.Include, FindObjectsSortMode.None)) if (c.renderMode == RenderMode.WorldSpace) c.enabled = false;
+            var old = GameObject.Find("HeroCam"); if (old != null) UnityEngine.Object.DestroyImmediate(old);
+            var go = new GameObject("HeroCam"); var cam = go.AddComponent<Camera>(); cam.depth = 50; cam.fieldOfView = 42; cam.clearFlags = CameraClearFlags.Skybox;
+            Vector3 f = vee.transform.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) f = Vector3.forward; f.Normalize();
+            var bnd = new Bounds(vee.transform.position + Vector3.up * 0.7f, Vector3.one * 0.1f); foreach (var r in vee.GetComponentsInChildren<Renderer>()) if (r.enabled) bnd.Encapsulate(r.bounds);
+            float dist = Mathf.Clamp(bnd.size.magnitude * 1.35f, 1.7f, 4.2f); float yaw = sports != null && si < sports.Length && sports[si] == "Kitchen" ? -55f : 28f;
+            go.transform.position = bnd.center + Quaternion.Euler(0, yaw, 0) * f * dist + Vector3.up * 0.2f; go.transform.rotation = Quaternion.LookRotation(bnd.center - go.transform.position, Vector3.up);
         }
 
         static string[] sports; static int si; static int wi;
@@ -149,9 +165,11 @@ namespace Vistara.EditorTools
                     case 11: Shot("06_results_b"); until = EditorApplication.timeSinceStartup + 8; stage = 12; break;
                     case 12: Shot("07_results_c"); stage = Arg("-previewWalk") != null ? 40 : 99; break;
                     case 20: if (si < sports.Length) { j.TestPickCategory(sports[si]); until = EditorApplication.timeSinceStartup + 7; stage = 21; } else stage = 99; break;
-                    case 21: { var gg = Vistara.GuideGirl.Instance; string[] vn = SportAct(sports[si]); if (gg != null) gg.TestAct(vn[0], vn[1]); until = EditorApplication.timeSinceStartup + 5; stage = 22; break; }
-                    case 22: Shot("08_act_" + sports[si] + "_a"); until = EditorApplication.timeSinceStartup + 3.5; stage = 23; break;
-                    case 23: Shot("08_act_" + sports[si] + "_b"); if (Vistara.GuideGirl.Instance != null) Vistara.GuideGirl.Instance.TestStop(); si++; stage = 20; until = EditorApplication.timeSinceStartup + 1; break;
+                    case 21: { var gg = Vistara.GuideGirl.Instance; string[] vn = SportAct(sports[si]); if (gg != null) gg.TestAct(vn[0], vn[1]); if (Arg("-previewHero") != null) { var st = Vistara.MascotAssistant.Instance; if (st != null) st.gameObject.SetActive(false); } until = EditorApplication.timeSinceStartup + 5; stage = 22; break; }
+                    case 22: if (Arg("-previewHero") != null) HeroOnVee(); until = EditorApplication.timeSinceStartup + 0.4; stage = 28; break;
+                    case 28: Shot((Arg("-previewHero") != null ? "10_hero_" : "08_act_") + sports[si] + "_a"); until = EditorApplication.timeSinceStartup + 3.5; stage = 29; break;
+                    case 29: if (Arg("-previewHero") != null) HeroOnVee(); until = EditorApplication.timeSinceStartup + 0.4; stage = 23; break;
+                    case 23: Shot((Arg("-previewHero") != null ? "10_hero_" : "08_act_") + sports[si] + "_b"); if (Vistara.GuideGirl.Instance != null) Vistara.GuideGirl.Instance.TestStop(); si++; stage = 20; until = EditorApplication.timeSinceStartup + 1; break;
                     case 50: case 51: case 52: case 53: case 54: case 55: Shot("11_shift_" + (stage - 50)); until = EditorApplication.timeSinceStartup + 0.12; stage++; if (stage > 55) { until = EditorApplication.timeSinceStartup + 4.5; stage = 4; } break;
                     case 40:      // walk around Vee in a circle (the XR rig is moved, the headset looks at her) and shoot every side
                     {

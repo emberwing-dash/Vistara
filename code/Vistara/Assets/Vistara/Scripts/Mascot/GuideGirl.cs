@@ -138,18 +138,16 @@ namespace Vistara
         }
 
         // ---------------------------------------------------------------- outfits
-        const bool UseMenuHoodie = false;          // flip to true once the cyberpunk hoodie (Outfit_Menu) is approved
         void SetOutfit(string cat)
         {
             if (outfitRoot != null) Destroy(outfitRoot); outfitRoot = null;
             foreach (var pc in outfitPieces) if (pc != null) Destroy(pc); outfitPieces.Clear();
             foreach (var kv in rest) kv.Key.localRotation = kv.Value;            // rest pose, so the pieces (authored in rest pose) land exactly on their bones
             bool covered = false; bool isMenu = string.IsNullOrEmpty(cat);
-            if (isMenu && !UseMenuHoodie) { if (teeMat != null) teeMat.SetFloat("_Recolor", 0f); if (starPin != null) starPin.SetActive(true); return; }          // original outfit until the hoodie design is approved
-            if (isMenu) cat = "Menu";          // main menu: the cyberpunk zip hoodie
-            if (Looks.TryGetValue(cat, out var look))
+            if (isMenu) cat = "Menu";          // main menu: her black play-button shirt (no recolour) under the sci-fi hoodie, dark shoes and glowing rings (Outfit_Menu)
+            if (isMenu || Looks.TryGetValue(cat, out var look))
             {
-                if (teeMat != null) { teeMat.SetFloat("_Recolor", 1f); teeMat.SetColor("_TeeColor", C(look.tee)); teeMat.SetColor("_SleeveColor", C(look.sleeve)); }
+                if (teeMat != null) { if (isMenu) teeMat.SetFloat("_Recolor", 0f); else { var lk = Looks[cat]; teeMat.SetFloat("_Recolor", 1f); teeMat.SetColor("_TeeColor", C(lk.tee)); teeMat.SetColor("_SleeveColor", C(lk.sleeve)); } }
                 var prefab = Resources.Load<GameObject>("Girl/Outfits/Outfit_" + cat);
                 if (prefab != null)
                 {
@@ -164,7 +162,15 @@ namespace Vistara
                         r.sharedMaterials = ms; r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
                         bones.TryGetValue(bn, out var bone);
                         t.SetParent(bone != null ? bone : outfitRoot.transform, true); outfitPieces.Add(t.gameObject);
-
+                    }
+                    // skinned pieces (the hoodie, rings, badge, shoes): re-bind them to HER bones by name, with bind poses taken from her rest pose, so they bend with the arms and spine
+                    foreach (var smr in inst.GetComponentsInChildren<SkinnedMeshRenderer>(true).ToList())
+                    {
+                        var ms = smr.sharedMaterials; for (int i = 0; i < ms.Length; i++) ms[i] = Flat(ColorOf(ms[i] != null ? ms[i].name : ""), 0.8f);
+                        var src = smr.bones; var nb = new Transform[src.Length]; var bp = new Matrix4x4[src.Length]; smr.transform.SetParent(outfitRoot.transform, true);
+                        for (int i = 0; i < src.Length; i++) { Transform tb = null; if (src[i] != null) bones.TryGetValue(src[i].name, out tb); nb[i] = tb != null ? tb : (spine2 != null ? spine2 : model); bp[i] = nb[i].worldToLocalMatrix * smr.transform.localToWorldMatrix; }
+                        var mesh = Instantiate(smr.sharedMesh); mesh.bindposes = bp; smr.sharedMesh = mesh; smr.bones = nb; smr.rootBone = spine2 != null ? spine2 : model;
+                        smr.sharedMaterials = ms; smr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; smr.updateWhenOffscreen = true; outfitPieces.Add(smr.gameObject);
                     }
                     Destroy(inst);
                 }

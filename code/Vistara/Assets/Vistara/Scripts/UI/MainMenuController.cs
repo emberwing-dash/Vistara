@@ -9,7 +9,8 @@ namespace Vistara
     /// <summary>Main menu / home dashboard: branding, start/import, engine status, recent analysis history.</summary>
     public class MainMenuController : MonoBehaviour
     {
-        const float W = 1700, H = 940;
+        public const float W = 1700, H = 940;
+        public static MainMenuController Instance { get; private set; }
         Canvas canvas; CanvasGroup group;
         Image statusDot; TextMeshProUGUI statusText, deviceText;
         RectTransform historyList; TextMeshProUGUI historyEmpty;
@@ -18,8 +19,10 @@ namespace Vistara
 
         void Awake()
         {
+            Instance = this;
             UIKit.CanvasScale = 0.00022f;                      // small panel held close to the chest (about 0.42 m)
-            var pf = GetComponent<PlaceInFront>(); if (pf != null) { pf.near = true; pf.distance = 0.42f; pf.heightOffset = -0.22f; pf.tilt = 25f; }
+            var pf = GetComponent<PlaceInFront>(); if (pf != null) { pf.near = true; pf.distance = 0.42f * UIKit.Reach; pf.heightOffset = -0.16f; pf.tilt = 14f; }
+            transform.localScale = Vector3.one * UIKit.Reach;          // bigger and further away: you point at it with a controller
             if (FindFirstObjectByType<HandOnlyMode>() == null) gameObject.AddComponent<HandOnlyMode>();
             client = BackendClient.Ensure();
             canvas = UIKit.WorldCanvas("MenuCanvas", W, H, transform);

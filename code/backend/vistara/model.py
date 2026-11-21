@@ -52,12 +52,13 @@ class ClipEncoder:
     def encode_images(self, frames: np.ndarray, progress=None) -> np.ndarray:
         """frames: (N,224,224,3) uint8 RGB -> (N,D) L2-normalised float32."""
         out = []
-        bs = self.cfg.clip_batch
+        from . import gpu_yield
+        bs = gpu_yield.batch(self.cfg.clip_batch, "VISTARA_CLIP_BATCH")
         for i in range(0, len(frames), bs):
             x = torch.from_numpy(frames[i:i + bs]).to(self.device).permute(0, 3, 1, 2).to(self.dtype) / 255.0
             x = (x - self.mean) / self.std
             f = self.model.encode_image(x).float()
-            out.append(torch.nn.functional.normalize(f, dim=-1).cpu().numpy())
+            out.append(torch.nn.functional.normalize(f, dim=-1).cpu().numpy()); gpu_yield.pause()
             if progress:
                 progress(min(1.0, (i + bs) / len(frames)))
         return np.concatenate(out, 0)

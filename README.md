@@ -1,6 +1,6 @@
 # 🌟 Vistara - Action-Aware Video Summarization (Samsung R&D PRISM 2026, Track 04)
 
-<p align="center"><img src="docs/img/hero.jpg" alt="Stara, Vee and the video panel" width="85%"></p>
+<p align="center"><img src="docs/img/hero.jpg" alt="The Vistara start menu: Vee in her sci-fi hoodie, Stara on the panel, the neon corridor" width="90%"></p>
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![Unity](https://img.shields.io/badge/Unity-6000.2.7f2-000000?logo=unity&logoColor=white)
@@ -9,7 +9,7 @@
 ![VR](https://img.shields.io/badge/VR-Quest%203%20%2F%20OpenXR-7B3FE4)
 
 ## 👀 Previews
-Meet **Vee** (the guide) and **Stara** (the star mascot, here with the video panel). Each of the 15 categories has its own world and its own outfit for Vee, and she re-enacts what the video highlighted.
+Meet **Vee** (the guide) and **Stara** (the star mascot, standing on the panel). The start menu opens facing down the neon corridor, and Vee waits in her sci-fi hoodie. Each of the 15 categories has its own world and its own outfit for Vee. Below is Vee in each one, UI hidden, re-enacting an action the video analysis highlights (kitchen: opening the fridge; bike: riding; boxing: hitting the bag ...).
 
 | 🚲 Bike | 🏑 Bike Polo | 🥊 Boxing | 🐎 Horse | 🪂 Jumping |
 |:---:|:---:|:---:|:---:|:---:|
@@ -33,34 +33,71 @@ Meet **Vee** (the guide) and **Stara** (the star mascot, here with the video pan
 Vistara watches a 2-10 minute first-person video, recognises fine-grained verb-noun actions, scores how important each moment is, labels the video,
 and selects <= 15 % highlights (each >= 4.0 s) from the original footage. A Unity VR app shows the result and re-enacts it with a 3D guide.
 
+## 🧠 Trained model (where it is)
+The model that analyses the videos, both from `./run.sh` and inside the Unity VR app, is in **[`weights/`](weights/)** at the repo root:
+[`head.pt`](weights/head.pt) (our trained head), [`pair_prior.npz`](weights/pair_prior.npz), [`avion_vitl_ek100_fp16.pt`](weights/avion_vitl_ek100_fp16.pt) (AVION, Git LFS) and the CLIP ViT-L/14 backbone (Git LFS).
+The Unity app does not carry its own copy: when you press Play it starts the engine in `code/backend`, which loads these files. Details in "Weights" below.
+
 ## 📁 Repository layout
 ```text
 run.sh                 <video.mp4> -> <out.json>
 requirements.txt       Python dependencies
 weights/               trained model (see "Weights")
 outputs/               one <video_id>.json for each of the 187 manifest videos
+predictions.jsonl      the same 187 results, one JSON per line
+results.csv            one summary row per video
 code/
   backend/             the AI engine (Python)
     vistara/           inference package: decode, features, action recognition (AVION + CLIP head), importance, highlights, JSON schema
     server/            FastAPI server the Unity app talks to (port 8765)
     training/          feature caches, priors, head training, AVION export/eval
     evaluation/        held-out evaluation        tests/   unit + edge tests
-    validate.py  make_outputs.py  run_manifest.py  data/manifest.csv  data/epic/ (annotations, EPIC downloader)
+    validate.py  make_outputs.py  make_predictions.py  run_manifest.py  data/manifest.csv  data/epic/ (annotations, EPIC downloader)
   Vistara/             Unity 6 (6000.2.7f2) VR project
   assets/              Blender sources (.blend) and exported FBX: category worlds + props, the guide character and her outfits, the star mascot
 ```
 
-## ⚙️ Setup
-Python 3.11+ (developed on 3.14 / Windows 11 / RTX 4060 Laptop). A GPU is recommended; CPU works, slower.
+## ⚙️ Setup guide (step by step)
+Needs Python 3.11+ (developed on 3.14, Windows 11, RTX 4060 Laptop), about 3 GB of disk for the weights, and Git LFS. A GPU is recommended; the CPU works but is slower.
+
+**1. Get the code and the weights**
 ```bash
-git lfs install && git lfs pull                 # the CLIP backbone and the AVION weights in weights/
+git clone <this repo> && cd <repo>
+git lfs install && git lfs pull        # downloads the CLIP backbone (~1.6 GB) and the AVION weights (~590 MB) into weights/
+```
+**2. Create the Python environment** (Windows paths shown; on Linux/macOS use `.venv/bin/` instead of `.venv/Scripts/`)
+```bash
 python -m venv .venv
-.venv/Scripts/pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128    # or the CPU wheels
+.venv/Scripts/pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128    # GPU; use the CPU wheels if there is no NVIDIA GPU
 .venv/Scripts/pip install -r requirements.txt
-./run.sh video.mp4 out.json                     # fully offline: every weight is read from weights/
-python code/backend/validate.py --dir outputs --manifest code/backend/data/manifest.csv
+```
+**3. Analyse one video** (fully offline: every weight is read from `weights/`)
+```bash
+./run.sh video.mp4 out.json
 ```
 `TEAM_ID` (env, default `vistara`) sets `team_id`. ffmpeg comes from PATH or the bundled `imageio-ffmpeg`.
+
+**4. Check the output files**
+```bash
+python code/backend/validate.py --dir outputs --manifest code/backend/data/manifest.csv     # expect: 187 files, 0 invalid
+python code/backend/make_predictions.py                                                       # writes predictions.jsonl + results.csv
+```
+**5. (Optional) Run the VR app**: see "VR app" below. It starts the engine by itself.
+
+Regenerating all 187 outputs: `python code/backend/make_outputs.py --roots <EPIC dir> <FPVSum dir> --redo` (see "Outputs status").
+
+## 📦 Submission contents
+| Item | Where |
+|---|---|
+| Reproducible inference entry point | `run.sh` (`./run.sh <video.mp4> <out.json>`) + `requirements.txt` |
+| Source code | `code/backend/` (engine), `code/Vistara/` (Unity VR app), `code/assets/` (Blender sources) |
+| Model weights | `weights/` (Git LFS) |
+| Predictions, one JSON per video | `outputs/<video_id>.json` (187), also collected in `predictions.jsonl` |
+| Summary table | `results.csv` (label, number of actions and highlights, highlighted seconds and % per video) |
+| Validation | `python code/backend/validate.py --dir outputs` (our own validator, written from the track README; the organizers did not provide one) |
+| Demo | screen recording of the VR app (add the file / link here before submitting) |
+
+Model size: the weights are not quantized. The AVION ViT-L/14 and CLIP ViT-L/14 backbones are about 2.2 GB in total, so a "< 20 MB INT8" model is not part of this submission.
 
 ## 🧾 Output format
 ```json
@@ -107,6 +144,8 @@ Regenerate with `python code/backend/make_outputs.py --roots <EPIC dir> <FPVSum 
 Open the folder in Unity 6000.2.7f2 (run **Vistara > Build Scenes** once), press Play (XR Interaction Simulator or Quest 3). The app starts the engine from `code/backend` with the weights in `weights/`
 (Python from `.venv` at the repo root; set `VISTARA_PYTHON` to use another interpreter).
 
+- **Input**: controllers or hands. With controllers, point at a button and pull the **trigger** to press it (also drags carousels and sliders); with hand tracking, touch or pinch.
+- **Start menu**: opens facing down the neon corridor; the panel follows you as you walk and turn, and the left controller **Y** button hides or shows it. Vee wears her sci-fi hoodie (open over her play-button shirt, glowing rings on the arms, dark gradient shoes), Stara is on the panel.
 - **Start**: the spatial shift (the whole 3D space shifts, chromatic/lens glitch, sound) into the app.
 - **Category** (15): another spatial shift loads that category's world (`code/assets/categories/<Category>`); the guide **Vee** changes into the category outfit and says a one-line greeting.
 - **Pick a video -> ANALYSE**: the trained model analyses the full test video. Results: the output JSON, the video with the findings marked, and a **storyboard** of real key-moment frames with what happens in each (no charts).
@@ -127,3 +166,11 @@ The 3D content of the VR app, as Blender sources plus the exported FBX files Uni
 ## 🙏 Credits
 Samsung R&D Institute India PRISM Hackathon 2026; [EPIC-KITCHENS-100](https://epic-kitchens.github.io/2020) (University of Bristol, non-commercial licence); FPVSum (Ho et al., ECCV 2018);
 [AVION](https://github.com/zhaoyue-zephyrus/avion) (MIT); OpenAI CLIP via open_clip / timm.
+
+## 🤖 AI disclosure
+AI tools were used while building this project:
+- **Claude** (Anthropic)
+- **Antigravity** (Google)
+- **ChatGPT** (OpenAI)
+
+They helped with writing and debugging code, the Unity VR app, the Blender assets and this documentation. The trained components, evaluation and final outputs were run and checked by the team; no ground truth or video IDs are used at inference (see "Model").

@@ -161,6 +161,11 @@ class VistaraPipeline:
             log.warning("schema warning: %s", w)
 
         analysis = self._analysis(info, s, imp, hl, actions, probs, domain, timings, dur, time.time() - t_start)
+        try:          # sports videos: what is going on, second by second, so the 3D guide can act the same thing (see scene_actions.py)
+            from .scene_actions import scene_actions
+            analysis["scene"] = scene_actions(self.enc, label, emb, s.times, imp.get("activity"))
+        except Exception as e:  # noqa: BLE001
+            log.warning("scene actions unavailable: %s", e); analysis["scene"] = []
         cb("done", 1.0, "Analysis complete")
         internal = {"times": s.times, "emb": emb, "comps": imp["comps"], "blur": imp["blur"], "idle": imp["idle"],
                     "weights": imp["weights"], "fps": imp["fps"], "pair_at": pair_at if wins else None,

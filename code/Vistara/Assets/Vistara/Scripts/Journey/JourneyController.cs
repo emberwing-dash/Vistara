@@ -53,7 +53,8 @@ namespace Vistara
         {
             UIKit.CanvasScale = 0.00022f;                      // small panel: 1700 px = about 0.37 m wide
             var pf = GetComponent<PlaceInFront>();             // held close in front of the chest, tilted toward you, within arm's reach for finger touch
-            if (pf != null) { pf.near = true; pf.distance = 0.42f; pf.heightOffset = -0.22f; pf.tilt = 25f; }
+            if (pf != null) { pf.near = true; pf.distance = 0.42f * UIKit.Reach; pf.heightOffset = -0.16f; pf.tilt = 14f; }
+            transform.localScale = Vector3.one * UIKit.Reach;          // bigger and further away: you point at it with a controller
 
             client = BackendClient.Ensure();
             var src = new GameObject("SourceVideo"); src.transform.SetParent(transform, false); Source = src.AddComponent<VideoController>();
@@ -401,7 +402,7 @@ namespace Vistara
         {
             if (toastGroup != null && toastGroup.alpha > 0 && Time.unscaledTime > toastUntil) toastGroup.alpha = Mathf.MoveTowards(toastGroup.alpha, 0, Time.unscaledDeltaTime * 2);
             if (client.Online && statusText != null)       // quick diagnosis on the headset: are hands being tracked?
-                statusText.text = HandTouchInput.Instance != null && HandTouchInput.Instance.HandsTracked ? "" : "No hands detected";
+                statusText.text = "";
             if (Current == Step.Categories) catCar.Tick();
             if (Current == Step.Videos)
             {
