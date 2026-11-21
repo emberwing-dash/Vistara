@@ -129,7 +129,7 @@ namespace Vistara
         {
             var cam = Camera.main; if (cam == null) return;
             Vector3 f = cam.transform.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) f = Vector3.forward; f.Normalize();
-            root.localScale = Vector3.one * UIKit.Reach; root.position = cam.transform.position + f * 0.50f * UIKit.Reach + Vector3.down * 0.40f;          // low in your view: the middle of your sight stays free for Vee and the scene
+            root.localScale = Vector3.one * (UIKit.Reach * 0.72f); root.position = cam.transform.position + f * 0.78f + Vector3.down * 0.40f;          // smaller and lower than the menus, so Vee's scene stays in view above it          // low in your view: the middle of your sight stays free for Vee and the scene
             root.rotation = Quaternion.LookRotation(f, Vector3.up) * Quaternion.Euler(Tilt, 0f, 0f);
             offsetLocal = Quaternion.Inverse(Quaternion.LookRotation(f, Vector3.up)) * (root.position - cam.transform.position);
             followMoving = false;

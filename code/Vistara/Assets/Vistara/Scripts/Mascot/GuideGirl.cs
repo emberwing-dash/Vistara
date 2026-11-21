@@ -54,7 +54,7 @@ namespace Vistara
             SceneManager.sceneLoaded += (s, m) => { if (s.name == "Workspace" || s.name == "Journey" || s.name == "MainMenu") Spawn(); };
             var n = SceneManager.GetActiveScene().name; if (n == "Workspace" || n == "Journey" || n == "MainMenu") Spawn();
         }
-        static void Spawn() { if (Instance == null) new GameObject("VeeGuide").AddComponent<GuideGirl>(); }
+        public static void Spawn() { if (Instance == null) new GameObject("VeeGuide").AddComponent<GuideGirl>(); }
         void Awake() { Instance = this; }
         void OnDestroy() { if (Instance == this) Instance = null; }
 
@@ -76,7 +76,7 @@ namespace Vistara
             foreach (var b in new[] { armUL, armUR, armFL, armFR, thighL, thighR, shinL, shinR, footL, footR, head, spine, spine2, tailL, tailR }) if (b != null) rest[b] = b.localRotation;
             foreach (var n in bones.Keys.Where(k => k.StartsWith("Tail.") || k.StartsWith("Hair ")).ToList()) rest[bones[n]] = bones[n].localRotation;
             BuildMaterials(); SetOutfit(null);
-            BuildBubble(); reen = gameObject.AddComponent<Reenactor>();
+            BuildBubble(); reen = gameObject.AddComponent<Reenactor>(); gameObject.AddComponent<ObjectOverlay>();
             blinkAt = Time.time + 2f; nextIdleChat = Time.time + 1.5f; rescanAt = Time.time + 0.6f;
             if (!bones.ContainsKey("upper_arm.L")) Debug.LogWarning("[Vistara] girl rig bones not found: " + string.Join(",", bones.Keys.Take(12)));
         }
@@ -278,9 +278,52 @@ namespace Vistara
         public void ReleasePlacement() { closeUp = false; lastMode = -1; }
 
         // ---------------------------------------------------------------- re-enactment hooks
+        public Transform HeadT { get { return head; } }
+        float hipH;
+        /// <summary>Height of her hip joint above her feet (her root): where the seat has to be for her to sit on it.</summary>
+        public float HipHeight { get { if (hipH <= 0.05f && thighL != null && thighR != null) hipH = (thighL.position.y + thighR.position.y) * 0.5f - transform.position.y; return hipH > 0.05f ? hipH : 0.5f; } }
+        float nextMode;
+        /// <summary>A short line when the video changes what is going on (going fast, turning, stopping ...), so she says what she is doing as the footage changes.</summary>
+        public void SayMode(string mode)
+        {
+            if (Time.time < nextMode) return; string line = null;
+            switch (mode)
+            {
+                case "fast": line = "Faster now!"; break; case "turn": line = "Here comes a turn."; break; case "stop": line = "Slowing down, a quiet moment."; break; case "jump": line = "Up we go!"; break;
+                case "hit": line = "Throwing punches!"; break; case "idle": line = "Taking a breath."; break; case "climb": line = "Climbing up."; break; case "swim": line = "Swimming along."; break; case "move": line = "Going steadily."; break;
+            }
+            if (line != null) { nextMode = Time.time + 6f; Speak(line); }
+        }
+        float nextNarrate; string lastNarr;
+        public string CurrentAction { get; private set; }
+        static string Ing(string v)
+        {
+            v = (v ?? "").ToLowerInvariant().Trim(); if (v.Length == 0) return v;
+            if (v.EndsWith("ie")) return v.Substring(0, v.Length - 2) + "ying";
+            if (v.EndsWith("e") && !v.EndsWith("ee") && !v.EndsWith("ye")) return v.Substring(0, v.Length - 1) + "ing";
+            foreach (var d in new[] { "cut", "put", "run", "stir", "chop", "swim", "get", "hit", "tap", "set", "skip", "drip", "slip", "jog", "hop", "pat", "wrap" }) if (v == d) return v + v[v.Length - 1] + "ing";
+            return v + "ing";
+        }
+        /// <summary>She says, out loud and in her speech bubble, what she is doing now (not more often than every few seconds).</summary>
+        void Narrate(string verb, string noun)
+        {
+            string n = (noun ?? "").Replace(':', ' ').Replace('_', ' ').Trim(), key = verb + "|" + noun; CurrentAction = Ing(verb) + " the " + n;
+            if (key == lastNarr || Time.time < nextNarrate) return; lastNarr = key; nextNarrate = Time.time + 5f;
+            Speak("Now I'm " + Ing(verb) + " the " + n + ".");
+        }
+        /// <summary>The user spoke to her: the language model answers as Vee and she says the answer.</summary>
+        public void Hear(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return; var m = MascotAssistant.Instance;
+            if (m == null) { Speak("Sorry, I can't answer right now."); return; }
+            nextIdleChat = Time.time + 45f; Speak("I heard: " + text, 0f);          // she shows what she understood, then answers
+            m.AskVee(text, reply => { nextIdleChat = Time.time + 45f; Speak(reply, 1f); });
+        }
+
         public void ActAs(string verb, string noun)
         {
             string cat = AppState.Category;
+            if (verb != null && !string.IsNullOrEmpty(cat)) Narrate(verb, noun); else if (verb == null) CurrentAction = null;
             if (verb == null) { gesture = "Idle"; gestureLabel = null; ShowProp(null); if (reen != null) reen.Idle(); return; }
             if (reen != null && !string.IsNullOrEmpty(cat)) { reen.Begin(verb, noun); gesture = "Idle"; gestureLabel = verb + " " + noun; ShowProp(null); return; }
             string g = VerbGesture(verb);
@@ -359,6 +402,17 @@ namespace Vistara
             return true;
         }
         float Margin(Vector3 p) { float m = 5f; foreach (var b in obstacles) { float dx = Mathf.Max(b.min.x - p.x, 0f, p.x - b.max.x), dz = Mathf.Max(b.min.z - p.z, 0f, p.z - b.max.z); m = Mathf.Min(m, Mathf.Sqrt(dx * dx + dz * dz)); } return m; }
+
+        /// <summary>The place for a sport stage: straight ahead of where you look, about 2.6 m away (a little closer or further if something is in the way), so the whole scene is in front of you.</summary>
+        public float StageYaw { get { return journey != null && journey.Hud != null && journey.Hud.Visible ? 0f : 28f; } }
+        public Vector3 StageSpot()
+        {
+            var cam = Camera.main; Vector3 f = cam != null ? cam.transform.forward : Vector3.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) f = Vector3.forward; f.Normalize(); Vector3 o = cam != null ? cam.transform.position : Vector3.zero;
+            f = Quaternion.Euler(0, StageYaw, 0) * f;          // results open: straight ahead, above the low results panel and clear of Stara; the category panel is big, so beside it
+            bool hudUp = journey != null && journey.Hud != null && journey.Hud.Visible;          // the results panel is low and wide: further away, so the scene is above it
+            foreach (float d in (hudUp ? new[] { 5.6f, 5.2f, 6.0f, 4.8f, 6.4f } : new[] { 3.3f, 2.9f, 3.7f, 2.5f, 4.0f })) { Vector3 p = o + f * d; p.y = floorY; if (Free(p)) return p; }
+            Vector3 q = o + f * 5.6f; q.y = floorY; return q;
+        }
 
         Vector3 PickSpot(Camera cam, Vector3 fpos, bool preferRight)
         {

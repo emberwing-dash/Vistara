@@ -67,6 +67,19 @@ namespace Vistara
             builtFor = o.video_id + "|" + acts.Count + "|" + hls.Count;
         }
 
+        static readonly bool Sim = System.Array.IndexOf(System.Environment.GetCommandLineArgs(), "-previewSim") >= 0; float simT0 = -1f; string lastMode;
+
+        public static string[] DefaultAct(string c)
+        {
+            switch (c)
+            {
+                case "Kitchen": return new[] { "take", "milk" }; case "Boxing": return new[] { "punch", "punching bag" }; case "Horse": return new[] { "ride", "horse" }; case "Jumping": return new[] { "jump", "box" };
+                case "Longboarding": return new[] { "ride", "board" }; case "Parkour": return new[] { "jump", "box" }; case "Plane": return new[] { "fly", "plane" }; case "RockClimbing": return new[] { "climb", "wall" };
+                case "Scuba": return new[] { "swim", "fish" }; case "Skate": return new[] { "ride", "skateboard" }; case "Ski": return new[] { "ski", "skis" }; case "Surfing": return new[] { "surf", "surfboard" };
+                case "BikePolo": return new[] { "ride", "bike" }; case "Motor": return new[] { "ride", "motorbike" }; default: return new[] { "ride", "bike" };
+            }
+        }
+
         void Update()
         {
             var mascot = MascotAssistant.Instance;
@@ -81,8 +94,9 @@ namespace Vistara
             canvas.transform.SetPositionAndRotation(frame.TransformPoint(new Vector3(-(1040f * 0.00026f * 0.5f) - W * Sc * 0.5f - 0.02f, 0f, 0f)), frame.rotation);
             canvas.transform.localScale = Vector3.one * sc;
 
-            var vc = journey.Source; if (vc == null || !vc.Prepared) return;
-            float t = vc.TimeSec;
+            var vc = journey.Source; float t;
+            if (Sim) { if (simT0 < 0f) simT0 = Time.unscaledTime; t = (hls.Count > 0 ? hls[0][0] : 0f) + (Time.unscaledTime - simT0); }          // editor test only (-previewSim): a clock stands in for a video that is not loaded
+            else { if (vc == null || !vc.Prepared) return; t = vc.TimeSec; }
             int cur = -1; float best = -1f;
             for (int i = 0; i < acts.Count; i++) if (acts[i].Start <= t && t <= acts[i].End && acts[i].score >= best) { best = acts[i].score; cur = i; }
             int hlIdx = -1; for (int i = 0; i < hls.Count; i++) if (t >= hls[i][0] && t <= hls[i][1]) { hlIdx = i; break; }
@@ -106,12 +120,29 @@ namespace Vistara
                 body.text = sb.ToString();
             }
 
-            string key = cur >= 0 ? acts[cur].verb + "|" + acts[cur].noun : null;
+            // she acts ONLY what is highlighted in this video: inside a key moment, and only something that fits the video. Kitchen: the recognised action of that moment.
+            // Other categories: the recognised vocabulary is kitchen verbs, which would be irrelevant there, so she acts what the category is about (swim for scuba, ride for bike ...).
+            string actVerb = null, actNoun = null; string catNow = AppState.Category;
+            if (hlIdx >= 0 && !string.IsNullOrEmpty(catNow))
+            {
+                if (catNow == "Kitchen") { if (cur >= 0) { actVerb = acts[cur].verb; actNoun = acts[cur].noun; } }
+                else { var d = DefaultAct(catNow); actVerb = d[0]; actNoun = d[1]; }
+            }
+            string sceneMode = null; { var scn = r.analysis != null ? r.analysis.scene : null; if (scn != null && scn.Length > 0 && catNow != "Kitchen") { sceneMode = "move"; foreach (var x in scn) if (t >= x.t0 && t < x.t1) { sceneMode = x.action; break; } } }
+            { var g0 = GuideGirl.Instance; var rn = g0 != null ? g0.GetComponent<Reenactor>() : null; var cu = o.actions != null ? r.analysis?.curve : r.analysis?.curve;
+              if (rn != null && sceneMode != null)
+              {
+                  rn.Mode = sceneMode; rn.Tempo = sceneMode == "fast" ? 1.7f : (sceneMode == "stop" || sceneMode == "idle") ? 0.25f : sceneMode == "jump" ? 1.3f : 1f;
+                  if (sceneMode != lastMode) { lastMode = sceneMode; if (actVerb != null) g0.SayMode(sceneMode); }
+              }
+              else if (rn != null) { float a01 = 0.5f; if (cu != null && cu.activity != null && cu.activity.Length > 1) { int ix = Mathf.Clamp(Mathf.FloorToInt(t), 0, cu.activity.Length - 1); float mx = 1e-4f; foreach (var v in cu.activity) if (v > mx) mx = v; a01 = Mathf.Clamp01(cu.activity[ix] / mx); } rn.Tempo = Mathf.Lerp(0.7f, 1.7f, a01); } }
+            string key = actVerb != null ? actVerb + "|" + actNoun : null;
             if (key != actKey && mascot != null)
             {
                 actKey = key;
-                if (cur >= 0) mascot.ActAs(acts[cur].verb, acts[cur].noun); else mascot.StopActing();
-                if (GuideGirl.Instance != null) { if (cur >= 0) GuideGirl.Instance.ActAs(acts[cur].verb, acts[cur].noun); else GuideGirl.Instance.ActAs(null, null); }
+                Debug.Log("[Vistara] re-enact: " + (actVerb != null ? actVerb + " " + actNoun : "(nothing)") + " at " + t.ToString("0.0") + " s, category " + catNow + ", key moment " + hlIdx);
+                try { if (actVerb != null) mascot.ActAs(actVerb, actNoun); else mascot.StopActing(); } catch (System.Exception ex) { Debug.LogWarning("[Vistara] Stara could not act: " + ex.Message); }          // her problem must never stop Vee
+                if (GuideGirl.Instance != null) { if (actVerb != null) GuideGirl.Instance.ActAs(actVerb, actNoun); else GuideGirl.Instance.ActAs(null, null); }
             }
         }
     }

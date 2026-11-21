@@ -118,7 +118,7 @@ namespace Vistara
         void LateUpdate()
         {
             if (amount <= 0.0005f && warped.Count == 0) return;
-            if (amount > 0.0005f) Gather();
+            // no Gather(): the 3D environment is not displaced, only the post-processing pulse runs
             var cam = Camera.main; Vector3 c = cam != null ? cam.transform.position : Vector3.zero; float e = Mathf.SmoothStep(0f, 1f, amount); List<Transform> dead = null;
             foreach (var kv in warped)
             {
@@ -152,6 +152,7 @@ namespace Vistara
 
         public IEnumerator Run(Action swap, bool outward = false, float up = 0.32f, float hold = 0.18f, float down = 0.6f)
         {
+            outward = false;          // exactly Cosmic Warrior's spatial shift: a post-processing pulse (chromatic aberration, lens, bloom, vignette) with the swap at its peak; the 3D environment is NOT displaced
             if (outward) { lensMax = -0.6f; scaleDrop = 0.16f; bloomGain = 3.2f; vignetteMax = 0.55f; chromaGain = 1.5f; fovGain = 28f; baseFov = Camera.main != null ? Camera.main.fieldOfView : 60f; }
             else { lensMax = -0.55f; scaleDrop = 0.12f; bloomGain = 3.0f; vignetteMax = 0.3f; chromaGain = 1.2f; fovGain = 0f; }       // Cosmic Warrior's PostFX values
             if (Camera.main != null) { var data = Camera.main.GetUniversalAdditionalCameraData(); if (data != null) data.renderPostProcessing = true; }

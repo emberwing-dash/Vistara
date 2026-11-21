@@ -461,6 +461,41 @@ namespace Vistara
             if (!llm.Online) { yield return new WaitForSeconds(6f); yield return llm.Probe(); statusText.text = llm.Online ? "Llama online" : "Llama offline"; }
         }
 
+        readonly List<OMsg> veeHistory = new List<OMsg>();
+        /// <summary>Vee's answer to something the user said (voice chat): same language model, her own short, soft persona.</summary>
+        public void AskVee(string text, Action<string> onReply)
+        {
+            if (llm == null || !llm.Online) { onReply?.Invoke(SmallTalk(text)); return; }
+            StartCoroutine(VeeRoutine(text, onReply));
+        }
+        static readonly string[] Chatter = { "That's interesting! Tell me more.", "Hmm, I like that. What else is on your mind?", "Ooh, good one. Want to see me act out a key moment?", "I'm all ears! Ask me about the video, or about what I'm doing." };
+        /// <summary>When the language model is not available she still answers like a person: greetings, who she is, what she is doing, thanks, help.</summary>
+        string SmallTalk(string text)
+        {
+            string t = (text ?? "").ToLowerInvariant(); var g = GuideGirl.Instance; string doing = g != null && !string.IsNullOrEmpty(g.CurrentAction) ? g.CurrentAction : null;
+            if (t.Contains("hello") || t.Contains("hi ") || t == "hi" || t.Contains("hey")) return "Hi there! I'm Vee. Nice to meet you!";
+            if (t.Contains("your name") || t.Contains("who are you")) return "I'm Vee, your guide. And the little star is Stara!";
+            if (t.Contains("what are you doing") || t.Contains("what do you do")) return doing != null ? "I'm " + doing + " right now, just like in your video." : "Right now I'm waiting for you to pick something. Then I act out the key moments.";
+            if (t.Contains("how are you")) return "I'm great, thank you! Ready when you are.";
+            if (t.Contains("thank")) return "You're welcome! That was fun.";
+            if (t.Contains("help") || t.Contains("what can")) return "Pick a category, choose a video, and I'll act out its key moments. You can also ask me what I'm doing.";
+            if (t.Contains("bye")) return "Bye bye! Come back soon!";
+            return Chatter[UnityEngine.Random.Range(0, Chatter.Length)];
+        }
+
+        IEnumerator VeeRoutine(string text, Action<string> onReply)
+        {
+            veeHistory.Add(new OMsg { role = "user", content = text }); while (veeHistory.Count > 8) veeHistory.RemoveAt(0);
+            var sb = new StringBuilder();
+            sb.AppendLine("You are Vee, a cheerful little girl who guides the user through a VR app that summarises first-person videos. Speak out loud in one or two short, soft sentences. No emojis, no lists.");
+            string cat = AppState.Category; if (!string.IsNullOrEmpty(cat)) sb.AppendLine("The user is in the " + cat + " category and you are wearing a matching outfit.");
+            var g = GuideGirl.Instance; if (g != null && !string.IsNullOrEmpty(g.CurrentAction)) sb.AppendLine("Right now you are " + g.CurrentAction + ".");
+            if (AppState.HasResult) sb.AppendLine("The video has been analysed; you act out its highlighted actions for the user.");
+            var msgs = new List<OMsg> { new OMsg { role = "system", content = sb.ToString() } }; msgs.AddRange(veeHistory);
+            string reply = null; yield return llm.Chat(msgs, r => reply = r, e => { });
+            if (reply != null) { veeHistory.Add(new OMsg { role = "assistant", content = reply }); onReply?.Invoke(reply); } else onReply?.Invoke(SmallTalk(text));
+        }
+
         public void Ask(string question) { if (!busy) StartCoroutine(AskRoutine(question)); }
 
         IEnumerator AskRoutine(string question)

@@ -46,8 +46,10 @@ namespace Vistara
         CatVideo selVid; string selPath; CatVideoList videos; float lastSeek;
 
         // analysis
-        Image barFill; TextMeshProUGUI pct, stageMsg; float shown, target;
+        Image barFill; TextMeshProUGUI pct, stageMsg; float shown, target; const float BarSpeed = 0.5f;          // the bar fills in about 2 s at the fastest, so the analysis always plays out as a readable flow
         ResultEnvelope result;
+
+        static bool Automation() { foreach (var a in System.Environment.GetCommandLineArgs()) { var l = a.ToLowerInvariant(); if (l.StartsWith("-vistara") || l.StartsWith("-preview")) return true; } return false; }
 
         void Awake()
         {
@@ -60,7 +62,7 @@ namespace Vistara
             var src = new GameObject("SourceVideo"); src.transform.SetParent(transform, false); Source = src.AddComponent<VideoController>();
             var hudGo = new GameObject("HudHost");
             Hud = hudGo.AddComponent<MrHud>(); Hud.Build(Source);
-            Hud.Closed += () => { ShowStage(true); SetStep(Step.Videos); };
+            Hud.Closed += () => { ShowStage(true); SetStep(Step.Videos); var cg = Stage.GetComponent<CanvasGroup>(); if (cg != null) cg.alpha = 1f; var pf2 = GetComponent<PlaceInFront>(); if (pf2 != null) pf2.Recenter(); };          // the panel comes back in front of you
             if (FindFirstObjectByType<HandOnlyMode>() == null) gameObject.AddComponent<HandOnlyMode>();
 
             Stage = UIKit.WorldCanvas("Stage", SW, SH, transform);
@@ -224,7 +226,7 @@ namespace Vistara
             AppState.Category = c.id; selVid = null; selPath = null; AppState.VideoPath = null; AppState.Result = null;
             vidCar.Clear(); vidMarks.Clear();
             previewHint.gameObject.SetActive(true); previewHint.text = c.available_count > 0 ? "Swipe, then choose a video" : "No video of this category on this PC";
-            Source.Pause(); analyseBtn.interactable = false;
+            Source.ClearToBlack(); analyseBtn.interactable = false;          // a new category: the preview is black, nothing from the last video
             SetStep(Step.Videos);
             StartCoroutine(LoadVideos(c));
         }
@@ -314,7 +316,7 @@ namespace Vistara
         void ApplySelection(string path)
         {
             selPath = path; AppState.VideoPath = path;
-            previewHint.gameObject.SetActive(false);
+            previewHint.gameObject.SetActive(true); previewHint.text = "Loading the video...";          // never a blank screen: it says what is happening
             Source.Load(PlayUrl(path), true);                   // plays as soon as it is chosen
             StartCoroutine(PlayableFallback(path));
             analyseBtn.interactable = true;
@@ -324,7 +326,7 @@ namespace Vistara
         IEnumerator PlayableFallback(string path)
         {
             float t = 0f;
-            while (!Source.Prepared && t < 9f && selPath == path) { t += Time.unscaledDeltaTime; yield return null; }
+            while (!Source.Prepared && t < 3f && selPath == path) { t += Time.unscaledDeltaTime; yield return null; }
             if (Source.Prepared || selPath != path || !client.Online) yield break;
             Debug.Log("[Vistara] preview: original does not play in Unity, asking the engine for a playable copy of " + Path.GetFileName(path));
             string copy = null;
@@ -363,7 +365,7 @@ namespace Vistara
             ResultEnvelope res = null;
             yield return client.Poll(jobId, s => { target = Mathf.Clamp01(s.progress); stageMsg.text = StageName(s.stage); }, r => res = r, e => err = e);
             if (res == null) { Fail(err ?? "Analysis failed"); yield break; }
-            result = res; AppState.Result = res; target = shown = 1; SetBar(1); pct.text = "100%";
+            result = res; AppState.Result = res; SaveOutput(res); target = 1f; while (shown < 0.999f) yield return null; SetBar(1); pct.text = "100%";          // an instant (cached) result still shows the whole flow
             Running = false;
             OpenHud();
         }
@@ -390,6 +392,28 @@ namespace Vistara
         public string SelectedPath => selPath;
         public void TestShowResult(ResultEnvelope r) { result = r; AppState.Result = r; Running = false; OpenHud(); }
 
+        /// <summary>Every finished analysis is stored as Assets/Output/&lt;video name&gt;/&lt;video name&gt;.json (in a headset build: persistentDataPath/Output/...).</summary>
+        void SaveOutput(ResultEnvelope res)
+        {
+            try
+            {
+                string name = System.IO.Path.GetFileNameWithoutExtension(!string.IsNullOrEmpty(res.source_path) ? res.source_path : (res.output != null ? res.output.video_id : "video"));
+                foreach (char ch in System.IO.Path.GetInvalidFileNameChars()) name = name.Replace(ch, '_');
+#if UNITY_EDITOR
+                string root = System.IO.Path.Combine(Application.dataPath, "Output");
+#else
+                string root = System.IO.Path.Combine(Application.persistentDataPath, "Output");
+#endif
+                string dir = System.IO.Path.Combine(root, name); System.IO.Directory.CreateDirectory(dir);
+                string file = System.IO.Path.Combine(dir, name + ".json"); System.IO.File.WriteAllText(file, JsonUtility.ToJson(res.output, true));
+                Debug.Log("[Vistara] result stored: " + file);
+#if UNITY_EDITOR
+                UnityEditor.AssetDatabase.Refresh();
+#endif
+            }
+            catch (System.Exception e) { Debug.LogWarning("[Vistara] could not store the result: " + e.Message); }
+        }
+
         public void OpenHud()
         {
             if (result == null) { Toast("Run an analysis first."); return; }
@@ -403,6 +427,7 @@ namespace Vistara
             if (toastGroup != null && toastGroup.alpha > 0 && Time.unscaledTime > toastUntil) toastGroup.alpha = Mathf.MoveTowards(toastGroup.alpha, 0, Time.unscaledDeltaTime * 2);
             if (client.Online && statusText != null)       // quick diagnosis on the headset: are hands being tracked?
                 statusText.text = "";
+            if (Current == Step.Videos && selPath != null && Source.Prepared && previewHint != null && previewHint.gameObject.activeSelf && previewHint.text == "Loading the video...") previewHint.gameObject.SetActive(false);
             if (Current == Step.Categories) catCar.Tick();
             if (Current == Step.Videos)
             {
@@ -410,7 +435,7 @@ namespace Vistara
                 if (Source.Prepared) { vidSeek.SetValueWithoutNotify(Source.Time01); vidTime.text = AppState.FormatTime(Source.TimeSec) + " / " + AppState.FormatTime(Source.Length); }
                 if (Source.Error != null) { previewHint.gameObject.SetActive(true); previewHint.text = "Preview unavailable - analysis still works"; }
             }
-            if (Current == Step.Analysing) { shown = Mathf.MoveTowards(shown, target, Time.unscaledDeltaTime * 0.6f); SetBar(shown); pct.text = Mathf.RoundToInt(shown * 100) + "%"; }
+            if (Current == Step.Analysing) { shown = Mathf.MoveTowards(shown, target, Time.unscaledDeltaTime * BarSpeed); SetBar(shown); if (stageMsg != null) stageMsg.text = shown < 0.18f ? "Reading the video" : shown < 0.42f ? "Understanding the scene" : shown < 0.68f ? "Recognising actions" : shown < 0.84f ? "Scoring importance" : shown < 0.97f ? "Selecting highlights" : "Finishing"; pct.text = Mathf.RoundToInt(shown * 100) + "%"; }
         }
 
         // test hooks (used by the automated flow test; they call the same code paths as the pinch buttons)

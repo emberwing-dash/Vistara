@@ -72,7 +72,7 @@ namespace Vistara.EditorTools
                 string id = Path.GetFileNameWithoutExtension(videoPath ?? ""); string file = null;
                 foreach (var f in Directory.GetFiles(dirOut, "*.json")) { if (Path.GetFileName(f).Contains(id)) { file = f; break; } }
                 if (file == null) return null;
-                var o = JsonUtility.FromJson<OutputJson>(File.ReadAllText(file)); if (o == null || o.actions == null || o.actions.Length == 0) return null;
+                var o = JsonUtility.FromJson<OutputJson>(File.ReadAllText(file)); if (o == null || o.actions == null) return null;
                 int n = Mathf.Max(2, Mathf.CeilToInt(o.duration_sec)); var t = new float[n]; var imp = new float[n];
                 for (int i = 0; i < n; i++) { t[i] = i; float v = 0.15f + 0.1f * Mathf.PerlinNoise(i * 0.21f, 3f); foreach (var h in o.highlights) { float c = (h.segment[0] + h.segment[1]) * 0.5f, w = Mathf.Max(2f, (h.segment[1] - h.segment[0]) * 0.6f); v += 0.8f * Mathf.Exp(-((i - c) * (i - c)) / (2 * w * w)); } imp[i] = v; }
                 var nouns = new System.Collections.Generic.Dictionary<string, ObjStat>();
@@ -97,11 +97,12 @@ namespace Vistara.EditorTools
         {
             var vee = Vistara.GuideGirl.Instance; if (vee == null) return;
             foreach (var c in UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsInactive.Include, FindObjectsSortMode.None)) if (c.renderMode == RenderMode.WorldSpace) c.enabled = false;
+            if (Arg("-previewMainCam") != null) return;          // keep the player's own camera: what you see when the UI is hidden with Y
             var old = GameObject.Find("HeroCam"); if (old != null) UnityEngine.Object.DestroyImmediate(old);
             var go = new GameObject("HeroCam"); var cam = go.AddComponent<Camera>(); cam.depth = 50; cam.fieldOfView = 42; cam.clearFlags = CameraClearFlags.Skybox;
             Vector3 f = vee.transform.forward; f.y = 0; if (f.sqrMagnitude < 0.01f) f = Vector3.forward; f.Normalize();
             var bnd = new Bounds(vee.transform.position + Vector3.up * 0.7f, Vector3.one * 0.1f); foreach (var r in vee.GetComponentsInChildren<Renderer>()) if (r.enabled) bnd.Encapsulate(r.bounds);
-            float dist = Mathf.Clamp(bnd.size.magnitude * 1.35f, 1.7f, 4.2f); float yaw = sports != null && si < sports.Length && sports[si] == "Kitchen" ? -55f : 28f;
+            float dist = Mathf.Clamp(bnd.size.magnitude * 1.35f, 1.7f, 4.2f); float yaw = Arg("-previewYaw") != null ? float.Parse(Arg("-previewYaw")) : (sports != null && si < sports.Length && sports[si] == "Kitchen" ? -55f : 28f);
             go.transform.position = bnd.center + Quaternion.Euler(0, yaw, 0) * f * dist + Vector3.up * 0.2f; go.transform.rotation = Quaternion.LookRotation(bnd.center - go.transform.position, Vector3.up);
         }
 
@@ -133,7 +134,7 @@ namespace Vistara.EditorTools
                 switch (stage)
                 {
                     case 1: if (j.CategoriesReady) { Log("categories ready (" + j.CategoryCount + ")"); until = EditorApplication.timeSinceStartup + 3; stage = 2; } else if (EditorApplication.timeSinceStartup - startedAt > 420) { Log("categories never loaded"); Shot("00_timeout"); Finish(3); } break;
-                    case 2: Shot("01_categories"); if (Arg("-previewLink") != null) { j.TestPickCategory("Kitchen"); until = EditorApplication.timeSinceStartup + 7; stage = 33; } else stage = 3; break;
+                    case 2: Shot("01_categories"); if (Arg("-previewReal") != null) { j.TestPickCategory(Arg("-previewReal")); until = EditorApplication.timeSinceStartup + 7; stage = 90; startedAt = EditorApplication.timeSinceStartup; } else if (Arg("-previewReenact") != null) { j.TestPickCategory(Arg("-previewReenact")); until = EditorApplication.timeSinceStartup + 7; stage = 80; } else if (Arg("-previewLink") != null) { j.TestPickCategory("Kitchen"); until = EditorApplication.timeSinceStartup + 7; stage = 33; } else stage = 3; break;
                     case 33: Vistara.SpaceShift.Instance.StartCoroutine(Vistara.SpaceShift.Instance.Run(() => { })); until = EditorApplication.timeSinceStartup + 0.45; stage = 30; break;
                     case 30: Shot("09_link_a"); until = EditorApplication.timeSinceStartup + 0.35; stage = 31; break;
                     case 31: Shot("09_link_b"); until = EditorApplication.timeSinceStartup + 0.5; stage = 32; break;
@@ -183,6 +184,14 @@ namespace Vistara.EditorTools
                         Log("walk position " + wi); until = EditorApplication.timeSinceStartup + 1.5; wi++; stage = 41; break;
                     }
                     case 41: Shot("10_walk_" + (wi - 1)); stage = 40; break;
+                    case 90: if (j.VideosReady) { j.TestPickFirstVideo(0); until = EditorApplication.timeSinceStartup + 3; stage = 91; } else if (EditorApplication.timeSinceStartup - startedAt > 120) { Log("videos never ready"); stage = 99; } break;
+                    case 91: j.StartAnalysis(); startedAt = EditorApplication.timeSinceStartup; until = EditorApplication.timeSinceStartup + 4; stage = 92; break;
+                    case 92: if (j.Hud != null && j.Hud.Visible) { Log("results open"); until = EditorApplication.timeSinceStartup + 2; stage = 93; } else if (EditorApplication.timeSinceStartup - startedAt > 180) { Log("analysis timed out"); stage = 99; } break;
+                    case 93: case 94: case 95: case 96: { var gg = Vistara.GuideGirl.Instance; var rn = gg != null ? gg.GetComponent<Vistara.Reenactor>() : null; Log("real flow check " + (stage - 93) + ": action=" + (gg != null ? gg.CurrentAction : "-") + " mode=" + (rn != null ? rn.Mode : "-") + " active=" + (rn != null && rn.Active)); Shot("13_real_" + Arg("-previewReal") + "_" + (stage - 93)); until = EditorApplication.timeSinceStartup + 3.5; stage++; if (stage > 96) stage = 99; break; }
+                    case 80: { var m = MockFor(Arg("-previewVideoPath")); if (m == null) { Log("no saved output for the video"); stage = 99; break; } j.TestShowResult(m); until = EditorApplication.timeSinceStartup + 2.5; stage = 81; break; }
+                    case 81: until = EditorApplication.timeSinceStartup + 0.2; stage = 82; break;
+                    case 82: { var gg = Vistara.GuideGirl.Instance; Log("reenact check: action=" + (gg != null ? gg.CurrentAction : "no guide") + " category=" + Vistara.AppState.Category); Shot("12_reenact_" + Arg("-previewReenact") + "_a"); until = EditorApplication.timeSinceStartup + 1.5; stage = 83; break; }
+                    case 83: { var gg = Vistara.GuideGirl.Instance; Log("reenact check later: action=" + (gg != null ? gg.CurrentAction : "no guide")); Shot("12_reenact_" + Arg("-previewReenact") + "_b"); stage = 99; break; }
                     case 99: Log("done"); Finish(0); if (!daemon) stage = 100; break;
                 }
             }

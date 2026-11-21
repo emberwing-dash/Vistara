@@ -20,12 +20,15 @@ namespace Vistara
     [Serializable] public class SegAnalysis { public float start; public float end; public float importance; }
     [Serializable] public class Timings { public float decode_s; public float embed_s; public float recognise_s; public float select_s; public float total_s; }
 
+    [Serializable] public class SceneAct { public float t0, t1; public string action; }
+
     [Serializable]
     public class AnalysisJson
     {
         public string engine_version; public string domain; public string device; public string model;
         public float retained_fraction; public float budget_seconds;
         public int feedback_votes;
+        public SceneAct[] scene;          // sports videos: what is going on, second by second (move / fast / turn / stop / jump / hit / climb / swim / idle)
         public Curve curve; public ObjStat[] objects; public VerbStat[] verbs; public SegAnalysis[] segments; public Timings timings;
     }
 

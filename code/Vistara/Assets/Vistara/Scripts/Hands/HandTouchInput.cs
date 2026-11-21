@@ -19,7 +19,7 @@ namespace Vistara
     /// </summary>
     public class HandTouchInput : MonoBehaviour
     {
-        public struct Finger { public bool tracked; public Vector3 tip, thumb; }
+        public struct Finger { public bool tracked; public Vector3 tip, thumb; public Canvas canvas; }          // canvas: set by the controller ray, which already knows which panel it points at
         public static readonly List<Canvas> Canvases = new List<Canvas>();
         public static Func<int, Finger> TestFeed;
         public static Func<int, Finger> ControllerFeed;          // a controller ray + trigger, delivered as a fingertip on the panel (see ControllerPointer)
@@ -154,7 +154,9 @@ namespace Vistara
                 return;
             }
 
-            if (!FindCanvas(P, out var c, out float d)) { SetHover(p, null); return; }
+            Canvas c; float d;
+            if (f.canvas != null) { c = f.canvas; d = SignedDistance(c, P); }
+            else if (!FindCanvas(P, out c, out d)) { SetHover(p, null); return; }
             if (d > FrontDist) p.frontTime = Time.unscaledTime;
             var g = HitTest(c, P);
             SetHover(p, g != null ? g.gameObject : null);
@@ -186,6 +188,7 @@ namespace Vistara
             ped.pointerDrag = ExecuteEvents.GetEventHandler<IDragHandler>(go);
             if (ped.pointerDrag != null) ExecuteEvents.Execute(ped.pointerDrag, ped, ExecuteEvents.initializePotentialDrag);
             ped.eligibleForClick = true; ped.useDragThreshold = true;
+            Debug.Log("[Vistara] pointer press on " + go.name + " (" + c.name + ")");
             p.ped = ped; p.canvas = c; p.raw = go; p.pressed = true; p.dragging = false; p.viaPinch = viaPinch; p.pressScreen = ped.position;
         }
 
@@ -215,7 +218,7 @@ namespace Vistara
             {
                 var pressTarget = ExecuteEvents.GetEventHandler<IPointerClickHandler>(p.raw);
                 var overTarget = p.hover != null ? ExecuteEvents.GetEventHandler<IPointerClickHandler>(p.hover) : null;
-                if (pressTarget != null && pressTarget == overTarget) { ExecuteEvents.Execute(pressTarget, ped, ExecuteEvents.pointerClickHandler); ClicksSent++; }
+                if (pressTarget != null && pressTarget == overTarget) { ExecuteEvents.Execute(pressTarget, ped, ExecuteEvents.pointerClickHandler); ClicksSent++; Debug.Log("[Vistara] pointer click on " + pressTarget.name); }
             }
             p.pressed = false; p.dragging = false; ped.pointerPress = null; ped.pointerDrag = null;
         }

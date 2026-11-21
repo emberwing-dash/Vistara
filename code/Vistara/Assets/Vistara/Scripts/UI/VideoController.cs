@@ -53,10 +53,17 @@ namespace Vistara
 
         int loadGen;
 
+        /// <summary>Stop and show plain black: used when the category changes or a new video is chosen, so the previously played video never stays on the preview.</summary>
+        public void ClearToBlack()
+        {
+            loadGen++; Prepared = false; Error = null; Seeking = false;
+            if (Player != null) Player.Stop();
+            if (Texture != null) { var a = RenderTexture.active; RenderTexture.active = Texture; GL.Clear(true, true, Color.black); RenderTexture.active = a; }
+        }
+
         public void Load(string path, bool autoplay = false)
         {
-            Prepared = false; Error = null; Seeking = false;
-            Player.Stop();
+            ClearToBlack();          // the old picture is gone while the new video loads
             Player.audioOutputMode = VideoAudioOutputMode.AudioSource;
             Player.source = VideoSource.Url;
             Player.url = path.StartsWith("http") ? path : new Uri(path).AbsoluteUri;   // http(s): streamed from the engine (headset)
@@ -69,7 +76,7 @@ namespace Vistara
         System.Collections.IEnumerator PrepareWatchdog(int gen)
         {
             float t = 0f;
-            while (!Prepared && gen == loadGen && t < 4f) { t += UnityEngine.Time.unscaledDeltaTime; yield return null; }
+            while (!Prepared && gen == loadGen && t < 1.5f) { t += UnityEngine.Time.unscaledDeltaTime; yield return null; }
             if (Prepared || gen != loadGen) yield break;
             Debug.LogWarning("[Vistara] video did not prepare with audio output; retrying without audio");
             Player.Stop();

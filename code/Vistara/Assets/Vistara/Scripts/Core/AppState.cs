@@ -6,6 +6,7 @@ namespace Vistara
     /// <summary>Process-wide state that survives scene loads (selected video, current job, last result).</summary>
     public static class AppState
     {
+        public static bool EnteredFromMenu;       // true once START was pressed in the main menu: the categories only show after that
         public static string VideoPath;
         public static string Category;            // Journey: selected category id (Kitchen, Bike, ...)
         public static string JobId;

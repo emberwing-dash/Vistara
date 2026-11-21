@@ -15,7 +15,11 @@ namespace Vistara
         class Door { public Transform pivot, handle; public float angle; public float x; }
 
         GuideGirl girl; Transform stage; bool built;
+        public string Mode = "move";          // what the video shows right now (from the analysis): move, fast, turn, stop, jump, hit, climb, swim, idle
+        public float Tempo = 1f;          // how fast the movement is performed: follows how much is going on in the video at that moment
         public bool Active { get; private set; }
+        public string CurVerb { get { return verb; } }
+        public string CurNoun { get { return noun; } }
         public Vector3 stand, faceDir; public float faceCam; public bool hasR, hasL; public Vector3 tR, tL;
         Door fridge, cabinet; Transform flames, water, knob, board, slices; GameObject held, boardVeg, potProp, cupProp; readonly List<Transform> flameCones = new List<Transform>();
         public int legMode; public float legPhase; public bool direct; SportStage sport; bool sportMode; string sportCat; Transform frameT;
@@ -135,9 +139,18 @@ namespace Vistara
         }
         void BeginSport(string cat, string v, string n)
         {
+            if (Active && sport.Built && sportCat == cat && frameT != null && Camera.main != null)          // the stage follows you: put it back in front of you when you have walked away or turned
+            {
+                Vector3 cp = Camera.main.transform.position, cf = Camera.main.transform.forward; cf.y = 0; cf.Normalize(); Vector3 to = frameT.position - cp; to.y = 0; float dist = to.magnitude;
+                if (dist < 1.8f || dist > 7.2f || Vector3.Angle(Quaternion.Euler(0, girl.StageYaw, 0) * cf, to) > 22f)
+                {
+                    Vector3 np = girl.StageSpot(); Vector3 cd2 = np - cp; cd2.y = 0; if (cd2.sqrMagnitude < 0.01f) cd2 = cf; cd2.Normalize(); float lat2 = Vector3.Dot(np - cp, Vector3.Cross(Vector3.up, cd2));
+                    frameT.SetPositionAndRotation(new Vector3(np.x, girl.floorY, np.z), Quaternion.LookRotation(Quaternion.Euler(0, lat2 < 0 ? 40f : -40f, 0) * cd2, Vector3.up)); stand = frameT.position; faceDir = frameT.forward;
+                }
+            }
             if (!Active || sportCat != cat || !sport.Built)
             {
-                Active = true; origin = girl.RepickSpot(true); Vector3 cam = Camera.main != null ? Camera.main.transform.position : Vector3.zero;
+                Active = true; origin = girl.StageSpot(); Vector3 cam = Camera.main != null ? Camera.main.transform.position : Vector3.zero;
                 Vector3 cd = origin - cam; cd.y = 0; if (cd.sqrMagnitude < 0.01f) cd = Vector3.forward; cd.Normalize(); Vector3 camRight = Vector3.Cross(Vector3.up, cd); float lateral = Vector3.Dot(origin - cam, camRight);
                 if (frameT == null) frameT = new GameObject("VeeFrame").transform; frameT.SetPositionAndRotation(new Vector3(origin.x, girl.floorY, origin.z), Quaternion.LookRotation(Quaternion.Euler(0, lateral < 0 ? 40f : -40f, 0) * cd, Vector3.up));
                 if (built) stage.gameObject.SetActive(false); sport.Build(cat, frameT); sportCat = cat; stand = frameT.position; faceDir = frameT.forward;

@@ -14,6 +14,7 @@ namespace Vistara
     public class FreeRoam : MonoBehaviour
     {
         public float walkSpeed = 1.5f, runSpeed = 3.2f, turnSpeed = 90f;
+        public static float SuspendUntil;          // set by ControllerPointer while a ray points at a panel
         XROrigin origin; float nextFind;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -34,6 +35,7 @@ namespace Vistara
         {
             if (origin == null) { if (Time.time < nextFind) return; nextFind = Time.time + 1f; origin = FindFirstObjectByType<XROrigin>(); if (origin == null) return; }
             var cam = origin.Camera != null ? origin.Camera.transform : Camera.main != null ? Camera.main.transform : null; if (cam == null) return;
+            if (Time.unscaledTime < SuspendUntil) return;
             bool hasL = Stick(XRNode.LeftHand, out var mv, out var run); bool hasR = Stick(XRNode.RightHand, out var tn, out _);
             if (hasL && mv.sqrMagnitude > 0.04f)
             {

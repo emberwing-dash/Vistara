@@ -3,6 +3,7 @@ rem Starts the Vistara AI engine (FastAPI) on http://127.0.0.1:8765  (the Unity 
 cd /d "%~dp0server"
 set PYTHONPATH=%~dp0
 set PYTHONIOENCODING=utf-8
+set VISTARA_EVAL_CONFIG=%~dp0..\Vistara\Assets\Model\Config\eval_config.json
 rem keeps the headset / editor smooth while a video is analysed: small GPU batches, short pauses
 set VISTARA_YIELD_MS=80
 set VISTARA_AVION_BATCH=2

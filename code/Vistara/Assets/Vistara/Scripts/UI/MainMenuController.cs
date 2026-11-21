@@ -19,7 +19,7 @@ namespace Vistara
 
         void Awake()
         {
-            Instance = this;
+            Instance = this; AppState.EnteredFromMenu = false;
             UIKit.CanvasScale = 0.00022f;                      // small panel held close to the chest (about 0.42 m)
             var pf = GetComponent<PlaceInFront>(); if (pf != null) { pf.near = true; pf.distance = 0.42f * UIKit.Reach; pf.heightOffset = -0.16f; pf.tilt = 14f; }
             transform.localScale = Vector3.one * UIKit.Reach;          // bigger and further away: you point at it with a controller
@@ -35,6 +35,7 @@ namespace Vistara
 
         void Start()
         {
+            GuideGirl.Spawn(); MascotAssistant.Spawn();          // Vee and Stara are in the main menu too
             client.OnHealthChanged += OnHealth;
             OnHealth(client.Online);
             StartCoroutine(RefreshHistory());
@@ -154,7 +155,7 @@ namespace Vistara
             Go(Workspace.Tab.Library);
         }
 
-        void StartJourney() { if (SpaceShift.Instance != null) SpaceShift.Instance.Dive("Journey"); else StartCoroutine(FadeAndLoad("Journey")); }          // the spatial shift, flung outward, into the app
+        void StartJourney() { AppState.EnteredFromMenu = true; if (SpaceShift.Instance != null) SpaceShift.Instance.Dive("Journey"); else StartCoroutine(FadeAndLoad("Journey")); }          // the spatial shift, flung outward, into the app
 
         void Go(Workspace.Tab tab)
         {

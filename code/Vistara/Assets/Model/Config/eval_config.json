@@ -1,9 +1,7 @@
 {
-  "_comment": "Evaluation data lives OUTSIDE the Unity project (large, licensed). Edit these paths for another machine. None of these videos is used for training.",
+  "_comment": "Paths are relative to this folder. Put test videos (.mp4) into <repo>/videos/<Category>/ - any subfolder works, the category comes from the video's name.",
   "manifest": "manifest.csv",
-  "epic_root": ["E:/samsung_temp/EVAL/data/EPIC-KITCHENS"],
-  "fpv_root": ["E:/samsung_temp/EVAL/fpvsum"],
-  "epic_ann": "E:/samsung_temp/epic-kitchens-100-annotations/EPIC_100_validation.csv",
-  "fpv_gt": "E:/samsung_temp/fpvsum/annotation/gt_data.mat",
+  "epic_root": ["../../../../../videos"],
+  "fpv_root": ["../../../../../videos"],
   "results_dir": "../Results"
 }

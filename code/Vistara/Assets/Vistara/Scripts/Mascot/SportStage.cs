@@ -14,7 +14,7 @@ namespace Vistara
         class Item
         {
             public string name; public Role role; public Transform tr; public Vector3 slot; public Quaternion slotRot; public float s = 1f; public Vector3 size; public Vector3 fwdLocal = Vector3.forward;
-            public float rear, front;
+            public float rear, front; public float seatT = -1f; public float seatTop;
             public List<Vector3> verts = new List<Vector3>(); public Vector3 ctr; public float lenAxis; public bool axisX;
         }
         static readonly Dictionary<string, string[]> Cfg = new Dictionary<string, string[]>
@@ -39,7 +39,7 @@ namespace Vistara
             { "Plane", "Plane" }, { "RockClimbing", "CliffBlock" }, { "Scuba", "Fish" }, { "Skate", "Skateboard" }, { "Ski", "Skis" }, { "Surfing", "Surfboard" } };
 
         readonly Reenactor R; readonly GuideGirl G; Transform root; string cat; readonly List<Item> items = new List<Item>(); Item cur; Transform frame; float t; string verb = "", noun = "";
-        float prevHit; Item carried; Vector3 carryBase;
+        float prevHit; Item carried; Vector3 carryBase; float pathT, legT;
 
         public SportStage(Reenactor r, GuideGirl g) { R = r; G = g; }
 
@@ -62,8 +62,14 @@ namespace Vistara
                 var rends = inst.GetComponentsInChildren<Renderer>(); Bounds b = new Bounds(); bool first = true;
                 foreach (var r in rends) { if (first) { b = r.bounds; first = false; } else b.Encapsulate(r.bounds); var ms = r.sharedMaterials; for (int i = 0; i < ms.Length; i++) ms[i] = G.Mat(ColorOf(ms[i] != null ? ms[i].name : "")); r.sharedMaterials = ms; r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; }
                 Vector3 off = new Vector3(-b.center.x, -b.min.y, -b.center.z); inst.transform.localPosition = off;
-                foreach (var mf in inst.GetComponentsInChildren<MeshFilter>()) if (mf.sharedMesh != null) { var m = mf.transform.localToWorldMatrix; foreach (var v in mf.sharedMesh.vertices) it.verts.Add(wrap.InverseTransformPoint(m.MultiplyPoint3x4(v))); }
-                it.size = b.size; float maxD = Mathf.Max(b.size.x, b.size.z, 0.01f); float s = Mathf.Min(0.62f, 1.7f / maxD); s = Mathf.Max(s, 0.24f / Mathf.Max(maxD, b.size.y)); if (it.role == Role.Hit) s = Mathf.Min(s, 0.7f / b.size.y * 0.9f); if (it.role == Role.Swim) s = Mathf.Min(0.6f, 0.5f / maxD);
+                foreach (var mf in inst.GetComponentsInChildren<MeshFilter>()) if (mf.sharedMesh != null)
+                {
+                    var m = mf.transform.localToWorldMatrix;
+                    if (mf.sharedMesh.isReadable) { foreach (var v in mf.sharedMesh.vertices) it.verts.Add(wrap.InverseTransformPoint(m.MultiplyPoint3x4(v))); }
+                    else { var mb = mf.sharedMesh.bounds; for (int cx = 0; cx < 8; cx++) it.verts.Add(wrap.InverseTransformPoint(m.MultiplyPoint3x4(mb.center + Vector3.Scale(mb.extents, new Vector3((cx & 1) * 2 - 1, ((cx >> 1) & 1) * 2 - 1, ((cx >> 2) & 1) * 2 - 1))))); }          // not readable: its bounding box corners
+                }
+                it.size = b.size; float maxD = Mathf.Max(b.size.x, b.size.z, 0.01f); float s = Mathf.Min(0.62f, 1.7f / maxD); s = Mathf.Max(s, 0.24f / Mathf.Max(maxD, b.size.y)); if (it.role == Role.Hit) s = (it.name == "SpeedBag" ? 0.55f : 1.05f) / Mathf.Max(0.05f, b.size.y);          // a heavy bag about as tall as her; the speed bag at her face
+                if (it.role == Role.Swim) s = Mathf.Min(0.6f, 0.5f / maxD);
                 it.s = s; wrap.localScale = Vector3.one * s;
                 Orient(it); items.Add(it); idx++;
             }
@@ -135,7 +141,7 @@ namespace Vistara
 
         public void Tick()
         {
-            t += Time.deltaTime; R.hasR = R.hasL = false; R.legMode = 0; R.faceCam = 0f; R.direct = false; Ambient();
+            t += Time.deltaTime * R.Tempo; R.hasR = R.hasL = false; R.legMode = 0; R.faceCam = 0f; R.direct = false; Ambient();
             if (cur == null) return;
             switch (cur.role)
             {
@@ -165,15 +171,29 @@ namespace Vistara
         // ---- ride (sitting: bike/motor/horse; standing: boards/skis)
         void Ride(Item it, bool stand)
         {
-            float ang = t * 0.5f; float rad = 0.6f; Vector3 c = frame.position + frame.TransformDirection(new Vector3(0, 0, 1.0f)); Vector3 pos = c + frame.TransformDirection(new Vector3(Mathf.Cos(ang), 0, Mathf.Sin(ang)) * rad); Vector3 tan = frame.TransformDirection(new Vector3(-Mathf.Sin(ang), 0, Mathf.Cos(ang)));
-            float bob = stand && cat == "Surfing" ? 0.03f * Mathf.Sin(t * 3f) : 0f; float roll = stand ? 6f * Mathf.Sin(t * 2.2f) : 0f;
+            // she acts what the video shows right now: moving, going fast, turning, stopped, jumping
+            string mode = R.Mode; float sp = mode == "stop" || mode == "idle" ? 0.3f : mode == "fast" ? 1.7f : mode == "turn" ? 0.85f : 1f;
+            pathT += Time.deltaTime * sp * (cat == "Horse" ? 0.38f : 0.55f); legT += Time.deltaTime * sp * (cat == "Horse" ? 3f : 6f);
+            float ang = pathT; float ca = Mathf.Cos(ang), sa = Mathf.Sin(ang);
+            Vector3 pos = frame.position + frame.right * (ca * 1.8f) + frame.forward * (sa * 0.6f); Vector3 tan = (frame.right * (-sa * 1.8f) + frame.forward * (ca * 0.6f)).normalized;          // she rides forward across your view along a wide oval, like in the video
+            float bob = stand && cat == "Surfing" ? 0.03f * Mathf.Sin(t * 3f) : (!stand ? 0.012f * Mathf.Sin(legT) : 0f);
+            if (mode == "jump") bob += 0.28f * Mathf.Abs(Mathf.Sin(t * 3.2f));
+            float roll = (stand ? 6f * Mathf.Sin(t * 2.2f) : 0f) + (mode == "turn" ? 14f * Mathf.Sin(ang * 2f) : 0f) + (mode == "fast" && !stand ? 6f : 0f);
             it.tr.position = pos + Vector3.up * bob; it.tr.rotation = Quaternion.LookRotation(tan, Vector3.up) * Quaternion.Inverse(Quaternion.LookRotation(it.fwdLocal)) * Quaternion.AngleAxis(roll, it.fwdLocal);
             R.direct = true; R.faceDir = tan; R.faceCam = 0f;
-            float top; Vector3 seatL = LP(it, stand ? 0.5f : (cat == "Horse" ? 0.5f : 0.4f), 0, out top); Vector3 seatW = it.tr.TransformPoint(seatL);
+            float top; Vector3 seatL;
+            if (!stand)
+            {
+                if (it.seatT < 0f) { float lo = cat == "Horse" ? 0.3f : 0.15f, hi = cat == "Horse" ? 0.6f : 0.55f, best = -1f; for (int k = 0; k <= 12; k++) { float tt = Mathf.Lerp(lo, hi, k / 12f); LP(it, tt, 0, out float tp); if (tp > best) { best = tp; it.seatT = tt; } } it.seatTop = best; }          // the saddle / the horse's back: the highest point behind the handlebar - a fixed 3D point she always sits on
+                seatL = LP(it, it.seatT, 0, out top);
+            }
+            else seatL = LP(it, 0.5f, 0, out top);
+            Vector3 seatW = it.tr.TransformPoint(seatL);
             if (stand) { R.stand = seatW; R.legMode = 0; Vector3 side = Vector3.Cross(Vector3.up, tan); float k = Mathf.Sin(t * 2f); Hands(seatW + side * 0.45f + Vector3.up * (0.52f + 0.05f * k), seatW - side * 0.45f + Vector3.up * (0.52f - 0.05f * k)); }
             else
             {
-                R.stand = new Vector3(seatW.x, seatW.y - 0.36f, seatW.z); R.legMode = cat == "Horse" ? 1 : 2; R.legPhase = t * (cat == "Horse" ? 3f : 6f);
+                R.stand = new Vector3(seatW.x, seatW.y + 0.04f - G.HipHeight, seatW.z);          // hips exactly on the seat
+                R.legMode = cat == "Horse" ? 1 : 2; R.legPhase = legT;
                 float topH; Vector3 hb = LP(it, cat == "Horse" ? 0.78f : 0.82f, 0.2f, out topH); Vector3 hb2 = LP(it, cat == "Horse" ? 0.78f : 0.82f, -0.2f, out topH);
                 Hands(it.tr.TransformPoint(hb), it.tr.TransformPoint(hb2));
             }
@@ -182,14 +202,18 @@ namespace Vistara
         // ---- hit the punching bag / speed bag
         void Hit(Item it)
         {
+            // what the video shows: hit = punches on the bag, fast = quick combinations, move = footwork in guard (stepping back and in, bouncing), idle = resting in guard
+            string mode = R.Mode; bool punching = mode == "hit" || mode == "fast"; bool foot = mode != "idle" && mode != "stop"; float rate = mode == "fast" ? 11f : 7f;
             Vector3 p = it.slot; Vector3 to = Flat(frame.position - p).normalized; if (to.sqrMagnitude < 0.01f) to = -Vector3.forward; var wb = WorldBounds(it); float half = Mathf.Max(wb.extents.x, wb.extents.z);
-            R.direct = false; R.stand = frame.position + frame.TransformDirection(Vector3.forward * 1.0f); R.stand = p + to * (half + 0.42f); R.faceDir = -to;
-            float s = Mathf.Sin(t * 7f); float ext = Mathf.Clamp01(s); float ext2 = Mathf.Clamp01(-s);
-            float hy = Mathf.Min(0.85f, wb.size.y * 0.7f); Vector3 front = p + to * half + Vector3.up * hy; Vector3 side = Vector3.Cross(Vector3.up, to) * 0.12f; Vector3 rest = R.stand - to * 0.0f + Vector3.up * 0.7f + (-R.faceDir * -0.0f);
-            Vector3 chest = R.stand + R.faceDir * 0.18f + Vector3.up * 0.72f;
-            Hands(Vector3.Lerp(chest + side, front + side, ext), Vector3.Lerp(chest - side, front - side, ext2));
-            float sw = (prevHit <= 0f && s > 0f) || (prevHit >= 0f && s < 0f) ? 1f : 0f; if (sw > 0f) ReenactSfx.Shot("chop", front, 0.8f); prevHit = s;
-            Vector3 pivot = p + Vector3.up * wb.size.y; float swing = 7f * Mathf.Sin(t * 3.5f) * Mathf.Clamp01(0.4f + Mathf.Abs(s)); Vector3 axis = Vector3.Cross(Vector3.up, to);
+            float step = foot ? 0.10f * Mathf.Sin(t * 1.6f) : 0f; float bounce = foot ? 0.025f * Mathf.Abs(Mathf.Sin(t * 6f)) : 0f;          // a little back and forth, light on her feet
+            R.direct = true; R.legMode = 0;          // placed exactly: no walking legs while she shuffles
+            R.stand = p + to * (half + 0.42f + step); R.stand.y = bounce; R.faceDir = -to;
+            float s = punching ? Mathf.Sin(t * rate) : 0f; float ext = Mathf.Clamp01(s); float ext2 = Mathf.Clamp01(-s);
+            float hy = Mathf.Min(0.85f, wb.size.y * 0.7f); Vector3 front = p + to * half + Vector3.up * hy; Vector3 side = Vector3.Cross(Vector3.up, to) * 0.12f;
+            Vector3 guard = R.stand + R.faceDir * 0.2f + Vector3.up * (0.85f + 0.02f * Mathf.Sin(t * 6f));          // fists up by the chin
+            Hands(Vector3.Lerp(guard + side, front + side, ext), Vector3.Lerp(guard - side, front - side, ext2));
+            float sw = (prevHit <= 0f && s > 0f) || (prevHit >= 0f && s < 0f) ? 1f : 0f; if (sw > 0f && punching) ReenactSfx.Shot("chop", front, 0.8f); prevHit = s;
+            Vector3 pivot = p + Vector3.up * wb.size.y; float swing = punching ? 7f * Mathf.Sin(t * 3.5f) * Mathf.Clamp01(0.4f + Mathf.Abs(s)) : 1.5f * Mathf.Sin(t * 1.5f); Vector3 axis = Vector3.Cross(Vector3.up, to);
             it.tr.rotation = Quaternion.AngleAxis(swing, axis) * it.slotRot; it.tr.position = pivot + Quaternion.AngleAxis(swing, axis) * (p - pivot);
         }
 
@@ -235,7 +259,7 @@ namespace Vistara
         // ---- fly the plane
         void Fly(Item it)
         {
-            float a = t * 0.7f; Vector3 c = frame.position + frame.TransformDirection(new Vector3(0, 0, 1.0f)); Vector3 p = c + frame.TransformDirection(new Vector3(Mathf.Cos(a), 0, Mathf.Sin(a)) * 0.6f); Vector3 tan = frame.TransformDirection(new Vector3(-Mathf.Sin(a), 0, Mathf.Cos(a)));
+            float fa = t * 0.5f; Vector3 p = frame.position + frame.right * (Mathf.Cos(fa) * 2.2f) + frame.forward * (Mathf.Sin(fa) * 0.8f); Vector3 tan = (frame.right * (-Mathf.Sin(fa) * 2.2f) + frame.forward * (Mathf.Cos(fa) * 0.8f)).normalized;          // flies across your view along a wide oval
             R.direct = true; R.stand = new Vector3(p.x, 0, p.z); R.faceDir = tan; R.legMode = 0; R.legPhase = t * 7f;
             Vector3 pp = R.stand + Vector3.up * (1.05f + 0.06f * Mathf.Sin(t * 2f)) + tan * 0.18f; it.tr.position = pp; it.tr.rotation = Quaternion.LookRotation(tan, Vector3.up) * Quaternion.Inverse(Quaternion.LookRotation(it.fwdLocal)) * Quaternion.AngleAxis(12f * Mathf.Sin(t * 1.5f), it.fwdLocal);
             Vector3 side = Vector3.Cross(Vector3.up, tan) * 0.09f; Hands(pp - Vector3.up * 0.04f + side, pp - Vector3.up * 0.04f - side);

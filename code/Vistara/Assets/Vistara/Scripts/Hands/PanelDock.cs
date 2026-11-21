@@ -20,7 +20,7 @@ namespace Vistara
         public static bool Hidden { get; private set; }
         public static bool Follow { get; private set; } = true;
 
-        JourneyController journey; Canvas dock; TextMeshProUGUI hideLbl, followLbl; Transform camT;
+        JourneyController journey; Canvas dock; TextMeshProUGUI hideLbl, followLbl, talkLbl; Transform camT;
         readonly List<Canvas> canvases = new List<Canvas>(); float nextScan; bool prevY, prevB;
         Vector3 offsetLocal, lastSet, vel; bool haveOffset, moving; float pauseUntil;
 
@@ -35,10 +35,11 @@ namespace Vistara
         void Start()
         {
             journey = FindFirstObjectByType<JourneyController>();
-            dock = UIKit.WorldCanvas("PanelDock", 380, 96, null, 0.00048f); var rt = (RectTransform)dock.transform;
+            dock = UIKit.WorldCanvas("PanelDock", 570, 96, null, 0.00048f); var rt = (RectTransform)dock.transform;
             var back = UIKit.Box(rt, "Back", new Color(0.03f, 0.05f, 0.12f, 0.82f), 22, false); UIKit.Fill(back.rectTransform); UIKit.Outline(back.transform, Theme.Cyan * new Color(1, 1, 1, 0.5f), 22, 2f);
             var b1 = UIKit.Button(rt, "", 12, 12, 172, 72, ToggleHidden, Theme.Card, Theme.Text, null, 24, 16); hideLbl = Label(b1.transform, "Hide UI");
             var b2 = UIKit.Button(rt, "", 196, 12, 172, 72, ToggleFollow, Theme.Card, Theme.Text, null, 24, 16); followLbl = Label(b2.transform, "Follow: on");
+            var b3 = UIKit.Button(rt, "", 380, 12, 178, 72, PovView.Toggle, Theme.Card, Theme.Text, null, 24, 16); talkLbl = Label(b3.transform, "POV (A)");          // see through Vee's eyes          // voice chat with Vee (also: hold a controller grip)
         }
 
         static TextMeshProUGUI Label(Transform parent, string text)
@@ -78,6 +79,7 @@ namespace Vistara
             bool y = Button(XRNode.LeftHand, UnityEngine.XR.CommonUsages.secondaryButton), b = Button(XRNode.RightHand, UnityEngine.XR.CommonUsages.secondaryButton);
             if (y && !prevY) ToggleHidden(); if (b && !prevB) ToggleFollow(); prevY = y; prevB = b;
             if (Keyboard.current != null && Keyboard.current.hKey.wasPressedThisFrame) ToggleHidden();
+            if (talkLbl != null) talkLbl.text = PovView.Label;
             FollowStage(cam);
         }
 

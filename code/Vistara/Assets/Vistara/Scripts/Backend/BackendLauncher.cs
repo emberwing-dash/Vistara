@@ -10,7 +10,7 @@ namespace Vistara
     /// Starts the trained-model engine (Assets/Model/Engine~, FastAPI) as a child process when none is listening and stops it on quit.
     /// The model files live in Assets/Model (Weights = trained heads, Backbone~ = pretrained CLIP). The engine is Unity-independent;
     /// see Assets/Model/README_MODEL.md. Python is taken from (in order): env VISTARA_PYTHON, Assets/Model/Engine~/.venv,
-    /// the repo's .venv (&lt;repo&gt;/.venv), then "python" on PATH.
+    /// the sibling Vistara project's Backend/.venv, then "python" on PATH.
     /// </summary>
     public class BackendLauncher : MonoBehaviour
     {
@@ -26,7 +26,7 @@ namespace Vistara
         }
 
         public static string ModelDir => Path.GetFullPath(Path.Combine(Application.dataPath, "Model"));
-        /// <summary>Submission layout: this project sits in &lt;repo&gt;/code/Vistara, the engine is &lt;repo&gt;/code/backend (server/ + the vistara package) and the trained model is &lt;repo&gt;/weights.</summary>
+        /// <summary>Submission layout: this project sits in &lt;repo&gt;/code/VisteraMR and the engine is &lt;repo&gt;/code/tools/server + &lt;repo&gt;/code/vistara and the trained model is &lt;repo&gt;/weights.</summary>
         static string RepoRoot
         {
             get
@@ -49,7 +49,7 @@ namespace Vistara
             get { var b = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Backend")); return Directory.Exists(Path.Combine(b, "server")) ? b : null; }
         }
         static bool OwnEngine => Directory.Exists(Path.Combine(ModelDir, "Engine~", "server"));
-        /// <summary>FastAPI server folder (a local Assets/Model/Engine~ copy wins, otherwise the repo's code/backend/server).</summary>
+        /// <summary>FastAPI server folder (a local Assets/Model/Engine~ copy wins, otherwise the repo's code/tools/server).</summary>
         public static string ServerDir => LocalBackend != null && !OwnEngine ? Path.Combine(LocalBackend, "server") : (OwnEngine || RepoRoot == null ? Path.Combine(EngineDir, "server") : Path.Combine(RepoRoot, "code", "backend", "server"));
         /// <summary>Folder holding the vistara python package (PYTHONPATH).</summary>
         public static string CodeDir => LocalBackend != null && !OwnEngine ? Path.Combine(LocalBackend, "code") : (OwnEngine || RepoRoot == null ? Path.Combine(EngineDir, "code") : Path.Combine(RepoRoot, "code", "backend"));
@@ -100,8 +100,16 @@ namespace Vistara
                 psi.EnvironmentVariables["PYTHONIOENCODING"] = "utf-8";
                 psi.EnvironmentVariables["VISTARA_WEIGHTS"] = WeightsDir;          // trained heads
                 psi.EnvironmentVariables["VISTARA_CLIP_DIR"] = BackboneDir;       // pretrained CLIP backbone
-                psi.EnvironmentVariables["VISTARA_EVAL_CONFIG"] = Path.Combine(ModelDir, "Config", "eval_config.json");
+                string cfgPath = Path.Combine(ModelDir, "Config", "eval_config.json");          // editor: Assets/Model/Config; built app: Config/ next to the exe (paths in it are relative to that folder)
+                string exeCfg = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Backend", "Config", "eval_config.json")); if (!File.Exists(cfgPath) && File.Exists(exeCfg)) cfgPath = exeCfg;
+                psi.EnvironmentVariables["VISTARA_EVAL_CONFIG"] = cfgPath;
+                if (RepoRoot != null && Directory.Exists(Path.Combine(RepoRoot, "cache", "avion"))) psi.EnvironmentVariables["VISTARA_AVION_CACHE"] = Path.Combine(RepoRoot, "cache", "avion");          // analyses saved with the repo: those videos open instantly
+                if (RepoRoot != null && Directory.Exists(Path.Combine(RepoRoot, "cache", "clip"))) psi.EnvironmentVariables["VISTARA_FEATURE_CACHE"] = Path.Combine(RepoRoot, "cache", "clip");
+                if (Directory.Exists("C:/vis_eval/avion_cache")) psi.EnvironmentVariables["VISTARA_AVION_CACHE"] = "C:/vis_eval/avion_cache";          // already analysed videos come back instantly (no GPU work, no lag)
+                if (Directory.Exists("E:/samsung_temp/EVAL/cache_l14")) psi.EnvironmentVariables["VISTARA_FEATURE_CACHE"] = "E:/samsung_temp/EVAL/cache_l14";
+                psi.EnvironmentVariables["VISTARA_YIELD_MS"] = "80"; psi.EnvironmentVariables["VISTARA_AVION_BATCH"] = "2"; psi.EnvironmentVariables["VISTARA_CLIP_BATCH"] = "16"; psi.EnvironmentVariables["OMP_NUM_THREADS"] = "3";          // keep the headset / editor smooth while the engine analyses
                 proc = Process.Start(psi);
+                try { proc.PriorityClass = ProcessPriorityClass.BelowNormal; } catch (System.Exception) { }
                 Debug.Log("[Vistara] Model engine started (pid " + proc.Id + ", python: " + py + ")");
             }
             catch (Exception e) { Debug.LogWarning("[Vistara] Could not start the model engine: " + e.Message); }
